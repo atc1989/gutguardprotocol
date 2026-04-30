@@ -18,7 +18,7 @@ export default function CategoryChipRail() {
   ];
 
   return (
-    <section className="border-b border-[#7E7E84] bg-[#F5F4F2] py-4 sm:h-[71.14px] sm:py-0">
+    <section className="border-b border-[#7E7E84] bg-[#F5F4F2] py-4 sm:py-0">
       <Container>
         <div className="flex min-h-[71.14px] flex-col justify-center gap-3 lg:h-[71.14px] lg:flex-row lg:items-center lg:gap-6">
           <p

@@ -53,7 +53,7 @@ export default function ScoreRangeCard({
   return (
     <div
       className={[
-        "h-[294.7px] w-full max-w-[245px] rounded-[20px] p-9 text-left sm:w-[245px]",
+        "w-full max-w-[245px] rounded-[20px] p-9 text-left sm:w-[245px] lg:h-[294.7px]",
         toneClasses[tone],
       ].join(" ")}
     >
@@ -83,7 +83,7 @@ export default function ScoreRangeCard({
         <p
           className={[
             inter.className,
-            "inline-flex h-[28.14px] w-[115.95px] items-center justify-center rounded-full border px-0 py-0 text-[11px] font-bold leading-[18.1px] tracking-[0.66px]",
+            "inline-flex min-h-[28.14px] items-center justify-center rounded-full border px-3 py-1 text-[11px] font-bold leading-[18.1px] tracking-[0.66px] sm:w-[115.95px] sm:px-0 sm:py-0",
             actionClasses[tone],
           ].join(" ")}
         >

@@ -61,14 +61,15 @@ const heroBulletSizeClasses = [
 
 export default function Hero() {
   return (
-    <section className="overflow-hidden bg-[#fbfaf7] py-12 sm:min-h-[1200px] sm:py-0" id="top">
+    <section className="overflow-hidden bg-[#fbfaf7] py-12 sm:pb-16 sm:pt-0" id="top">
+      <div aria-hidden="true" className="sr-only" id="home" />
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[501.14px_450.86px] lg:justify-between lg:gap-0 lg:pt-[132px]">
           <div className="w-full max-w-[501.14px] space-y-7 lg:h-[876.28px] lg:w-[501.14px]">
             <div
               className={[
                 inter.className,
-                "inline-flex h-[39.09px] items-center rounded-full border border-[rgba(248,113,113,0.2)] bg-[rgba(248,113,113,0.09)] px-4 text-[14px] font-medium leading-[23.1px] tracking-[0] text-[#F87171]",
+                "inline-flex min-h-[39.09px] items-center rounded-full border border-[rgba(248,113,113,0.2)] bg-[rgba(248,113,113,0.09)] px-4 py-2 text-[14px] font-medium leading-[23.1px] tracking-[0] text-[#F87171]",
               ].join(" ")}
             >
               {"\u2022"} 68% of Philippine deaths start with chronic inflammation
@@ -91,7 +92,7 @@ export default function Hero() {
               <p
                 className={[
                   inter.className,
-                  "min-h-[178.5px] max-w-[490.45px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#44444A]",
+                  "max-w-[490.45px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#44444A] lg:min-h-[178.5px]",
                 ].join(" ")}
               >
                 Upload the blood panel you already have from any Philippine laboratory. Your
@@ -105,9 +106,9 @@ export default function Hero() {
               <Button
                 className={[
                   plusJakartaSans.className,
-                  "h-[54px] w-[221.17px] gap-2 rounded-[100px] !bg-[#0305C6] px-0 py-0 text-[16px] font-semibold leading-[100%] !text-[#FFFFFF] hover:!bg-[#0305C6]",
+                  "h-[54px] w-full gap-2 rounded-[100px] !bg-[#0305C6] px-0 py-0 text-[16px] font-semibold leading-[100%] !text-[#FFFFFF] hover:!bg-[#0305C6] sm:w-[221.17px]",
                 ].join(" ")}
-                href="#plans"
+                href="#pricing-anchor"
               >
                 <span className="inline-flex w-[125.56px] items-center justify-center">
                   Check My Score
@@ -141,7 +142,7 @@ export default function Hero() {
 
           <div className="relative mx-auto w-full max-w-[450.86px] lg:w-[450.86px]">
             <div className="absolute inset-x-0 top-8 h-[220px] rounded-full bg-[#eef2ff] blur-[68px]" />
-            <div className="relative mx-auto h-[611.61px] w-full max-w-[450.86px] rounded-[20px] border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.07)] px-[29px] pb-[30px] pt-[31px] shadow-[0_42px_64px_rgba(15,23,42,0.22),0_12px_24px_rgba(15,23,42,0.14)] lg:w-[450.86px]">
+            <div className="relative mx-auto w-full max-w-[450.86px] rounded-[20px] border border-[rgba(255,255,255,0.13)] bg-[rgba(255,255,255,0.07)] px-5 pb-6 pt-7 shadow-[0_42px_64px_rgba(15,23,42,0.22),0_12px_24px_rgba(15,23,42,0.14)] sm:px-[29px] sm:pb-[30px] sm:pt-[31px] lg:h-[611.61px] lg:w-[450.86px]">
               <div className="flex h-full flex-col">
                 <div
                   className={[
@@ -189,11 +190,11 @@ export default function Hero() {
                   {scoreRows.map((row) => (
                     <div
                       key={row.label}
-                      className={[
-                        inter.className,
-                        "grid grid-cols-[minmax(0,1fr)_44px_44px_64px] items-center gap-x-[8px] text-[14px] leading-none",
-                      ].join(" ")}
-                    >
+                        className={[
+                          inter.className,
+                          "grid grid-cols-[minmax(0,1fr)_40px_40px_58px] items-center gap-x-[6px] text-[14px] leading-none sm:grid-cols-[minmax(0,1fr)_44px_44px_64px] sm:gap-x-[8px]",
+                        ].join(" ")}
+                      >
                       <span
                         className={[
                           inter.className,
@@ -244,8 +245,8 @@ export default function Hero() {
                 </div>
 
                 <Button
-                  className="mt-auto h-[52px] w-full rounded-full !bg-[#1D23D8] py-0 text-[18px] font-semibold !text-[#FFFFFF] hover:!bg-[#1D23D8]"
-                  href="#plans"
+                  className="mt-6 h-[52px] w-full rounded-full !bg-[#1D23D8] py-0 text-[18px] font-semibold !text-[#FFFFFF] hover:!bg-[#1D23D8] lg:mt-auto"
+                  href="#pricing-anchor"
                 >
                   Get My Real Score {"\u2192"}
                 </Button>

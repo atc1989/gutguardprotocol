@@ -4,9 +4,9 @@ import StatItem from "../ui/StatItem";
 
 export default function TrustStats() {
   return (
-    <section className="bg-[#E5E5E5] py-10 sm:flex sm:h-[286.8px] sm:items-center sm:py-0">
+    <section className="bg-[#E5E5E5] py-10 lg:flex lg:items-center lg:py-8">
       <Container>
-        <div className="mx-auto flex min-h-[151.66px] w-full max-w-[811.65px] flex-col justify-center space-y-4 text-[#020B41] sm:h-[151.66px] sm:w-[811.65px] sm:translate-y-[12px]">
+        <div className="mx-auto flex min-h-[151.66px] w-full max-w-[811.65px] flex-col justify-center space-y-4 text-[#020B41] lg:w-[811.65px]">
           <div className="grid items-start gap-8 md:grid-cols-3 md:gap-0">
             {trustStats.map((stat, index) => (
               <div

@@ -23,7 +23,7 @@ const footerHeadingSizes: Record<string, string> = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#141414] text-white sm:h-[300px]">
+    <footer className="bg-[#141414] text-white">
       <Container>
         <div className="flex flex-col gap-10 px-[10px] py-14 sm:px-0 sm:pb-[8px] sm:pt-[46px]">
           <div className="grid gap-10 lg:grid-cols-[325.58px_179.2px_179.2px_179.19px] lg:justify-between">

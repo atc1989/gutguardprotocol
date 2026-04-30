@@ -24,14 +24,15 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export default function PatientReviews() {
   return (
-    <section className="bg-[#FBFAF7] py-16 sm:min-h-[780px] sm:py-0" id="reviews">
+    <section className="bg-[#FBFAF7] py-16 sm:pb-20 sm:pt-0" id="reviews">
+      <div aria-hidden="true" className="sr-only" id="proof" />
       <Container>
-        <div className="space-y-[18px] sm:pt-[88px]">
+        <div className="space-y-[18px] lg:pt-[88px]">
           <div className="flex flex-col items-center text-center">
             <p
               className={[
                 firaCode.className,
-                "h-[11px] w-[128.9px] text-[11px] font-bold uppercase leading-[18.15px] tracking-[1.98px] text-[#1A56DB]",
+                "min-h-[11px] w-[128.9px] text-[11px] font-bold uppercase leading-[18.15px] tracking-[1.98px] text-[#1A56DB]",
               ].join(" ")}
             >
               Patient results
@@ -39,7 +40,7 @@ export default function PatientReviews() {
             <h2
               className={[
                 plusJakartaSans.className,
-                "mt-[16px] h-[66px] w-full max-w-[642px] text-[40px] font-bold leading-[1.05] tracking-[-0.04em] text-[#0305C6] sm:text-[52px] sm:leading-[57.2px] sm:tracking-[-1.56px]",
+                "mt-[16px] w-full max-w-[642px] text-[40px] font-bold leading-[1.05] tracking-[-0.04em] text-[#0305C6] sm:text-[52px] sm:leading-[57.2px] sm:tracking-[-1.56px] lg:h-[66px]",
               ].join(" ")}
             >
               Real scores. Real patients.
@@ -57,10 +58,10 @@ export default function PatientReviews() {
                 protocol={review.protocol}
                 quoteSizeClassName={
                   index === 1
-                    ? "w-[269.6px] min-h-[135.98px]"
+                    ? "w-full sm:w-[269.6px] lg:min-h-[135.98px]"
                     : index === 2
-                      ? "w-[269.98px] min-h-[88.39px]"
-                      : "w-[268.61px] min-h-[88.39px]"
+                      ? "w-full sm:w-[269.98px] lg:min-h-[88.39px]"
+                      : "w-full sm:w-[268.61px] lg:min-h-[88.39px]"
                 }
                 quote={review.quote}
               />
@@ -70,7 +71,7 @@ export default function PatientReviews() {
           <p
             className={[
               inter.className,
-              "mx-auto mt-[18px] h-[14px] w-full max-w-[597.07px] text-center text-[11px] font-normal leading-[17.6px] tracking-[0] text-[#6E6E6E]",
+              "mx-auto mt-[18px] w-full max-w-[597.07px] text-center text-[11px] font-normal leading-[17.6px] tracking-[0] text-[#6E6E6E]",
             ].join(" ")}
           >
             Patient names changed for privacy. Score data from GutGuard patient portal

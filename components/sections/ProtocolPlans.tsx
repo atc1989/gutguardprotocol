@@ -1,5 +1,6 @@
 import { Fira_Code, Inter, Plus_Jakarta_Sans } from "next/font/google";
 
+import CheckoutTrigger from "@/components/app/CheckoutTrigger";
 import Container from "../ui/Container";
 
 const firaCode = Fira_Code({
@@ -27,6 +28,7 @@ type PlanVariant = {
 };
 
 type Plan = {
+  checkoutKey: "trial" | "start" | "grow" | "power";
   icon: string;
   title: string;
   subtitle: string;
@@ -46,6 +48,7 @@ type Plan = {
 
 const plans: Plan[] = [
   {
+    checkoutKey: "trial",
     icon: "\uD83C\uDF31",
     title: "Trial Protocol",
     subtitle: "GLIS 0\u201330 \u00B7 First-time users",
@@ -63,6 +66,7 @@ const plans: Plan[] = [
     ],
   },
   {
+    checkoutKey: "start",
     icon: "\u26A1",
     title: "Start Protocol",
     subtitle: "GLIS 26\u201350 \u00B7 Mild inflammation",
@@ -76,6 +80,7 @@ const plans: Plan[] = [
     cta: "Enroll Now \u2192",
   },
   {
+    checkoutKey: "grow",
     icon: "\uD83D\uDD25",
     title: "Grow Protocol",
     subtitle: "GLIS 51\u201375 \u00B7 Moderate inflammation",
@@ -98,6 +103,7 @@ const plans: Plan[] = [
     notice: "\u26A1 Limited doctor slots this week",
   },
   {
+    checkoutKey: "power",
     icon: "\uD83D\uDC51",
     title: "Power Protocol",
     subtitle: "GLIS 76\u2013100 \u00B7 High inflammation",
@@ -114,14 +120,18 @@ const plans: Plan[] = [
 
 export default function ProtocolPlans() {
   return (
-    <section className="bg-white py-16 sm:h-[1550.88px] sm:py-0" id="plans">
+    <section className="bg-white py-16 sm:py-0" id="plans">
+      <div aria-hidden="true" className="sr-only" id="pricing" />
       <Container>
-        <div className="sm:pt-[191.05px]">
-          <div className="mx-auto flex max-w-[982px] flex-col items-center space-y-4 text-center">
+        <div className="lg:pt-[191.05px]">
+          <div
+            className="mx-auto flex max-w-[982px] scroll-mt-20 flex-col items-center space-y-4 text-center"
+            id="pricing-anchor"
+          >
             <h2
               className={[
                 plusJakartaSans.className,
-                "h-[66px] w-full max-w-[982px] text-[40px] font-bold leading-[1.05] tracking-[-0.04em] text-[#0305C6] sm:text-[52px] sm:leading-[57.2px] sm:tracking-[-1.56px]",
+                "w-full max-w-[982px] text-[40px] font-bold leading-[1.05] tracking-[-0.04em] text-[#0305C6] sm:text-[52px] sm:leading-[57.2px] sm:tracking-[-1.56px] lg:h-[66px]",
               ].join(" ")}
             >
               Doctor-assigned based on your score
@@ -129,7 +139,7 @@ export default function ProtocolPlans() {
             <p
               className={[
                 inter.className,
-                "mx-auto min-h-[52.5px] max-w-[566.83px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#020B41]",
+                "mx-auto max-w-[566.83px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#020B41] lg:min-h-[52.5px]",
               ].join(" ")}
             >
               Not sure which one? Dr. Shane assigns the right protocol based on your actual
@@ -142,7 +152,7 @@ export default function ProtocolPlans() {
               <article
                 key={plan.title}
                 className={[
-                  "relative flex h-[668.69px] w-full max-w-[246.5px] flex-col rounded-[20px] border border-[#E3E7F4] bg-white px-5 py-6",
+                  "relative flex w-full max-w-[246.5px] flex-col rounded-[20px] border border-[#E3E7F4] bg-white px-5 py-6 lg:h-[668.69px]",
                   plan.featured
                     ? "overflow-hidden border-[#0305C6] shadow-[0_12px_40px_rgba(0,0,0,0.10)]"
                     : "border-[rgba(0,0,0,0.09)]",
@@ -153,7 +163,7 @@ export default function ProtocolPlans() {
                     <span
                       className={[
                         inter.className,
-                        "inline-flex h-[14px] w-[96.13px] items-center justify-center whitespace-nowrap text-[11px] font-bold uppercase leading-[18.1px] tracking-[0.66px] text-white",
+                          "inline-flex h-[14px] w-[96.13px] items-center justify-center whitespace-nowrap text-[11px] font-bold uppercase leading-[18.1px] tracking-[0.66px] text-white",
                       ].join(" ")}
                     >
                       {plan.badge}
@@ -165,7 +175,7 @@ export default function ProtocolPlans() {
                   <div className="space-y-4">
                     {plan.notice ? (
                       <div className="space-y-[6px] pt-[24px]">
-                        <div className="inline-flex h-[50.28px] w-[188.5px] items-center rounded-[10px] border border-[#F5C4C4] bg-[#FFF5F5] px-4 py-2">
+                        <div className="inline-flex min-h-[50.28px] w-full max-w-[188.5px] items-center rounded-[10px] border border-[#F5C4C4] bg-[#FFF5F5] px-4 py-2">
                           <span
                             className={[
                               inter.className,
@@ -307,7 +317,7 @@ export default function ProtocolPlans() {
                     </ul>
                   </div>
 
-                  <a
+                  <CheckoutTrigger
                     className={[
                       inter.className,
                       "mt-6 inline-flex h-[35px] items-center justify-center self-center rounded-full border text-[14px] font-semibold leading-none transition-colors",
@@ -315,10 +325,11 @@ export default function ProtocolPlans() {
                         ? "w-[145px] border-[#1D23D8] bg-[#1D23D8] text-white"
                         : "w-[146px] border-[#2A35FF] bg-white text-[#1D23D8]",
                     ].join(" ")}
-                    href="#top"
+                    href="#plans"
+                    protocolKey={plan.checkoutKey}
                   >
                     {plan.cta}
-                  </a>
+                  </CheckoutTrigger>
                 </div>
               </article>
             ))}
@@ -328,7 +339,7 @@ export default function ProtocolPlans() {
             <p
               className={[
                 inter.className,
-                "w-[806.14px] text-[14px] font-normal leading-[23.1px] tracking-[0] text-[#7D8191]",
+                "w-full max-w-[806.14px] text-[14px] font-normal leading-[23.1px] tracking-[0] text-[#7D8191]",
               ].join(" ")}
             >
               Not sure which protocol is right for you?{" "}
@@ -342,7 +353,7 @@ export default function ProtocolPlans() {
           </div>
 
           <div className="mx-auto mt-[35.91px] flex w-full max-w-[1040px] flex-col items-center gap-3">
-            <div className="w-full rounded-[20px] border border-[rgba(5,150,105,0.18)] bg-[rgba(5,150,105,0.05)] px-[18px] py-[16px] sm:h-[189.17px]">
+            <div className="w-full rounded-[20px] border border-[rgba(5,150,105,0.18)] bg-[rgba(5,150,105,0.05)] px-[18px] py-[16px] lg:h-[189.17px]">
               <div className="flex flex-col items-start gap-[10px]">
                 <div className="relative flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-[#B8E6DE] bg-[#DDF6F2] text-[0px] leading-none text-transparent">
                   <svg
@@ -389,7 +400,7 @@ export default function ProtocolPlans() {
             <p
               className={[
                 inter.className,
-                "w-[597.07px] text-center text-[11px] font-normal leading-[17.6px] tracking-[0] text-[#6E6E6E]",
+                "w-full max-w-[597.07px] text-center text-[11px] font-normal leading-[17.6px] tracking-[0] text-[#6E6E6E]",
               ].join(" ")}
             >
               Patient names changed for privacy. Score data from GutGuard patient portal

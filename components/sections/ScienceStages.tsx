@@ -82,14 +82,17 @@ const timeline = [
 
 export default function ScienceStages() {
   return (
-    <section className="bg-white py-12 sm:h-[1124.98px] sm:py-0" id="science">
+    <section className="bg-white py-12 sm:py-0" id="science">
       <Container>
-        <div className="space-y-14 sm:pt-[167px]">
-          <div className="mx-auto flex max-w-[887px] flex-col items-center space-y-5 text-center">
+        <div className="space-y-14 lg:pt-[167px]">
+          <div
+            className="mx-auto flex max-w-[887px] scroll-mt-20 flex-col items-center space-y-5 text-center"
+            id="science-anchor"
+          >
             <p
               className={[
                 firaCode.className,
-                "h-[11px] w-[257.61px] text-[11px] font-bold uppercase leading-[18.15px] tracking-[1.98px] text-[#5B8EF0]",
+                "min-h-[11px] w-[257.61px] text-[11px] font-bold uppercase leading-[18.15px] tracking-[1.98px] text-[#5B8EF0]",
               ].join(" ")}
             >
               GUTGUARD PROPRIETARY FRAMEWORK
@@ -98,7 +101,7 @@ export default function ScienceStages() {
             <h2
               className={[
                 plusJakartaSans.className,
-                "h-[66px] w-full max-w-[887px] text-[52px] font-bold leading-[57.2px] tracking-[-1.56px] text-[#020B41]",
+                "w-full max-w-[887px] text-[40px] font-bold leading-[1.05] tracking-[-0.04em] text-[#020B41] sm:text-[52px] sm:leading-[57.2px] sm:tracking-[-1.56px]",
               ].join(" ")}
             >
               Three stages. One cascade.
@@ -107,22 +110,13 @@ export default function ScienceStages() {
             <p
               className={[
                 inter.className,
-                "mx-auto h-[147px] max-w-[582.11px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#A3A3A8]",
+                "mx-auto max-w-[582.11px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#A3A3A8] lg:h-[147px]",
               ].join(" ")}
             >
-              <>
-                The MBS (Mitochondria Bio-regeneration System) is GutGuard&apos;s
-                <br />
-                proprietary protocol {"\u2014"} built on independently peer-reviewed
-                <br />
-                mechanisms in pre-, pro-, and postbiotic science. The Urolithin-A
-                <br />
-                and L-Tryptophan outcomes in Stage 3 are documented in
-                <br />
-                published
-                <br />
-                clinical research.
-              </>
+              The MBS (Mitochondria Bio-regeneration System) is GutGuard&apos;s proprietary
+              protocol {"\u2014"} built on independently peer-reviewed mechanisms in pre-, pro-,
+              and postbiotic science. The Urolithin-A and L-Tryptophan outcomes in Stage 3 are
+              documented in published clinical research.
             </p>
           </div>
 
@@ -131,7 +125,7 @@ export default function ScienceStages() {
               <div
                 key={stage.step}
                 className={[
-                  "h-[277.16px] w-full max-w-[333.33px] rounded-[20px] border p-8 text-left",
+                  "w-full max-w-[333.33px] rounded-[20px] border p-6 text-left sm:p-8 lg:h-[277.16px]",
                   stage.cardClassName,
                 ].join(" ")}
               >
@@ -171,7 +165,7 @@ export default function ScienceStages() {
                   <span
                     className={[
                       inter.className,
-                      "inline-flex items-center justify-center rounded-full border px-0 py-0 text-[11px] font-semibold leading-none",
+                      "inline-flex max-w-full items-center justify-center rounded-full border px-3 py-1 text-center text-[11px] font-semibold leading-none sm:px-0 sm:py-0",
                       stage.pillSizeClassName,
                       stage.pillClassName,
                     ].join(" ")}
@@ -183,11 +177,11 @@ export default function ScienceStages() {
             ))}
           </div>
 
-          <div className="mx-auto h-[199px] w-full max-w-[1040px] rounded-[20px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-8 py-10">
+          <div className="mx-auto w-full max-w-[1040px] rounded-[20px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-6 py-8 sm:px-8 sm:py-10 lg:h-[199px]">
             <p
               className={[
                 inter.className,
-                "mx-auto flex h-[14px] w-[188.04px] items-center justify-center whitespace-nowrap text-center text-[11px] font-semibold uppercase leading-[18.15px] tracking-[1.32px] text-[#7E7E84]",
+                "mx-auto flex min-h-[14px] w-full max-w-[188.04px] items-center justify-center text-center text-[11px] font-semibold uppercase leading-[18.15px] tracking-[1.32px] text-[#7E7E84]",
               ].join(" ")}
             >
               Timeline: What to expect

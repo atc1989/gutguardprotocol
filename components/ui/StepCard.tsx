@@ -36,7 +36,7 @@ function StepIcon({ step }: Pick<StepCardProps, "step">) {
 
 export default function StepCard({ description, step, title }: StepCardProps) {
   return (
-    <Card className="h-full min-h-[205px] rounded-[20px] !border-[rgba(0,0,0,0.83)] !bg-[#FFFFFF] px-[24px] pb-[22px] pt-[26px] shadow-none sm:h-[267.11px] sm:min-h-0 sm:w-[328px]">
+    <Card className="h-full min-h-[205px] rounded-[20px] !border-[rgba(0,0,0,0.83)] !bg-[#FFFFFF] px-[24px] pb-[22px] pt-[26px] shadow-none lg:h-[267.11px] lg:min-h-0 lg:w-[328px]">
       <div className="flex h-full flex-col">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#4C80FF]">
           {step}
@@ -48,7 +48,7 @@ export default function StepCard({ description, step, title }: StepCardProps) {
 
         <div className="mt-[46px] space-y-2">
           {title ? <h3 className="text-xl font-semibold tracking-tight text-[#11205f]">{title}</h3> : null}
-          <p className="max-w-[220px] text-[14px] font-normal leading-[1.5] text-[#7A7A81]">{description}</p>
+          <p className="max-w-[220px] text-[14px] font-normal leading-[1.5] text-[#7A7A81] lg:max-w-[220px]">{description}</p>
         </div>
       </div>
     </Card>

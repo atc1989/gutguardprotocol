@@ -1,0 +1,2918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>GutGuard Protocol — Check Your Inflammation Score · Philippines</title>
+<meta name="description" content="68% of Philippine deaths start with chronic inflammation. Upload your blood results, get your Lifestyle Inflammation Score in minutes. Doctor-assigned protocol. Free shipping nationwide.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gutguard.ph/">
+<meta property="og:title" content="Find out if chronic inflammation is already affecting you">
+<meta property="og:description" content="Upload your existing blood results. Get your Lifestyle Inflammation Score. A doctor reviews and assigns your protocol.">
+<meta property="og:image" content="https://gutguard.ph/og-image.jpg">
+<meta property="og:locale" content="en_PH">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gutguard.ph/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"></noscript>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalWebPage","name":"GutGuard Protocol","description":"Doctor-monitored gut health protocol using the Lifestyle Inflammation Score to assign personalized Pre-Pro-Postbiotic protocols.","url":"https://gutguard.ph","inLanguage":"en-PH"}</script>
+<!-- GA4: replace G-XXXXXXXXXX -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');function track(n,p){typeof gtag==='function'&&gtag('event',n,p||{})}</script>
+<style>
+/* ================================================================
+   GUTGUARD PROTOCOL — LANDING PAGE
+   Design system: verified contrast · one radius · one surface
+   All text colors verified WCAG AA before use.
+   ================================================================ */
+
+/* ── 1. VARIABLES ─────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-black:   #0a0a0a;
+  --bg-dark:    #141414;
+  --bg-card-dk: #1c1c1e;
+  --bg-cream:   #f5f4f2;
+  --bg-white:   #ffffff;
+  --bg-card-lt: #ffffff;
+
+  /* Text — all pre-verified WCAG AA */
+  --txt-dk-1: #ffffff;     /* 19.8:1 on black  */
+  --txt-dk-2: #ebebef;     /* 16.7:1 on black  */
+  --txt-dk-3: #a3a3a8;     /* 7.9:1  on black  */
+  --txt-dk-4: #7e7e84;     /* 4.9:1  on black  */
+  --txt-lt-1: #111113;     /* 17.2:1 on cream  */
+  --txt-lt-2: #44444a;     /* 8.8:1  on cream  */
+  --txt-lt-3: #6b6b71;     /* 4.8:1  on cream  */
+  --txt-lt-4: #6e6e6e;     /* 4.6:1  on cream  */
+
+  /* Brand */
+  --blue:      #1a56db;
+  --blue-lt:   #4f8ef7;
+  --green:     #059669;
+  --red:       #dc2626;
+  --amber:     #d97706;
+  --orange:    #c2410c;
+
+  /* Surfaces on dark */
+  --srf-1: rgba(255,255,255,.05);
+  --srf-2: rgba(255,255,255,.08);
+  --bdr-1: rgba(255,255,255,.09);
+  --bdr-2: rgba(255,255,255,.14);
+
+  /* Surfaces on light */
+  --bdr-lt: rgba(0,0,0,.1);
+
+  /* Radius: 3 values only */
+  --r-pill: 100px;
+  --r-card: 20px;
+  --r-tag:  10px;
+
+  /* Type */
+  --f-disp: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --f-body: 'Inter', -apple-system, sans-serif;
+
+  /* ── Type scale — 5 sizes only ─────────────────────────────
+     Stripe uses 4. Linear uses 5. Nothing in between.
+     Every font-size in the entire page uses one of these.
+  ─────────────────────────────────────────────────────────── */
+  --fs-xs:  .6875rem;  /* 11.7px — labels, badges, eyebrows  */
+  --fs-sm:  .875rem;   /* 14.9px — secondary, metadata       */
+  --fs-md:  1rem;      /* 17px   — body                      */
+  --fs-lg:  1.125rem;  /* 19px   — card titles, emphasis     */
+  --fs-xl:  1.375rem;  /* 23px   — large labels, sub-numbers */
+
+  /* ── Type scale — 5 sizes only ─────────────────────────────
+     Stripe uses 4. Linear uses 5. Nothing in between.
+     Every font-size in the entire page uses one of these.
+  ─────────────────────────────────────────────────────────── */
+  --fs-xs:  .6875rem;  /* 11.7px — labels, badges, eyebrows  */
+  --fs-sm:  .875rem;   /* 14.9px — secondary, metadata       */
+  --fs-md:  1rem;      /* 17px   — body                      */
+  --fs-lg:  1.125rem;  /* 19px   — card titles, emphasis     */
+  --fs-xl:  1.375rem;  /* 23px   — large labels, sub-numbers */
+  --ease:   cubic-bezier(.16,1,.3,1);
+  --fs-xs:.6875rem;
+  --fs-sm:.875rem;
+  --fs-md:1rem;
+  --fs-lg:1.125rem;
+  --fs-xl:1.375rem;
+}
+
+/* ── 2. RESET ─────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:var(--fs-md);scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{font-family:var(--f-body);font-size:var(--fs-md);line-height:1.65;color:var(--txt-lt-1);background:var(--bg-cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,canvas{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent}
+[id]{scroll-margin-top:80px}/* nav:64px + 16px breathing = 80px */
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms;transition-duration:.01ms}}
+
+/* ── 3. TYPOGRAPHY ────────────────────────────────────────────── */
+.disp{font-family:var(--f-disp)}
+.h1{font-family:var(--f-disp);font-size:clamp(2.75rem,7.5vw,5.25rem);font-weight:800;line-height:1.0;letter-spacing:-.04em}
+.h2{font-family:var(--f-disp);font-size:clamp(2rem,4.5vw,3.25rem);font-weight:700;line-height:1.1;letter-spacing:-.03em}
+.h3{font-family:var(--f-disp);font-size:clamp(1.0625rem,1.8vw,1.25rem);font-weight:700;line-height:1.3;letter-spacing:-.015em}
+.body-lg{font-size:clamp(1rem,1.5vw,1.125rem);line-height:1.75}
+.body{font-size:clamp(.9375rem,1.3vw,1rem);line-height:1.7}
+.sm{font-size:var(--fs-sm);line-height:1.6}
+.xs{font-size:var(--fs-sm);line-height:1.6}
+.label{font-size:var(--fs-xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mono{font-family:'SF Mono','Fira Code',monospace;font-size:var(--fs-sm)}
+
+/* ── 4. LAYOUT ────────────────────────────────────────────────── */
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
+.wrap-sm{max-width:760px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
+.section{padding:clamp(80px,11vw,140px) 0}
+.section-tight{padding:clamp(60px,8vw,100px) 0}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.5vw,24px)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,24px)}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,20px)}
+@media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}}
+.center{text-align:center}
+.flex-center{display:flex;align-items:center;justify-content:center}
+.eyebrow{color:var(--blue);font-family:'SF Mono','Fira Code',monospace;font-size:var(--fs-xs);font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow-dk{color:#5b8ef0}
+.section-gap{margin-top:clamp(48px,6vw,72px)}
+
+/* ── 5. BUTTONS ───────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:600;transition:all .2s var(--ease);cursor:pointer;white-space:nowrap;min-height:48px;border:none}
+.btn svg{width:16px;height:16px;flex-shrink:0;transition:transform .2s}
+.btn:hover svg{transform:translateX(3px)}
+.btn-primary{background:var(--txt-lt-1);color:var(--bg-white)}
+.btn-primary:hover{background:#2d2d2f;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.btn-primary-lt{background:var(--bg-white);color:var(--txt-lt-1)}
+.btn-primary-lt:hover{background:#f0efed;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--txt-dk-1);border:1.5px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
+.btn-lg{padding:16px 36px;font-size:var(--fs-md);min-height:54px}
+.btn-sm{padding:10px 20px;font-size:var(--fs-sm);min-height:40px}
+.btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* ── 6. CARDS ─────────────────────────────────────────────────── */
+/* Single card surface per context — no mixing */
+.card-dk{background:var(--bg-card-dk);border:1px solid var(--bdr-1);border-radius:var(--r-card);padding:clamp(20px,3vw,28px)}
+.card-lt{background:var(--bg-card-lt);border:1px solid var(--bdr-lt);border-radius:var(--r-card);padding:clamp(20px,3vw,28px)}
+.card-dk:hover,.card-lt:hover{border-color:rgba(26,86,219,.3);box-shadow:0 8px 32px rgba(0,0,0,.1)}
+
+/* ── 7. TAGS / CHIPS ──────────────────────────────────────────── */
+.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:var(--r-tag);font-size:var(--fs-xs);font-weight:600}
+.tag-green{background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.22);color:#047857}
+.tag-amber{background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.22);color:#b45309}
+.tag-red{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.22);color:#b91c1c}
+.tag-blue{background:rgba(26,86,219,.1);border:1px solid rgba(26,86,219,.22);color:#1d4ed8}
+.tag-neutral-dk{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:var(--txt-dk-3)}
+.tag-neutral-lt{background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.1);color:var(--txt-lt-3)}
+
+/* ── 8. NAV ───────────────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;transition:background .3s,border-color .3s}
+.nav.solid{background:rgba(245,244,242,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+.nav-inner{position:relative;height:100%;max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{display:flex;align-items:center;gap:9px;font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-dk-1);letter-spacing:-.02em;flex-shrink:0;transition:color .2s}
+.nav.solid .nav-logo{color:var(--txt-lt-1)}
+.nav-logo-mark{width:28px;height:28px;border-radius:var(--r-tag);background:linear-gradient(135deg,#1a56db,#4f8ef7);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-mark svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5}
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;position:absolute;left:50%;transform:translateX(-50%)}
+.nav-links a{display:block;padding:8px 14px;border-radius:var(--r-tag);font-size:var(--fs-sm);font-weight:500;color:rgba(255,255,255,.7);transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--txt-dk-1);background:rgba(255,255,255,.1)}
+.nav.solid .nav-links a{color:var(--txt-lt-3)}
+.nav.solid .nav-links a:hover{color:var(--txt-lt-1);background:rgba(0,0,0,.05)}
+.nav-cta{font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:600;padding:9px 20px;border-radius:var(--r-pill);background:var(--txt-dk-1);color:var(--bg-white);transition:all .2s;min-height:38px;flex-shrink:0}
+.nav-cta:hover{background:#2d2d2f;transform:translateY(-1px)}
+.nav.solid .nav-cta{background:var(--txt-lt-1);color:var(--bg-white)}
+.nav-cta:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:10px;margin:-10px;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+.hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--txt-dk-1);transition:transform .3s var(--ease),opacity .3s,width .3s}
+.nav.solid .hamburger span{background:var(--txt-lt-1)}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:860px){.nav-links{display:none}.hamburger{display:flex}.nav-cta{display:none}}
+
+/* Mobile menu */
+.mmenu{position:fixed;inset:0;z-index:1001;background:#0a0a0a;transform:translateY(-100%);transition:transform .45s var(--ease);padding:clamp(72px,10vw,96px) clamp(28px,6vw,48px) clamp(28px,5vw,40px);overflow-y:auto;-webkit-overflow-scrolling:touch;isolation:isolate;display:block}
+.mmenu.open{transform:none}
+.mmenu-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:var(--r-pill);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:var(--txt-dk-1);font-size:var(--fs-xl);cursor:pointer;transition:background .2s;border:none;font-family:inherit}
+.mmenu-close:hover{background:rgba(255,255,255,.15)}
+.mmenu-items{display:flex;flex-direction:column;gap:0}
+.mmenu-link{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2.2vh,16px) 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--txt-dk-1);font-family:var(--f-disp);font-size:clamp(1.125rem,3.5vw,1.625rem);font-weight:700;letter-spacing:-.02em;transition:color .15s,padding-left .2s;gap:12px}
+.mmenu-link:hover{color:var(--txt-dk-3);padding-left:6px}
+
+
+.mmenu-link svg{width:16px;height:16px;stroke:rgba(255,255,255,.2);fill:none;stroke-width:2;flex-shrink:0}
+
+
+
+
+
+
+.mmenu-contact-btn:hover{border-color:rgba(255,255,255,.25);color:var(--txt-dk-1)}
+.mmenu-contact-btn svg{width:13px;height:13px;flex-shrink:0}
+.mmenu-cta{margin-top:clamp(24px,4vw,36px);padding:16px;background:var(--txt-dk-1);color:var(--bg-black);border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-md);font-weight:700;text-align:center;transition:background .2s;cursor:pointer;border:none;min-height:52px;width:100%}
+.mmenu-cta:hover{background:#ebebef}
+.mmenu-foot{margin-top:clamp(14px,2.5vh,24px);padding-top:clamp(14px,2.5vh,20px);border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:12px}
+.mmenu-foot-av{width:34px;height:34px;border-radius:var(--r-pill);background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.25);display:flex;align-items:center;justify-content:center;font-size:var(--fs-xs);font-weight:700;color:#5b8ef0;flex-shrink:0}
+.mmenu-foot-name{font-size:var(--fs-sm);font-weight:600;color:var(--txt-dk-3)}
+.mmenu-foot-role{font-size:var(--fs-xs);color:var(--txt-dk-4);margin-top:1px}
+
+/* ── 9. HERO ──────────────────────────────────────────────────── */
+.hero{min-height:100vh;min-height:100dvh;background:var(--bg-black);display:flex;align-items:center;padding:clamp(96px,14vh,140px) 0 clamp(72px,10vh,100px);position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% 40%,rgba(26,86,219,.06) 0%,transparent 70%),radial-gradient(ellipse 50% 60% at 15% 70%,rgba(5,150,105,.04) 0%,transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,7vw,88px);align-items:center;position:relative}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;max-width:560px}}
+.hero-stat{display:inline-flex;align-items:center;gap:8px;background:rgba(220,38,38,.09);border:1px solid rgba(220,38,38,.2);border-radius:var(--r-pill);padding:7px 16px;margin-bottom:28px}
+.hero-stat-dot{width:6px;height:6px;border-radius:50%;background:#dc2626;animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+.hero-stat-text{font-size:var(--fs-sm);font-weight:500;color:#f87171}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.hero h1{color:var(--txt-dk-1);margin-bottom:20px}
+.hero h1 em{font-style:normal;color:#f87171}
+.hero-sub{color:var(--txt-dk-3);margin-bottom:36px;max-width:46ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-trust{display:flex;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap}
+.hero-trust-item{display:flex;align-items:center;gap:6px;font-size:var(--fs-sm);color:var(--txt-dk-4)}
+.hero-trust-item svg{width:14px;height:14px;stroke:var(--txt-dk-4);fill:none;stroke-width:2;flex-shrink:0}
+.hero-trust-sep{color:rgba(255,255,255,.18);font-size:var(--fs-xs)}
+@media(max-width:900px){.hero-actions{flex-direction:column;align-items:flex-start}.hero-trust{gap:8px}}
+@media(max-width:480px){.hero-stat{font-size:var(--fs-xs);padding:6px 12px}.hero-trust-sep{display:none}.hero-trust{flex-direction:column;align-items:flex-start;gap:8px}}
+@media(max-width:480px){.hero-actions .btn{width:100%;justify-content:center}}
+
+/* Score card */
+.score-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:var(--r-card);padding:clamp(24px,4vw,36px);box-shadow:0 0 0 1px rgba(255,255,255,.04),0 24px 64px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3)}
+@media(max-width:900px){.score-card{max-width:440px;margin:0 auto;width:100%}}
+.score-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.score-title{font-size:var(--fs-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-dk-4)}
+.score-live-badge{display:flex;align-items:center;gap:5px;font-size:var(--fs-xs);font-weight:500;color:#34d399}
+.score-live-dot{width:6px;height:6px;border-radius:50%;background:#34d399;animation:pulse 2s ease-in-out infinite}
+.score-ring-area{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;position:relative}
+.score-ring-area .ring{width:clamp(160px,46vw,200px);height:clamp(160px,46vw,200px)}
+.score-big{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-num{font-family:var(--f-disp);font-size:clamp(2.75rem,8vw,3.75rem);font-weight:800;color:#d97706;letter-spacing:-.04em;line-height:1}
+.score-out-of{font-size:var(--fs-xs);color:var(--txt-dk-4);margin-top:2px;letter-spacing:.06em}
+.score-level{font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:600;color:#d97706;text-align:center;margin-bottom:16px}
+.score-rows{display:flex;flex-direction:column;gap:6px}
+.score-row{display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:10px}
+.score-row-name{flex:1;font-size:var(--fs-sm);color:var(--txt-dk-3)}
+.score-row-val{font-size:var(--fs-sm);font-weight:600;font-family:'SF Mono','Fira Code',monospace}
+.score-row-val.hi{color:#f87171}
+.score-row-val.ok{color:var(--txt-dk-3)}
+.score-row-flag{font-size:var(--fs-xs);font-weight:700;padding:2px 7px;border-radius:var(--r-tag);flex-shrink:0}
+@media(max-width:340px){.score-row-flag{display:none}}
+.flag-hi{background:rgba(248,113,113,.12);color:#f87171}
+.flag-ok{background:rgba(255,255,255,.07);color:var(--txt-dk-4)}
+.score-cta{display:block;width:100%;margin-top:16px;padding:13px;background:var(--txt-dk-1);color:var(--bg-black);border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:700;text-align:center;border:none;cursor:pointer;transition:all .2s;min-height:46px}
+.score-cta:hover{background:#ebebef}
+
+/* ── 10. STAT BANNER ──────────────────────────────────────────── */
+.stat-banner{background:#141414;padding:clamp(36px,5vw,56px) 0}
+.stat-grid{display:flex;align-items:center;justify-content:center;gap:0}
+.stat-item{flex:1;max-width:280px;text-align:center;padding:0 clamp(20px,4vw,40px)}
+.stat-num{font-family:var(--f-disp);font-size:clamp(2rem,5vw,3rem);font-weight:800;color:var(--txt-dk-1);letter-spacing:-.035em;line-height:1}
+.stat-label{font-size:var(--fs-sm);color:var(--txt-dk-3);margin-top:6px;line-height:1.5}
+.stat-sep{width:1px;height:48px;background:rgba(255,255,255,.1);flex-shrink:0}
+@media(max-width:600px){.stat-grid{flex-direction:column;gap:24px}.stat-sep{width:40px;height:1px}.stat-item{max-width:none}}
+
+/* ── 11. HOW IT WORKS ─────────────────────────────────────────── */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,28px)}
+@media(max-width:700px){.steps-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
+.step-card{padding:clamp(24px,3vw,32px);background:var(--bg-white);border:1px solid var(--bdr-lt);border-radius:var(--r-card);transition:border-color .2s,box-shadow .2s}
+.step-card:hover{border-color:rgba(26,86,219,.3);box-shadow:0 8px 32px rgba(0,0,0,.06)}
+.step-num{font-family:'SF Mono','Fira Code',monospace;font-size:var(--fs-xs);font-weight:700;color:#5b8ef0;letter-spacing:.1em;margin-bottom:16px}
+.step-icon{width:44px;height:44px;border-radius:var(--r-tag);background:rgba(26,86,219,.07);border:1px solid rgba(26,86,219,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.step-icon svg{width:20px;height:20px;stroke:#1a56db;fill:none;stroke-width:1.8}
+.step-title{font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-lt-1);margin-bottom:8px}
+.step-desc{font-size:var(--fs-sm);color:var(--txt-lt-3);line-height:1.65}
+.labs-strip{margin-top:clamp(28px,4vw,40px);padding:20px 24px;background:var(--bg-white);border:1px solid var(--bdr-lt);border-radius:var(--r-card)}
+.labs-label{font-size:var(--fs-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-lt-4);margin-bottom:12px}
+.labs-tags{display:flex;flex-wrap:wrap;gap:8px}
+.lab-tag{padding:5px 14px;background:#f5f4f2;border:1px solid rgba(0,0,0,.1);border-radius:var(--r-pill);font-size:var(--fs-sm);font-weight:500;color:var(--txt-lt-2);white-space:nowrap}
+
+/* ── 12. MARKERS ──────────────────────────────────────────────── */
+.markers-sec{background:var(--bg-black)}
+.markers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,16px)}
+@media(max-width:860px){.markers-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.markers-grid{grid-template-columns:1fr}}
+.marker-card{background:var(--bg-card-dk);border:1px solid var(--bdr-1);border-radius:var(--r-card);padding:clamp(16px,2.5vw,24px);transition:border-color .2s}
+.marker-card:hover{border-color:rgba(26,86,219,.3)}
+.m-abbr{font-family:'SF Mono','Fira Code',monospace;font-size:var(--fs-xs);font-weight:700;color:#5b8ef0;letter-spacing:.1em;margin-bottom:7px}
+.m-name{font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:700;color:var(--txt-dk-1);margin-bottom:8px;line-height:1.3}
+.m-desc{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.65;margin-bottom:12px}
+.m-range{font-size:var(--fs-xs);font-weight:600;color:#34d399;background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.18);border-radius:var(--r-tag);padding:3px 10px;display:inline-block}
+
+/* ── 13. SCORE RANGES ─────────────────────────────────────────── */
+.ranges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,20px)}
+@media(max-width:860px){.ranges-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.ranges-grid{grid-template-columns:1fr}}
+.range-card{border-radius:var(--r-card);padding:clamp(20px,3vw,28px);border:1px solid transparent}
+.range-optimal{background:rgba(5,150,105,.07);border-color:rgba(5,150,105,.2)}
+.range-mild{background:rgba(217,119,6,.07);border-color:rgba(217,119,6,.2)}
+.range-moderate{background:rgba(194,65,12,.07);border-color:rgba(194,65,12,.2)}
+.range-high{background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.2)}
+.range-score{font-family:var(--f-disp);font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+.range-optimal .range-score{color:#065f46}
+.range-mild     .range-score{color:#b45309}
+.range-moderate .range-score{color:#c2410c}
+.range-high     .range-score{color:#b91c1c}
+.range-name{font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:600;color:var(--txt-lt-1);margin-bottom:8px}
+.range-desc{font-size:var(--fs-sm);color:var(--txt-lt-3);line-height:1.65;margin-bottom:14px}
+.range-proto{font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;padding:4px 12px;border-radius:var(--r-pill);display:inline-block}
+.range-optimal .range-proto{background:rgba(5,150,105,.1);color:#065f46;border:1px solid rgba(5,150,105,.2)}
+.range-mild     .range-proto{background:rgba(217,119,6,.1);color:#92400e;border:1px solid rgba(217,119,6,.2)}
+.range-moderate .range-proto{background:rgba(194,65,12,.1);color:#9a3412;border:1px solid rgba(194,65,12,.2)}
+.range-high     .range-proto{background:rgba(220,38,38,.1);color:#991b1b;border:1px solid rgba(220,38,38,.2)}
+
+/* ── 14. DOCTOR ───────────────────────────────────────────────── */
+.doctor-sec{background:#141414}
+.doctor-card{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,48px);align-items:start;background:var(--bg-card-dk);border:1px solid var(--bdr-1);border-radius:var(--r-card);padding:clamp(28px,4vw,48px)}
+@media(max-width:640px){.doctor-card{grid-template-columns:1fr;text-align:center}}
+.doctor-avatar{width:clamp(80px,12vw,104px);height:clamp(80px,12vw,104px);border-radius:20px;background:rgba(26,86,219,.15);border:1.5px solid rgba(26,86,219,.3);display:flex;align-items:center;justify-content:center;font-family:var(--f-disp);font-size:1.5rem;font-weight:700;color:#5b8ef0;flex-shrink:0;position:relative}
+@media(max-width:640px){.doctor-avatar{margin:0 auto}}
+.doctor-name{font-family:var(--f-disp);font-size:clamp(1.375rem,2.5vw,1.875rem);font-weight:700;color:var(--txt-dk-1);letter-spacing:-.025em;margin-bottom:4px}
+.doctor-title{font-size:var(--fs-sm);color:var(--txt-dk-3);margin-bottom:18px}
+.doctor-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+@media(max-width:640px){.doctor-badges{justify-content:center}}
+.doctor-quote{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.75;font-style:italic;padding:14px 18px;background:rgba(255,255,255,.04);border-radius:0 12px 12px 0;border-left:2px solid rgba(26,86,219,.4);margin-bottom:22px}
+.doctor-stats{display:flex;gap:clamp(20px,4vw,36px);flex-wrap:wrap}
+@media(max-width:640px){.doctor-stats{justify-content:center}}
+.dstat-val{font-family:var(--f-disp);font-size:clamp(1.25rem,2vw,1.625rem);font-weight:700;color:var(--txt-dk-1);letter-spacing:-.025em}
+.dstat-label{font-size:var(--fs-xs);color:var(--txt-dk-4);margin-top:2px}
+.doctor-flow{margin-top:clamp(32px,5vw,48px);display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;gap:6px;align-items:stretch}
+@media(max-width:760px){.doctor-flow{display:flex;flex-direction:column;align-items:center;max-width:360px;margin:clamp(24px,4vw,40px) auto 0}}
+.flow-step{text-align:center;padding:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;width:100%}
+.flow-step-n{font-family:'SF Mono','Fira Code',monospace;font-size:var(--fs-xs);color:#5b8ef0;margin-bottom:5px;letter-spacing:.1em}
+.flow-step-l{font-size:var(--fs-sm);font-weight:600;color:var(--txt-dk-2);line-height:1.4}
+.flow-arr{text-align:center;color:rgba(255,255,255,.2);font-size:var(--fs-sm);padding:2px 0;line-height:1}
+@media(max-width:760px){.flow-arr{transform:none;font-size:var(--fs-xs)}}
+
+/* ── 15. SCIENCE / MBS ────────────────────────────────────────── */
+.science-sec{background:var(--bg-black)}
+.mbs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,20px)}
+@media(max-width:700px){.mbs-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}}
+.mbs-card{border-radius:var(--r-card);padding:clamp(24px,3vw,32px);transition:transform .2s,box-shadow .2s}
+.mbs-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.25)}
+@media(hover:none){.mbs-card:hover{transform:none}}
+.mbs-pre{background:rgba(26,86,219,.09);border:1px solid rgba(26,86,219,.18)}
+.mbs-pro{background:rgba(5,150,105,.09);border:1px solid rgba(5,150,105,.18)}
+.mbs-post{background:rgba(217,119,6,.09);border:1px solid rgba(217,119,6,.18)}
+.mbs-stage{font-family:'SF Mono','Fira Code',monospace;font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;margin-bottom:12px}
+.mbs-pre .mbs-stage{color:#5b8ef0}
+.mbs-pro .mbs-stage{color:#34d399}
+.mbs-post .mbs-stage{color:#fbbf24}
+.mbs-title{font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-dk-1);margin-bottom:10px}
+.mbs-desc{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.7;margin-bottom:16px}
+.mbs-pill{font-size:var(--fs-xs);font-weight:600;padding:5px 12px;border-radius:var(--r-pill);display:inline-block}
+.mbs-pre  .mbs-pill{background:rgba(26,86,219,.12);border:1px solid rgba(26,86,219,.22);color:#93b4f9}
+.mbs-pro  .mbs-pill{background:rgba(5,150,105,.12);border:1px solid rgba(5,150,105,.22);color:#6ee7b7}
+.mbs-post .mbs-pill{background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.22);color:#fcd34d}
+.mbs-timeline{margin-top:clamp(24px,4vw,36px);padding:clamp(20px,3vw,28px);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-card)}
+.mbs-tl-title{font-size:var(--fs-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-dk-4);margin-bottom:clamp(16px,2.5vw,20px);text-align:center}
+.mbs-tl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);max-width:640px;margin:0 auto}
+@media(max-width:480px){.mbs-tl-grid{grid-template-columns:1fr}}
+.mbs-tl-item{text-align:center}
+.mbs-tl-day{font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-dk-1);margin-bottom:6px}
+.mbs-tl-text{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.6}
+
+/* ── 16. PROTOCOLS ────────────────────────────────────────────── */
+.protocols-sec{background:var(--bg-cream)}
+.proto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,18px)}
+@media(max-width:960px){.proto-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.proto-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
+.proto-card{background:var(--bg-white);border:1.5px solid rgba(0,0,0,.09);border-radius:var(--r-card);padding:clamp(20px,2.5vw,28px);transition:border-color .2s,box-shadow .2s,transform .2s;cursor:pointer;position:relative}
+.proto-card:hover{border-color:rgba(0,0,0,.2);box-shadow:0 8px 32px rgba(0,0,0,.07);transform:translateY(-3px)}
+@media(hover:none){.proto-card:hover{transform:none}}
+.proto-card.featured{border-color:var(--txt-lt-1);box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.proto-badge-featured{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--txt-lt-1);color:var(--bg-white);font-size:var(--fs-xs);font-weight:700;padding:4px 12px;border-radius:0 0 9px 9px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.proto-emoji{font-size:var(--fs-xl);margin-bottom:12px}
+.proto-name{font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-lt-1);margin-bottom:4px}
+.proto-for{font-size:var(--fs-sm);color:var(--txt-lt-3);margin-bottom:16px;line-height:1.5}
+.proto-price{font-family:var(--f-disp);font-size:clamp(1.75rem,3.5vw,2.25rem);font-weight:800;color:var(--txt-lt-1);letter-spacing:-.04em;line-height:1}
+.proto-supply{font-size:var(--fs-sm);color:var(--txt-lt-3);margin-top:4px;margin-bottom:16px}
+.proto-dose{font-size:var(--fs-xs);font-family:'SF Mono','Fira Code',monospace;color:var(--txt-lt-3);padding:8px 10px;background:#f5f4f2;border-radius:var(--r-tag);line-height:1.6;margin-bottom:18px}
+.proto-includes{display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.proto-include{display:flex;align-items:flex-start;gap:7px;font-size:var(--fs-sm);color:var(--txt-lt-2);line-height:1.5}
+.proto-include svg{width:14px;height:14px;stroke:#059669;fill:none;stroke-width:2.5;flex-shrink:0;margin-top:2px}
+.proto-btn{width:100%;padding:12px;border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:700;border:1.5px solid var(--txt-lt-1);background:transparent;color:var(--txt-lt-1);cursor:pointer;transition:all .2s;min-height:46px}
+.proto-btn:hover,.proto-card.featured .proto-btn{background:var(--txt-lt-1);color:var(--bg-white)}
+.proto-btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.proto-note{margin-top:clamp(28px,4vw,36px);padding:18px 24px;background:rgba(26,86,219,.05);border:1px solid rgba(26,86,219,.12);border-radius:var(--r-card);font-size:var(--fs-sm);color:var(--txt-lt-3);text-align:center}
+.proto-note a{color:var(--blue);font-weight:600}
+.proto-note a:hover{text-decoration:underline}
+
+/* ── 17. PROOF ────────────────────────────────────────────────── */
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,24px)}
+@media(max-width:860px){.proof-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
+.proof-card{background:var(--bg-white);border:1px solid rgba(0,0,0,.09);border-radius:var(--r-card);padding:clamp(20px,3vw,28px)}
+.proof-scores{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.proof-n{font-family:var(--f-disp);font-size:clamp(1.75rem,4vw,2.25rem);font-weight:800;letter-spacing:-.03em}
+.proof-before{color:#b91c1c}
+.proof-after{color:#047857}
+.proof-arr{color:rgba(0,0,0,.2);font-size:var(--fs-xl)}
+.proof-drop{font-size:var(--fs-xs);font-weight:700;padding:3px 10px;border-radius:var(--r-pill);background:rgba(5,150,105,.09);border:1px solid rgba(5,150,105,.18);color:#047857;margin-left:auto}
+.proof-bar-area{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.proof-bar-row{display:flex;align-items:center;gap:10px}
+.proof-bar-tag{font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;width:36px;text-align:right;flex-shrink:0;color:var(--txt-lt-4)}
+.proof-bar-track{flex:1;height:7px;background:#f0efed;border-radius:var(--r-pill);overflow:hidden}
+.proof-bar-fill{height:100%;border-radius:var(--r-pill);width:0;transition:width 1.2s var(--ease)}
+.bar-before .proof-bar-fill{background:#f87171}
+.bar-after  .proof-bar-fill{background:#34d399}
+.proof-val{font-family:'SF Mono','Fira Code',monospace;font-size:var(--fs-xs);font-weight:700;width:26px;flex-shrink:0;color:var(--txt-lt-3)}
+.proof-quote{font-size:var(--fs-sm);color:var(--txt-lt-3);line-height:1.7;font-style:italic;margin-bottom:14px}
+.proof-byline{display:flex;align-items:center;gap:10px}
+.proof-avatar{width:36px;height:36px;border-radius:50%;background:#ebe9e5;border:2px dashed rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);flex-shrink:0}
+.proof-name{font-size:var(--fs-sm);font-weight:600;color:var(--txt-lt-1)}
+.proof-meta{font-size:var(--fs-xs);color:var(--txt-lt-4);margin-top:1px}
+
+/* ── 18. VITAL INFO ───────────────────────────────────────────── */
+.vital-sec{background:var(--bg-black)}
+.vital-tabs{display:flex;gap:3px;background:rgba(255,255,255,.06);border-radius:14px;padding:4px;margin-bottom:36px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.vital-tabs::-webkit-scrollbar{display:none}
+.vital-tab{flex:0 0 auto;padding:10px 18px;border-radius:10px;font-size:var(--fs-sm);font-weight:600;border:none;cursor:pointer;background:transparent;color:var(--txt-dk-3);transition:all .2s;min-height:40px;white-space:nowrap}
+.vital-tab:hover{color:var(--txt-dk-1);background:rgba(255,255,255,.06)}
+.vital-tab.active{background:rgba(255,255,255,.12);color:var(--txt-dk-1)}
+.vital-tab:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.vital-panel{display:none}
+.vital-panel.on{display:block}
+.vital-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,20px)}
+@media(max-width:700px){.vital-grid{grid-template-columns:1fr}}
+.vital-card{background:var(--bg-card-dk);border:1px solid var(--bdr-1);border-radius:var(--r-card);padding:clamp(20px,3vw,26px);transition:border-color .2s}
+.vital-card:hover{border-color:rgba(26,86,219,.28)}
+.vital-card-head{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.vital-card-icon{width:36px;height:36px;flex-shrink:0;background:rgba(26,86,219,.1);border:1px solid rgba(26,86,219,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm)}
+.vital-card-title{font-family:var(--f-disp);font-size:var(--fs-md);font-weight:700;color:var(--txt-dk-1);line-height:1.3}
+.vital-card-body{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.75}
+.vital-card-body strong{color:var(--txt-dk-2);font-weight:600}
+.vital-card-body ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.vital-card-body li{display:flex;align-items:flex-start;gap:8px;line-height:1.6}
+.vital-card-body li::before{content:"·";color:#5b8ef0;font-weight:700;flex-shrink:0;margin-top:1px}
+.vtable{width:100%;border-collapse:collapse;margin-top:10px}
+.vtable th{font-size:var(--fs-xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt-dk-3);text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.vtable td{font-size:var(--fs-sm);color:var(--txt-dk-3);padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04)}
+.vtable td:first-child{font-weight:600;color:var(--txt-dk-1)}
+.vtable tr:last-child td{border-bottom:none}
+.comp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.comp-tag{padding:5px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-tag);font-size:var(--fs-sm);color:var(--txt-dk-3)}
+
+/* ── 19. FAQ ──────────────────────────────────────────────────── */
+.faq-sec{background:#141414}
+.faq-list{display:flex;flex-direction:column;gap:6px;min-height:400px}
+.faq-item{background:var(--bg-card-dk);border:1px solid var(--bdr-1);border-radius:var(--r-card);overflow:hidden}
+.faq-q{width:100%;padding:18px 22px;background:none;border:none;text-align:left;font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:600;color:var(--txt-dk-1);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:56px}
+.faq-q:hover{background:rgba(255,255,255,.03)}
+.faq-q svg{width:18px;height:18px;stroke:var(--txt-dk-3);flex-shrink:0;transition:transform .25s var(--ease)}
+.faq-item.open .faq-q svg{transform:rotate(45deg)}
+.faq-q:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:var(--r-card)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.faq-item.open .faq-body{max-height:600px}
+.faq-a{padding:0 22px 20px;font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.75}
+.faq-a strong{color:var(--txt-dk-2);font-weight:600}
+
+/* ── 20. FINAL CTA ────────────────────────────────────────────── */
+.final-cta{background:var(--bg-black);padding:clamp(96px,14vw,180px) 0;text-align:center}
+.final-cta h2{color:var(--txt-dk-1);margin-bottom:16px}
+.final-cta .sub{color:var(--txt-dk-3);margin-bottom:40px}
+.final-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ── 21. FOOTER ───────────────────────────────────────────────── */
+.footer{background:#141414;padding:clamp(48px,7vw,72px) 0 clamp(28px,4vw,40px)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:clamp(24px,4vw,48px);margin-bottom:clamp(32px,5vw,48px)}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-dk-1);letter-spacing:-.02em;margin-bottom:10px}
+.footer-tagline{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.65;margin-bottom:16px;max-width:280px}
+.footer-legal{font-size:var(--fs-xs);color:var(--txt-dk-4);line-height:1.65}
+.footer-col-title{font-size:var(--fs-xs);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dk-4);margin-bottom:14px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:var(--fs-sm);color:var(--txt-dk-3);transition:color .15s}
+.footer-links a:hover{color:var(--txt-dk-1)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer-copy{font-size:var(--fs-sm);color:var(--txt-dk-4)}
+.footer-badges{display:flex;gap:7px;flex-wrap:wrap}
+.footer-badge{font-size:max(.625rem,12px);padding:4px 9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-tag);color:var(--txt-dk-4);font-weight:600;letter-spacing:.04em}
+
+/* ── 22. MOBILE BUY BAR ───────────────────────────────────────── */
+.m-bar{position:fixed;bottom:0;left:0;right:0;z-index:900;background:rgba(10,10,10,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.09);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));display:none}
+/* mobile bar visibility: controlled by JS scroll handler */
+.m-bar-inner{display:flex;align-items:center;gap:14px}
+.m-bar-price{font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-dk-1)}
+.m-bar-label{font-size:var(--fs-xs);color:var(--txt-dk-3);margin-top:1px}
+.m-bar-btn{flex:1;padding:13px 20px;background:var(--txt-dk-1);color:var(--bg-black);border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:700;border:none;cursor:pointer;min-height:48px;transition:background .2s}
+.m-bar-btn:hover{background:#ebebef}
+
+/* ── 23. COOKIE BANNER ────────────────────────────────────────── */
+.cookie{position:fixed;bottom:0;left:0;right:0;z-index:999;background:#141414;border-top:1px solid rgba(255,255,255,.09);padding:14px max(20px,env(safe-area-inset-left,20px)) calc(14px + env(safe-area-inset-bottom,0px));transform:translateY(100%);transition:transform .4s var(--ease)}
+.cookie.show{transform:none}
+.cookie-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cookie-text{flex:1;font-size:var(--fs-sm);color:var(--txt-dk-3);min-width:200px}
+.cookie-text a{color:#5b8ef0;text-decoration:underline}
+.cookie-btns{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+.cookie-ok{padding:9px 20px;border-radius:var(--r-pill);background:var(--txt-dk-1);color:var(--bg-black);font-size:var(--fs-sm);font-weight:600;border:none;cursor:pointer;min-height:38px;transition:background .2s}
+.cookie-ok:hover{background:#ebebef}
+.cookie-no{padding:9px 18px;border-radius:var(--r-pill);background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--txt-dk-3);font-size:var(--fs-sm);font-weight:500;cursor:pointer;min-height:38px;transition:all .2s}
+.cookie-no:hover{border-color:rgba(255,255,255,.45);color:var(--txt-dk-1)}
+@media(max-width:480px){.cookie-inner{flex-direction:column;align-items:stretch}.cookie-ok,.cookie-no{flex:1;text-align:center}}
+
+/* ── 24. SCROLL REVEALS ───────────────────────────────────────── */
+[data-r]{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease);will-change:opacity,transform}
+[data-r].shown{opacity:1;transform:none;will-change:auto}
+[data-r][data-d="1"]{transition-delay:.08s}
+[data-r][data-d="2"]{transition-delay:.16s}
+[data-r][data-d="3"]{transition-delay:.24s}
+[data-r][data-d="4"]{transition-delay:.32s}
+[data-r][data-d="5"]{transition-delay:.40s}
+[data-r][data-d="6"]{transition-delay:.48s}
+[data-r][data-d="7"]{transition-delay:.56s}
+[data-r][data-d="8"]{transition-delay:.64s}
+@media(prefers-reduced-motion:reduce){[data-r]{opacity:1;transform:none;transition:none}}
+
+/* ── 25. PHOTO PLACEHOLDERS ───────────────────────────────────── */
+.ph{background:rgba(255,255,255,.04);border:1.5px dashed rgba(255,255,255,.18);border-radius:var(--r-card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 20px;text-align:center;position:relative;overflow:hidden}
+.ph::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(255,255,255,.015) 8px,rgba(255,255,255,.015) 16px);pointer-events:none}
+.ph-icon{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:var(--fs-md)}
+.ph-text{font-size:var(--fs-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);line-height:1.6}
+.ph-lt{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.15)}
+.ph-lt::before{background:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(0,0,0,.018) 8px,rgba(0,0,0,.018) 16px)}
+.ph-lt .ph-icon{border-color:rgba(0,0,0,.18)}
+.ph-lt .ph-text{color:rgba(0,0,0,.45)}
+.ph-avatar{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:var(--fs-xl);flex-shrink:0}
+.ph-avatar-lt{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.15)}
+
+/* ── 26. RESPONSIVE REFINEMENTS ───────────────────────────────── */
+@media(max-width:1100px) and (min-width:860px){.hero-grid{gap:48px}.proto-grid{gap:14px}}
+@media(max-width:900px){.hero-grid{text-align:left}.hero-sub{max-width:100%}}
+@media(max-width:640px){.section{padding:clamp(64px,10vw,100px) 0}.step-card{padding:22px 18px}.mbs-card{padding:22px 18px}.proto-card{padding:20px 16px}}
+@media(max-width:480px){.h1{font-size:clamp(2.25rem,9vw,2.75rem)}.h2{font-size:clamp(1.75rem,6vw,2rem)}}
+@media(max-height:500px) and (orientation:landscape){.hero{min-height:auto;padding:80px 0 48px}.hero-grid{grid-template-columns:1fr;text-align:left}.score-card{display:none}.m-bar{display:none}}
+
+/* ── 27. DARK MODE ─────────────────────────────────────────────── */
+@media(prefers-color-scheme:dark){
+  :root{
+    /* Flip backgrounds */
+    --bg-cream:   #111214;
+    --bg-white:   #1c1e22;
+    --bg-card-lt: #1c1e22;
+    --bdr-lt:     rgba(255,255,255,.09);
+    /* Flip ALL text tokens — auto-fixes all 70 usages */
+    --txt-lt-1: #ebebef;   /* was #111113 → now near-white  */
+    --txt-lt-2: #c4c4c8;   /* was #44444a → now mid-light   */
+    --txt-lt-3: #a3a3a8;   /* was #6b6b71 → now muted light */
+    --txt-lt-4: #888888;   /* 4.7:1 on #1c1e22 · 5.3:1 on #111214 */
+  }
+  .step-card,.proto-card,.proof-card,.labs-strip{background:var(--bg-card-lt)!important;border-color:rgba(255,255,255,.09)!important}
+  .step-card:hover,.proto-card:hover,.proof-card:hover{border-color:rgba(26,86,219,.35)!important}
+  .proto-card.featured{border-color:rgba(255,255,255,.6)!important}
+  .step-title,.proto-name,.proto-price,.range-name,.proof-name,.labs-label{color:var(--txt-dk-1)!important}
+  .step-desc,.proto-for,.proto-supply,.range-desc,.proof-quote,.footer-tagline{color:var(--txt-dk-3)!important}
+  .proto-dose{background:rgba(255,255,255,.06)!important;color:var(--txt-dk-3)!important}
+  .proto-include{color:var(--txt-dk-3)!important}
+  .proto-btn{border-color:rgba(255,255,255,.3)!important;color:var(--txt-dk-1)!important}
+  .proto-btn:hover,.proto-card.featured .proto-btn{background:var(--txt-dk-1)!important;color:var(--bg-black)!important}
+  .lab-tag{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.1)!important;color:var(--txt-dk-3)!important}
+  .range-name{color:var(--txt-dk-1)}
+  .range-desc{color:var(--txt-dk-3)}
+  .nav.solid{background:rgba(17,18,20,.95)!important;border-color:rgba(255,255,255,.09)!important}
+  .nav.solid .nav-logo,.nav.solid .nav-links a:hover{color:var(--txt-dk-1)!important}
+  .nav.solid .nav-links a{color:var(--txt-dk-3)!important}
+  .nav.solid .nav-cta{background:var(--txt-dk-1)!important;color:var(--bg-black)!important}
+  .nav.solid .hamburger span{background:var(--txt-dk-1)!important}
+  .proof-bar-track{background:rgba(255,255,255,.08)!important}
+  .proof-byline{border-color:rgba(255,255,255,.07)}
+  .proof-avatar{background:rgba(255,255,255,.06)!important;border-color:rgba(255,255,255,.15)!important}
+
+  /* ── Primary light button — must stay white+dark in dark mode ───
+     btn-primary-lt uses --bg-white (becomes #1a1c20) + --txt-lt-1
+     (#111113). Both are near-black in dark mode = 1.1:1 invisible.
+     Force white background with black text explicitly.
+  ─────────────────────────────────────────────────────────────── */
+  .btn-primary-lt{background:#ffffff!important;color:#111113!important}
+  .btn-primary-lt:hover{background:#f0efed!important;color:#111113!important}
+
+  /* ── Range card scores — keep accessible on dark tinted bg ── */
+  .range-optimal .range-score{color:#34d399}
+  .range-mild     .range-score{color:#fbbf24}
+  .range-moderate .range-score{color:#fb923c}
+  .range-high     .range-score{color:#f87171}
+  .range-optimal .range-proto{background:rgba(52,211,153,.1);color:#34d399;border-color:rgba(52,211,153,.2)}
+  .range-mild    .range-proto{background:rgba(251,191,36,.1);color:#fbbf24;border-color:rgba(251,191,36,.2)}
+  .range-moderate .range-proto{background:rgba(251,146,60,.1);color:#fb923c;border-color:rgba(251,146,60,.2)}
+  .range-high    .range-proto{background:rgba(248,113,113,.1);color:#f87171;border-color:rgba(248,113,113,.2)}
+
+  /* ── Comparison table ─────────────────────────────────────── */
+  .compare-table th{color:var(--txt-dk-3)}
+  .compare-table td{color:var(--txt-dk-3)}
+  .compare-table td:first-child{color:var(--txt-dk-2)}
+  .col-gg th{color:#93b4f9;background:rgba(26,86,219,.08)}
+  .compare-yes{color:#34d399}
+  .compare-no{color:var(--txt-dk-4)}
+  .compare-partial{color:#fbbf24}
+
+  /* ── Guarantee strip on cream bg ─────────────────────────── */
+  .guarantee-strip{background:rgba(5,150,105,.06);border-color:rgba(5,150,105,.15)}
+  .guarantee-title{color:var(--txt-dk-1)}
+  .guarantee-desc{color:var(--txt-dk-3)}
+
+  /* ── Email capture section (already dark bg — just reinforce) */
+  .email-h{color:var(--txt-dk-1)}
+  .email-sub{color:var(--txt-dk-3)}
+  .email-note{color:var(--txt-dk-4)}
+
+  /* ── Proof section ───────────────────────────────────────── */
+  .proof-name{color:var(--txt-dk-1)!important}
+  .proof-meta{color:var(--txt-dk-4)}
+  .proof-before{color:#f87171}
+  .proof-after{color:#34d399}
+  .proof-arr{color:rgba(255,255,255,.2)}
+  .proof-drop{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.18);color:#34d399}
+  .proof-val{color:var(--txt-dk-4)}
+  .proof-bar-track{background:rgba(255,255,255,.06)!important}
+
+  /* ── Tags on light sections ──────────────────────────────── */
+  .tag-green{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.2);color:#34d399}
+  .tag-blue{background:rgba(79,142,247,.1);border-color:rgba(79,142,247,.2);color:#93b4f9}
+  .lab-tag{background:rgba(255,255,255,.06)!important;border-color:rgba(255,255,255,.1)!important;color:var(--txt-dk-3)!important}
+
+  /* ── How It Works section ────────────────────────────────── */
+  .step-num{color:#5b8ef0}
+  .step-icon{background:rgba(26,86,219,.1);border-color:rgba(26,86,219,.2)}
+  .step-icon svg{stroke:#5b8ef0}
+  .labs-label{color:var(--txt-dk-4)!important}
+
+  /* ── Proto note ──────────────────────────────────────────── */
+  .proto-note{background:rgba(26,86,219,.05);border-color:rgba(26,86,219,.12);color:var(--txt-dk-3)}
+  .proto-note a{color:#93b4f9}
+
+  /* ── Score ranges section bg ─────────────────────────────── */
+  .range-optimal{background:rgba(52,211,153,.05);border-color:rgba(52,211,153,.15)}
+  .range-mild{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.15)}
+  .range-moderate{background:rgba(251,146,60,.05);border-color:rgba(251,146,60,.15)}
+  .range-high{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.15)}
+
+})();
+
+
+}
+
+  /* ── INTERACTION STATES — world-class mobile UX ────────────────
+     :active gives immediate tactile feedback on mobile tap.
+     :focus-visible shows keyboard nav ring without mouse clutter.
+     touch-action removes 300ms delay on tappable elements.
+  ─────────────────────────────────────────────────────────────── */
+
+  /* touch-action — eliminates 300ms tap delay globally */
+  button, a, [role="button"], [onclick],
+  .proto-card, .faq-q, .vital-tab, .mmenu-link,
+  .score-cta, .m-bar-btn, .nav-cta { touch-action: manipulation; }
+
+  /* Active states — all primary interactive elements */
+  .btn:active              { transform: scale(.97) !important; opacity: .9; }
+  .btn-lg:active           { transform: scale(.98) !important; }
+  .proto-btn:active        { transform: scale(.97); opacity: .88; }
+  .score-cta:active        { transform: scale(.97); opacity: .88; }
+  .mmenu-cta:active        { transform: scale(.97); opacity: .9; }
+  .m-bar-btn:active        { transform: scale(.97); opacity: .9; }
+  .nav-cta:active          { transform: scale(.96); }
+  .faq-q:active            { background: rgba(255,255,255,.04); }
+  .vital-tab:active        { opacity: .7; }
+  .mmenu-link:active       { opacity: .6; }
+  .mmenu-close:active      { transform: scale(.9); }
+  .cookie-ok:active        { transform: scale(.97); opacity: .9; }
+  .cookie-no:active        { transform: scale(.97); opacity: .9; }
+  .proto-card:active       { transform: translateY(-1px) !important; opacity: .95; }
+
+  /* suppress active transform on hover-capable devices */
+  @media(hover:hover) {
+    .proto-card:active { transform: none !important; opacity: 1; }
+  }
+
+  /* :focus-visible — keyboard nav rings */
+  .proto-card:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: var(--r-card);
+  }
+  .mmenu-link:focus-visible {
+    outline: 2px solid var(--txt-dk-1);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  .score-cta:focus-visible {
+    outline: 3px solid rgba(255,255,255,.8);
+    outline-offset: 3px;
+  }
+  .faq-q:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: -2px;
+    border-radius: var(--r-card);
+  }
+  .mmenu-cta:focus-visible {
+    outline: 3px solid rgba(255,255,255,.8);
+    outline-offset: 3px;
+  }
+  .m-bar-btn:focus-visible {
+    outline: 3px solid rgba(255,255,255,.8);
+    outline-offset: 3px;
+  }
+
+
+  /* ── Section intro paragraphs (replaces inline styles) ─────── */
+  .sec-intro-lt  { color:var(--txt-lt-3); max-width:56ch; margin-top:14px; }
+  .sec-intro-dk  { color:var(--txt-dk-3); max-width:52ch; margin-top:14px; }
+  .sec-intro-lt2 { color:var(--txt-lt-3); max-width:52ch; margin-top:14px; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   NEW SECTIONS CSS
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Media logos bar ───────────────────────────────────────── */
+.media-bar{background:var(--bg-cream);border-bottom:1px solid var(--bdr-lt);padding:18px 0}
+.media-bar-inner{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,60px);display:flex;align-items:center;gap:clamp(12px,3vw,28px);flex-wrap:wrap;justify-content:center}
+.media-label{font-size:var(--fs-xs);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-lt-4);white-space:nowrap;flex-shrink:0}
+.media-logo{padding:7px 16px;border:1px solid var(--bdr-lt);border-radius:var(--r-tag);font-family:var(--f-disp);font-size:var(--fs-xs);font-weight:700;color:var(--txt-lt-4);letter-spacing:.02em;white-space:nowrap;transition:border-color .2s,color .2s;cursor:default}
+.media-logo:hover{border-color:rgba(0,0,0,.2);color:var(--txt-lt-2)}
+@media(max-width:600px){.media-label{display:none}.media-bar-inner{gap:8px}}
+
+/* ── Patient live counter badge ─────────────────────────────── */
+.live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(5,150,105,.07);border:1px solid rgba(5,150,105,.18);border-radius:var(--r-pill);padding:8px 18px;margin-bottom:32px}
+.live-badge-dot{width:8px;height:8px;border-radius:50%;background:#059669;animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+.live-badge-text{font-size:var(--fs-sm);font-weight:600;color:#065f46}
+
+/* ── Guarantee badge ────────────────────────────────────────── */
+.guarantee-strip{margin-top:clamp(24px,4vw,36px);padding:clamp(16px,2.5vw,22px) clamp(20px,3vw,28px);background:rgba(5,150,105,.05);border:1px solid rgba(5,150,105,.18);border-radius:var(--r-card);display:flex;align-items:center;gap:clamp(14px,2.5vw,20px);flex-wrap:wrap}
+.guarantee-icon{width:48px;height:48px;flex-shrink:0;background:rgba(5,150,105,.1);border:1.5px solid rgba(5,150,105,.22);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:var(--fs-xl)}
+.guarantee-title{font-family:var(--f-disp);font-size:var(--fs-md);font-weight:700;color:var(--txt-lt-1);margin-bottom:4px}
+.guarantee-desc{font-size:var(--fs-sm);color:var(--txt-lt-3);line-height:1.6}
+
+/* ── Urgency badge on featured card ────────────────────────── */
+.urgency-badge{display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.18);border-radius:var(--r-tag);margin-top:10px;margin-bottom:0}
+.urgency-dot{width:6px;height:6px;border-radius:50%;background:#dc2626;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
+.urgency-text{font-size:var(--fs-xs);font-weight:600;color:#b91c1c}
+
+/* ── Comparison table ───────────────────────────────────────── */
+.compare-sec{background:var(--bg-cream)}
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:clamp(40px,6vw,64px)}
+.compare-table th{padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);text-align:center;font-family:var(--f-disp);font-size:clamp(.875rem,1.4vw,1rem);font-weight:700;position:relative}
+.compare-table td{padding:clamp(10px,1.5vw,14px) clamp(14px,2.5vw,22px);text-align:center;font-size:clamp(.8125rem,1.3vw,.9375rem);border-top:1px solid var(--bdr-lt);vertical-align:middle;line-height:1.5}
+.compare-table td:first-child{text-align:left;font-weight:500;color:var(--txt-lt-2)}
+.col-gg{background:rgba(26,86,219,.04);border-left:2px solid var(--blue);border-right:2px solid var(--blue)}
+.col-gg th{border-top:2px solid var(--blue);border-radius:var(--r-card) 16px 0 0;background:rgba(26,86,219,.06);color:var(--blue)}
+.col-gg-last td{border-bottom:2px solid var(--blue);border-radius:0 0 16px 16px}
+.compare-yes{color:#065f46;font-weight:700;font-size:var(--fs-md)}
+.compare-no{color:var(--txt-lt-4);font-size:var(--fs-md)}
+.compare-partial{color:#b45309;font-size:var(--fs-sm);font-weight:500}
+@media(max-width:600px){
+  .compare-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .compare-table::-webkit-scrollbar{display:none}
+  .compare-table th,.compare-table td{min-width:110px}
+}
+
+/* ── Email capture ───────────────────────────────────────────── */
+.email-sec{background:#141414}
+.email-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-card);padding:clamp(28px,4vw,44px);display:grid;grid-template-columns:1fr auto;gap:clamp(24px,4vw,48px);align-items:center}
+@media(max-width:700px){.email-card{grid-template-columns:1fr}}
+.email-h{font-family:var(--f-disp);font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:700;color:var(--txt-dk-1);letter-spacing:-.02em;margin-bottom:8px}
+.email-sub{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.65;margin-bottom:0;max-width:48ch}
+.email-form{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:700px){.email-form{flex-direction:column}}
+.email-input{flex:1;min-width:220px;padding:13px 18px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:var(--r-pill);font-family:var(--f-body);font-size:var(--fs-md);color:var(--txt-dk-1);outline:none;transition:border-color .2s;min-height:48px}
+.email-input::placeholder{color:var(--txt-dk-4)}
+.email-input:focus{border-color:rgba(26,86,219,.6);background:rgba(255,255,255,.09)}
+.email-input:focus-visible{outline:none}
+.email-btn{padding:13px 24px;background:var(--txt-dk-1);color:var(--bg-black);border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:700;border:none;cursor:pointer;transition:all .2s;min-height:48px;white-space:nowrap;touch-action:manipulation}
+.email-btn:hover{background:#ebebef;transform:translateY(-1px)}
+.email-btn:active{transform:scale(.97)}
+.email-btn:focus-visible{outline:3px solid rgba(255,255,255,.8);outline-offset:3px}
+.email-note{font-size:var(--fs-xs);color:var(--txt-dk-4);margin-top:10px}
+
+/* ── Final CTA rewrite ───────────────────────────────────────── */
+.final-cta-label{font-size:var(--fs-sm);color:var(--txt-dk-3);line-height:1.7;max-width:52ch;margin:0 auto 40px}
+.final-cta-social{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
+.final-social-link{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1.5px solid rgba(255,255,255,.15);border-radius:var(--r-pill);font-size:var(--fs-sm);font-weight:500;color:var(--txt-dk-3);transition:all .2s;touch-action:manipulation}
+.final-social-link:hover{border-color:rgba(255,255,255,.4);color:var(--txt-dk-1)}
+.final-social-link svg{width:16px;height:16px;flex-shrink:0}
+
+/* ══════════════════════════════════════════════════════════════
+   CHECKOUT OVERLAY
+   ════════════════════════════════════════════════════════════ */
+.checkout{position:fixed;inset:0;z-index:2000;display:flex;flex-direction:column;visibility:hidden;pointer-events:none}
+.checkout.active{visibility:visible;pointer-events:all}
+.checkout-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .3s ease}
+.checkout.active .checkout-backdrop{opacity:1}
+.checkout-panel{position:absolute;bottom:0;left:0;right:0;max-height:96dvh;background:var(--bg-cream);border-radius:24px 24px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .4s var(--ease);overflow:hidden;will-change:transform}
+@media(min-width:640px){
+  .checkout-panel{position:fixed;top:50%;bottom:auto;left:50%;right:auto;transform:translate(-50%,calc(-50% + 40px));max-width:520px;width:calc(100% - 40px);border-radius:24px;max-height:90dvh;opacity:0;transition:transform .45s var(--ease),opacity .3s ease;will-change:transform,opacity}
+  .checkout.active .checkout-panel{transform:translate(-50%,-50%);opacity:1}
+}
+/* Mobile: slide up from bottom — MUST be scoped to avoid overriding desktop rule */
+@media(max-width:639px){
+  .checkout.active .checkout-panel{transform:translateY(0);opacity:1}
+}
+
+/* Checkout header */
+.ck-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0;flex-shrink:0}
+.ck-close{width:36px;height:36px;border-radius:var(--r-pill);background:rgba(0,0,0,.07);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:var(--fs-lg);color:var(--txt-lt-1);transition:background .2s;flex-shrink:0;touch-action:manipulation}
+.ck-close:hover{background:rgba(0,0,0,.12)}
+
+/* Progress steps */
+.ck-progress{display:flex;align-items:center;gap:0;flex:1;padding:0 12px}
+.ck-step{display:flex;align-items:center;gap:6px;flex:1}
+.ck-step-num{width:24px;height:24px;border-radius:50%;border:2px solid var(--bdr-lt);background:var(--bg-white);color:var(--txt-lt-4);font-size:var(--fs-xs);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s}
+.ck-step.done .ck-step-num{background:#059669;border-color:#059669;color:#fff}
+.ck-step.active .ck-step-num{background:var(--blue);border-color:var(--blue);color:#fff}
+.ck-step-label{font-size:var(--fs-xs);font-weight:600;color:var(--txt-lt-4);display:none;white-space:nowrap}
+.ck-step.active .ck-step-label{display:block;color:var(--txt-lt-2)}
+.ck-step-line{flex:1;height:1px;background:var(--bdr-lt);margin:0 4px;flex-shrink:1}
+.ck-step.done .ck-step-line{background:#059669}
+
+/* Scrollable content area */
+.ck-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:24px 24px 0}
+.ck-footer{padding:16px 24px calc(16px + env(safe-area-inset-bottom,0px));flex-shrink:0;background:var(--bg-cream)}
+
+/* Step content */
+.ck-panel{display:none}
+.ck-panel.active{display:block}
+.ck-title{font-family:var(--f-disp);font-size:var(--fs-xl);font-weight:700;color:var(--txt-lt-1);letter-spacing:-.02em;margin-bottom:4px}
+.ck-sub{font-size:var(--fs-sm);color:var(--txt-lt-3);margin-bottom:20px}
+
+/* Cart step */
+.ck-cart-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--bg-white);border:1px solid var(--bdr-lt);border-radius:var(--r-card);margin-bottom:12px}
+.ck-cart-icon{font-size:1.5rem;flex-shrink:0}
+.ck-cart-name{font-family:var(--f-disp);font-size:var(--fs-md);font-weight:700;color:var(--txt-lt-1)}
+.ck-cart-detail{font-size:var(--fs-sm);color:var(--txt-lt-3);margin-top:2px}
+.ck-cart-price{font-family:var(--f-disp);font-size:var(--fs-xl);font-weight:800;color:var(--txt-lt-1);letter-spacing:-.02em;margin-left:auto;flex-shrink:0}
+.ck-includes{display:flex;flex-direction:column;gap:6px;padding:14px;background:#f5f4f2;border-radius:var(--r-tag);margin-bottom:16px}
+.ck-include-row{display:flex;align-items:center;gap:8px;font-size:var(--fs-sm);color:var(--txt-lt-2)}
+.ck-include-row svg{width:14px;height:14px;stroke:#059669;fill:none;stroke-width:2.5;flex-shrink:0}
+.ck-protocol-change{text-align:center;margin-bottom:4px}
+.ck-protocol-change button{background:none;border:none;font-size:var(--fs-sm);color:var(--blue);font-weight:600;cursor:pointer;text-decoration:underline;touch-action:manipulation}
+
+/* Order summary */
+.ck-summary{background:#f5f4f2;border-radius:14px;padding:16px;margin-bottom:16px}
+.ck-summary-row{display:flex;justify-content:space-between;align-items:center;font-size:var(--fs-sm);color:var(--txt-lt-3);padding:4px 0}
+.ck-summary-row.total{font-family:var(--f-disp);font-weight:700;font-size:var(--fs-md);color:var(--txt-lt-1);border-top:1px solid var(--bdr-lt);padding-top:10px;margin-top:6px}
+.ck-summary-row.free{color:#059669;font-weight:600}
+
+/* Form fields */
+.ck-field{margin-bottom:14px}
+.ck-label{display:block;font-size:var(--fs-sm);font-weight:600;color:var(--txt-lt-2);margin-bottom:6px}
+.ck-label span{color:var(--red);margin-left:2px}
+.ck-input{width:100%;padding:12px 16px;background:var(--bg-white);border:1.5px solid var(--bdr-lt);border-radius:var(--r-tag);font-family:var(--f-body);font-size:var(--fs-md);color:var(--txt-lt-1);outline:none;transition:border-color .2s;min-height:46px;-webkit-appearance:none}
+.ck-input:focus{border-color:rgba(26,86,219,.5)}
+.ck-input:focus-visible{outline:none}
+.ck-input.error{border-color:var(--red)}
+.ck-err{font-size:var(--fs-xs);color:var(--red);margin-top:4px;display:none}
+.ck-err.show{display:block}
+.ck-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:400px){.ck-grid-2{grid-template-columns:1fr}}
+.ck-select{width:100%;padding:12px 16px;background:var(--bg-white);border:1.5px solid var(--bdr-lt);border-radius:var(--r-tag);font-family:var(--f-body);font-size:var(--fs-md);color:var(--txt-lt-1);outline:none;cursor:pointer;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b6b71' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;min-height:46px}
+
+/* Payment methods */
+.pay-options{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.pay-option{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--bg-white);border:1.5px solid var(--bdr-lt);border-radius:14px;cursor:pointer;transition:border-color .2s;touch-action:manipulation}
+.pay-option:hover{border-color:rgba(26,86,219,.3)}
+.pay-option.selected{border-color:var(--blue);background:rgba(26,86,219,.03)}
+.pay-option input[type="radio"]{width:18px;height:18px;accent-color:var(--blue);flex-shrink:0}
+.pay-icon{font-size:var(--fs-xl);flex-shrink:0}
+.pay-name{font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:600;color:var(--txt-lt-1)}
+.pay-desc{font-size:var(--fs-xs);color:var(--txt-lt-3);margin-top:1px}
+.pay-detail{margin-top:14px;padding:16px;background:#f5f4f2;border-radius:var(--r-tag);display:none}
+.pay-detail.show{display:block}
+.pay-detail-label{font-size:var(--fs-xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-lt-4);margin-bottom:8px}
+.pay-detail-value{font-family:var(--f-disp);font-size:var(--fs-lg);font-weight:700;color:var(--txt-lt-1);letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.pay-copy-btn{padding:5px 12px;background:var(--txt-lt-1);color:#fff;border:none;border-radius:var(--r-tag);font-size:var(--fs-xs);font-weight:600;cursor:pointer;touch-action:manipulation}
+.pay-qr-placeholder{width:140px;height:140px;background:var(--bdr-lt);border:2px dashed rgba(0,0,0,.15);border-radius:var(--r-tag);display:flex;align-items:center;justify-content:center;font-size:var(--fs-xs);color:var(--txt-lt-4);margin-top:12px;text-align:center;font-family:var(--f-body)}
+
+/* Confirmation */
+.ck-confirm{text-align:center;padding:8px 0 4px}
+.ck-confirm-icon{font-size:3.5rem;margin-bottom:16px;display:block}
+.ck-confirm-num{font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:700;color:var(--blue);background:rgba(26,86,219,.07);border:1px solid rgba(26,86,219,.18);border-radius:var(--r-tag);padding:6px 16px;display:inline-block;margin-bottom:16px}
+.ck-confirm-steps{display:flex;flex-direction:column;gap:12px;margin:20px 0;text-align:left}
+.ck-confirm-step{display:flex;gap:12px;align-items:flex-start}
+.ck-confirm-step-num{width:28px;height:28px;border-radius:50%;background:rgba(26,86,219,.1);border:1.5px solid rgba(26,86,219,.22);display:flex;align-items:center;justify-content:center;font-size:var(--fs-xs);font-weight:700;color:var(--blue);flex-shrink:0}
+.ck-confirm-step-text{font-size:var(--fs-sm);color:var(--txt-lt-2);line-height:1.6;padding-top:3px}
+.ck-wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#25D366;color:#fff;border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:700;border:none;cursor:pointer;transition:background .2s;touch-action:manipulation;text-decoration:none}
+.ck-wa-btn:hover{background:#1da851}
+
+/* Primary checkout button */
+.ck-btn{width:100%;padding:15px;background:var(--txt-lt-1);color:#fff;border-radius:var(--r-pill);font-family:var(--f-disp);font-size:var(--fs-md);font-weight:700;border:none;cursor:pointer;transition:all .2s;min-height:52px;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation}
+.ck-btn:hover{background:#2d2d2f;transform:translateY(-1px)}
+.ck-btn:active{transform:scale(.98);opacity:.9}
+.ck-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.ck-btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.ck-back{background:none;border:none;font-size:var(--fs-sm);color:var(--txt-lt-3);cursor:pointer;padding:0;margin-top:12px;text-align:center;width:100%;touch-action:manipulation}
+.ck-back:hover{color:var(--txt-lt-1);text-decoration:underline}
+
+/* Dark mode for checkout */
+@media(prefers-color-scheme:dark){
+  .checkout-panel{background:var(--bg-dark)}
+  .ck-close{background:rgba(255,255,255,.08);color:var(--txt-dk-1)}
+  .ck-step-num{background:var(--bg-card-dk);border-color:var(--bdr-1);color:var(--txt-dk-4)}
+  .ck-step-label{color:var(--txt-dk-4)}
+  .ck-step.active .ck-step-label,.ck-step.done .ck-step-label{color:var(--txt-dk-2)}
+  .ck-step-line{background:var(--bdr-1)}
+  .ck-title{color:var(--txt-dk-1)}
+  .ck-sub{color:var(--txt-dk-3)}
+  .ck-cart-item,.ck-summary,.ck-includes,.pay-detail{background:var(--bg-card-dk)}
+  .ck-cart-item{border-color:var(--bdr-1)}
+  .ck-cart-name,.ck-cart-price,.ck-summary-row.total{color:var(--txt-dk-1)}
+  .ck-cart-detail,.ck-summary-row,.ck-confirm-step-text{color:var(--txt-dk-3)}
+  .ck-input,.ck-select,.pay-option{background:var(--bg-card-dk);border-color:var(--bdr-1);color:var(--txt-dk-1)}
+  .ck-input::placeholder{color:var(--txt-dk-4)}
+  .ck-input:focus,.ck-select:focus{border-color:rgba(26,86,219,.5)}
+  .ck-label{color:var(--txt-dk-2)}
+  .pay-option{background:var(--bg-card-dk);border-color:var(--bdr-1)}
+  .pay-option.selected{background:rgba(26,86,219,.06);border-color:var(--blue)}
+  .pay-name{color:var(--txt-dk-1)}
+  .pay-desc{color:var(--txt-dk-3)}
+  .pay-detail{background:rgba(255,255,255,.04)}
+  .pay-detail-value{color:var(--txt-dk-1)}
+  .ck-summary{background:rgba(255,255,255,.04)}
+  .ck-summary-row.total{border-color:var(--bdr-1)}
+  .ck-includes{background:rgba(255,255,255,.04)}
+  .ck-confirm-num{background:rgba(26,86,219,.1);border-color:rgba(26,86,219,.25);color:#93b4f9}
+  .ck-protocol-change button{color:#93b4f9}
+  .ck-footer{background:var(--bg-dark)}
+  .ck-btn{background:var(--txt-dk-1);color:var(--bg-black)}
+  .ck-btn:hover{background:#ebebef}
+
+
+}
+
+
+/* ── Portal ring system — copied exactly ─────────────────────
+   @property enables smooth CSS transition on --ra (angle).
+   conic-gradient shows full green→red spectrum, mask clips to score.
+─────────────────────────────────────────────────────────────── */
+@property --ra{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes ringBreathe{0%,100%{opacity:.5}50%{opacity:.85}}
+
+
+/* ── Ring classes — direct copy from patient portal ─────────── */
+.ring{position:relative;margin:0 auto}
+.ring-trk{position:absolute;inset:0;border-radius:50%;background:rgba(255,255,255,.07);
+  -webkit-mask:radial-gradient(closest-side,transparent 82%,#000 82.5%,#000 94%,transparent 94.5%);
+  mask:radial-gradient(closest-side,transparent 82%,#000 82.5%,#000 94%,transparent 94.5%)}
+.ring-fill{
+  position:absolute;inset:0;border-radius:50%;opacity:0;
+  background:conic-gradient(from 180deg,#5CB882 0%,#7EBC6C 14%,#9AB854 28%,#C4B044 42%,#D4A840 52%,#CC8844 66%,#CC6E48 78%,#D03030 90%,#D42020 100%);
+  -webkit-mask-image:radial-gradient(closest-side,transparent 82%,#000 82.5%,#000 94%,transparent 94.5%),conic-gradient(from 180deg,#000 var(--ra),transparent var(--ra));
+  -webkit-mask-composite:source-in;
+  mask-image:radial-gradient(closest-side,transparent 82%,#000 82.5%,#000 94%,transparent 94.5%),conic-gradient(from 180deg,#000 var(--ra),transparent var(--ra));
+  mask-composite:intersect;
+  transition:opacity .3s,--ra 1.5s cubic-bezier(.16,1,.3,1);
+  will-change:--ra,opacity}
+@supports not (mask-composite:intersect){
+  .ring-fill{
+    -webkit-mask-image:radial-gradient(closest-side,transparent 82%,#000 82.5%,#000 94%,transparent 94.5%);
+    mask-image:radial-gradient(closest-side,transparent 82%,#000 82.5%,#000 94%,transparent 94.5%)}}
+.ring-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+
+/* ── Mobile menu — clean rebuild ────────────────────────────── */
+.mmenu-link{display:flex;align-items:flex-start;justify-content:space-between;padding:clamp(11px,2vh,15px) 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--txt-dk-1);font-family:var(--f-disp);font-size:clamp(1.0625rem,3.2vw,1.5rem);font-weight:700;letter-spacing:-.02em;transition:color .15s,padding-left .2s;gap:12px;text-decoration:none}
+.mmenu-link:hover{color:var(--txt-dk-3);padding-left:6px}
+.mmenu-link:focus-visible{outline:2px solid var(--txt-dk-1);outline-offset:4px;border-radius:4px}
+.mmenu-link:active{opacity:.6}
+.mmenu-link-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.mmenu-link-title{font-size:clamp(1.0625rem,3.2vw,1.5rem);font-weight:700;color:var(--txt-dk-1);letter-spacing:-.02em}
+.mmenu-link-sub{font-size:var(--fs-xs);font-weight:400;color:var(--txt-dk-4);letter-spacing:.01em;line-height:1.4;font-family:var(--f-body)}
+.mmenu-link svg{width:14px;height:14px;stroke:rgba(255,255,255,.2);fill:none;stroke-width:2;flex-shrink:0;margin-top:5px}
+.mmenu-divider{height:1px;background:rgba(255,255,255,.06);margin:clamp(12px,2.5vh,18px) 0}
+.mmenu-social{display:flex;gap:8px;margin-top:clamp(12px,2vw,16px)}
+.mmenu-social-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 12px;border-radius:var(--r-tag);border:1px solid rgba(255,255,255,.1);font-family:var(--f-disp);font-size:var(--fs-sm);font-weight:600;color:var(--txt-dk-3);transition:all .2s;text-decoration:none;touch-action:manipulation;min-height:42px}
+.mmenu-social-btn:hover{border-color:rgba(255,255,255,.28);color:var(--txt-dk-1);background:rgba(255,255,255,.04)}
+.mmenu-social-btn:active{opacity:.7}
+.mmenu-social-btn svg{width:14px;height:14px;flex-shrink:0}
+
+
+  /* ── Utility classes replacing inline styles ───────────────
+     No more style= on text content. Every value has a name.
+  ─────────────────────────────────────────────────────────── */
+  .sec-title-dk   { color:var(--txt-dk-1) }
+  .sec-title-lt   { color:var(--txt-lt-1) }
+  .sec-body-dk    { color:var(--txt-dk-3); max-width:52ch; margin-top:14px }
+  .sec-body-dk-c  { color:var(--txt-dk-3); max-width:52ch; margin:14px auto 0 }
+  .sec-body-lt    { color:var(--txt-lt-3); max-width:52ch; margin-top:14px }
+  .sec-body-lt-c  { color:var(--txt-lt-3); max-width:52ch; margin:14px auto 0 }
+  .sec-body-lt-56 { color:var(--txt-lt-3); max-width:56ch; margin-top:14px }
+  .sec-body-dk-mb { color:var(--txt-dk-3); max-width:52ch; margin-top:14px; margin-bottom:clamp(32px,5vw,48px) }
+  .sec-compare-th { text-align:left; color:var(--txt-lt-4); font-weight:600; font-size:var(--fs-xs); letter-spacing:.08em; text-transform:uppercase }
+  .overflow-x     { overflow-x:auto }
+  .ring-wrap      { width:200px; height:200px }
+
+
+  /* ── Missing active states ──────────────────────────────── */
+  .step-card:active   { transform:scale(.99); border-color:rgba(26,86,219,.4) }
+  .ck-close:active    { transform:scale(.88); opacity:.8 }
+  .email-btn:active   { transform:scale(.97); opacity:.9 }
+  .vital-tab:active   { opacity:.7 }
+  .lab-tag:active     { opacity:.75 }
+
+
+  /* ── Section h2 colour — no inline styles needed ─────────── */
+  .markers-sec h2,
+  .doctor-sec h2,
+  .science-sec h2,
+  .vital-sec h2,
+  .faq-sec h2,
+  .final-cta h2 { color:var(--txt-dk-1) }
+
+  /* ── Section subtitle — clean class replaces inline styles ── */
+  .sec-sub { color:var(--txt-lt-3); max-width:54ch; margin-top:14px; font-size:var(--fs-md); line-height:1.75 }
+  .sec-sub-dk { color:var(--txt-dk-3); max-width:54ch; margin-top:14px; font-size:var(--fs-md); line-height:1.75 }
+  .sec-sub-c  { text-align:center }
+
+  /* ── Section number decorators — visual hierarchy ─────────── */
+  .section-n {
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:var(--fs-xs); font-weight:700; letter-spacing:.18em;
+    text-transform:uppercase; margin-bottom:14px;
+    font-family:'SF Mono','Fira Code',monospace;
+  }
+  .section-n::before {
+    content:attr(data-n);
+    width:20px; height:20px; border-radius:50%;
+    background:rgba(26,86,219,.12); border:1px solid rgba(26,86,219,.25);
+    display:flex; align-items:center; justify-content:center;
+    font-size:10px; font-weight:800; color:var(--blue);
+    flex-shrink:0;
+  }
+
+
+  /* ── Unified card elevation system ─────────────────────────
+     Level 0: resting (border only)
+     Level 1: hover (2px lift + shadow bloom)
+     Consistent across step-card, marker-card, vital-card, proof-card
+  ─────────────────────────────────────────────────────────── */
+  .step-card,
+  .marker-card,
+  .vital-card,
+  .proof-card  { transition:border-color .18s, box-shadow .18s, transform .18s }
+
+  .step-card:hover   { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); border-color:rgba(26,86,219,.3) }
+  .marker-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.2);  border-color:rgba(26,86,219,.3) }
+  .vital-card:hover  { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.2);  border-color:rgba(26,86,219,.28) }
+  .proof-card:hover  { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); border-color:rgba(26,86,219,.2) }
+
+  @media(hover:none) {
+    .step-card:hover,.marker-card:hover,.vital-card:hover,.proof-card:hover {
+      transform:none; box-shadow:none; border-color:revert
+    }
+  }
+
+
+  .step-card:active   { transform:scale(.99); border-color:rgba(26,86,219,.4) }
+  .ck-close:active    { transform:scale(.88); opacity:.8 }
+  .email-btn:active   { transform:scale(.97); opacity:.9 }
+
+  .markers-sec h2,.doctor-sec h2,.science-sec h2,.vital-sec h2,.faq-sec h2,.final-cta h2{color:var(--txt-dk-1)}
+  .sec-sub{color:var(--txt-lt-3);max-width:54ch;margin-top:14px;line-height:1.75}
+  .sec-sub-dk{color:var(--txt-dk-3);max-width:54ch;margin-top:14px;line-height:1.75}
+
+  .step-card,.marker-card,.vital-card,.proof-card{transition:border-color .18s,box-shadow .18s,transform .18s}
+  .step-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:rgba(26,86,219,.3)}
+  .marker-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);border-color:rgba(26,86,219,.3)}
+  .vital-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);border-color:rgba(26,86,219,.28)}
+  .proof-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:rgba(26,86,219,.2)}
+  @media(hover:none){.step-card:hover,.marker-card:hover,.vital-card:hover,.proof-card:hover{transform:none;box-shadow:none}}
+
+
+  .proto-day-rate{font-size:var(--fs-xs);color:var(--txt-lt-3);margin-top:6px;letter-spacing:.01em}
+  .proto-card.featured .proto-day-rate{color:rgba(255,255,255,.55)}
+
+  /* ── SRP / Discount pricing ─────────────────────────────── */
+  .proto-srp{font-size:var(--fs-xs);color:var(--txt-lt-4);text-decoration:line-through;margin-top:2px;letter-spacing:.01em;display:block}
+  .proto-save{display:inline-flex;align-items:center;font-size:var(--fs-xs);font-weight:700;color:#065f46;background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.15);border-radius:var(--r-pill);padding:2px 9px;margin-left:8px;vertical-align:middle}
+  @media(prefers-color-scheme:dark){.proto-srp{color:var(--txt-dk-4)}.proto-save{color:#34d399;background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.2)}}
+  /* ── Trial toggle ────────────────────────────────────────── */
+  .trial-toggle{display:flex;gap:6px;margin-bottom:14px}
+  .trial-opt{flex:1;padding:8px 10px;border-radius:10px;border:1.5px solid rgba(0,0,0,.1);background:transparent;font-family:var(--f-disp);font-size:var(--fs-xs);font-weight:600;color:var(--txt-lt-3);cursor:pointer;transition:all .15s;text-align:center;touch-action:manipulation;line-height:1.4}
+  .trial-opt.active{border-color:var(--txt-lt-1);background:var(--txt-lt-1);color:#fff}
+  .trial-opt:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  @media(prefers-color-scheme:dark){
+    .trial-opt{border-color:rgba(255,255,255,.12);color:var(--txt-dk-3)}
+    .trial-opt.active{border-color:var(--txt-dk-1);background:var(--txt-dk-1);color:var(--bg-black)}
+  }
+
+
+  /* ── Per-cap primary pricing ─────────────────────────────── */
+  .proto-cap-unit{font-size:var(--fs-sm);font-weight:500;color:var(--txt-lt-3);letter-spacing:0;margin-left:2px}
+  .proto-cap-label{font-size:var(--fs-xs);color:var(--txt-lt-4);margin-top:3px;letter-spacing:.01em}
+  .proto-total{font-size:var(--fs-xs);color:var(--txt-lt-4);margin-top:5px;margin-bottom:16px;letter-spacing:.01em}
+  .proto-total s{color:var(--txt-lt-4);text-decoration:line-through;margin-right:5px}
+  .proto-total .proto-save-sm{color:#065f46;font-weight:600}
+  @media(prefers-color-scheme:dark){
+    .proto-cap-unit,.proto-cap-label,.proto-total{color:var(--txt-dk-4)}
+    .proto-total s{color:var(--txt-dk-4)}
+    .proto-total .proto-save-sm{color:#34d399}
+  }
+
+
+  /* ── Checkout per-cap hero ───────────────────────────────── */
+  .ck-val-hero{display:flex;align-items:baseline;gap:6px;padding:16px 0 4px;border-bottom:1px solid rgba(0,0,0,.06)}
+  .ck-val-cap{font-family:var(--f-disp);font-size:clamp(2rem,6vw,2.5rem);font-weight:800;color:var(--txt-lt-1);letter-spacing:-.04em;line-height:1}
+  .ck-val-cap-unit{font-size:var(--fs-sm);font-weight:500;color:var(--txt-lt-3)}
+  .ck-val-days{margin-left:auto;font-size:var(--fs-sm);font-weight:600;color:var(--txt-lt-2);background:rgba(0,0,0,.04);padding:4px 10px;border-radius:var(--r-pill);white-space:nowrap}
+  /* Total row — silenced in steps 1-3 */
+  .ck-total-row{margin-top:4px;padding-top:10px;border-top:1px solid rgba(0,0,0,.06);opacity:.4}
+  .ck-total-row span:last-child{font-size:.8125rem}
+  @media(prefers-color-scheme:dark){
+    .ck-val-hero{border-bottom-color:rgba(255,255,255,.06)}
+    .ck-val-cap{color:var(--txt-dk-1)}
+    .ck-val-cap-unit,.ck-val-days{color:var(--txt-dk-3)}
+    .ck-val-days{background:rgba(255,255,255,.06)}
+    .ck-total-row{border-top-color:rgba(255,255,255,.06)}
+  }
+
+
+  /* ── Nav cart icon ───────────────────────────────────────── */
+  .nav-cart{position:relative;display:flex;align-items:center;justify-content:center;
+    width:40px;height:40px;border-radius:var(--r-tag);border:none;background:transparent;
+    cursor:pointer;color:rgba(255,255,255,.8);margin-right:4px;transition:background .15s,color .15s;
+    touch-action:manipulation;flex-shrink:0}
+  .nav-cart:hover{background:rgba(255,255,255,.1);color:#fff}
+  .nav.solid .nav-cart{color:var(--txt-lt-2)}
+  .nav.solid .nav-cart:hover{background:rgba(0,0,0,.06);color:var(--txt-lt-1)}
+  .nav-cart svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
+  .nav-cart-badge{
+    position:absolute;top:4px;right:4px;
+    min-width:16px;height:16px;border-radius:100px;
+    background:#ef4444;color:#fff;
+    font-size:10px;font-weight:800;font-family:var(--f-disp);
+    display:none;align-items:center;justify-content:center;padding:0 4px;
+    line-height:1;border:2px solid var(--bg-black);
+  }
+  .nav.solid .nav-cart-badge{border-color:var(--bg-white)}
+  .nav-cart.has-items .nav-cart-badge{display:flex}
+  .nav-cart.has-items{color:#fff}
+  .nav.solid .nav-cart.has-items{color:var(--txt-lt-1)}
+  /* Cart shake animation on add */
+  @keyframes cartShake{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(6deg)}}
+  .nav-cart.shake svg{animation:cartShake .45s cubic-bezier(.36,.07,.19,.97)}
+
+</style>
+</head>
+<body>
+<a href="#main" class="sr-only" style="position:absolute;top:-100%;left:16px;background:var(--blue);color:#fff;padding:10px 20px;border-radius:0 0 8px 8px;font-weight:700;font-size:.9375rem;z-index:9999;text-decoration:none;transition:top .2s" onfocus="this.style.top='0'" onblur="this.style.top='-100%'">Skip to main content</a>
+
+<!-- ── NAV ── -->
+<nav class="nav" id="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="GutGuard home">
+      <div class="nav-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
+      </div>
+      GutGuard
+    </a>
+    <ul class="nav-links" role="menubar">
+      <li><a href="#how-it-works" role="menuitem" onclick="event.preventDefault();document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">How It Works</a></li>
+      <li><a href="#science" role="menuitem" onclick="event.preventDefault();document.getElementById('science').scrollIntoView({behavior:'smooth'})">The Science</a></li>
+      <li><a href="#pricing" role="menuitem" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a></li>
+    </ul>
+    <button class="nav-cta btn" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get My Score</button>
+    <button class="nav-cart" id="nav-cart-btn" aria-label="View cart" onclick="openCartOrCheckout()" style="display:none">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="nav-cart-badge" id="nav-cart-count">1</span>
+    </button>
+    <button class="hamburger" id="hbg" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <button class="mmenu-close" id="mmenu-close" aria-label="Close menu">&#x2715;</button>
+
+  <div class="mmenu-items">
+    <a href="#how-it-works" class="mmenu-link" onclick="event.preventDefault();closeMenu();document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">
+      <div class="mmenu-link-body">
+        <span class="mmenu-link-title">How It Works</span>
+        <span class="mmenu-link-sub">Upload labs · get your GLIS in 30 seconds</span>
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#doctor" class="mmenu-link" onclick="event.preventDefault();closeMenu();document.getElementById('doctor').scrollIntoView({behavior:'smooth'})">
+      <div class="mmenu-link-body">
+        <span class="mmenu-link-title">The Doctor</span>
+        <span class="mmenu-link-sub">Dr. Shane Animas reviews every scan personally</span>
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#science" class="mmenu-link" onclick="event.preventDefault();closeMenu();document.getElementById('science').scrollIntoView({behavior:'smooth'})">
+      <div class="mmenu-link-body">
+        <span class="mmenu-link-title">The Science</span>
+        <span class="mmenu-link-sub">Pre → Pro → Postbiotic MBS formula</span>
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#compare" class="mmenu-link" onclick="event.preventDefault();closeMenu();document.getElementById('compare').scrollIntoView({behavior:'smooth'})">
+      <div class="mmenu-link-body">
+        <span class="mmenu-link-title">Why GutGuard</span>
+        <span class="mmenu-link-sub">BioScan-first · doctor-assigned · 90-day guarantee</span>
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#pricing" class="mmenu-link" onclick="event.preventDefault();closeMenu();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+      <div class="mmenu-link-body">
+        <span class="mmenu-link-title">Pricing</span>
+        <span class="mmenu-link-sub">₱1,299 – ₱34,999 · free nationwide shipping</span>
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#faq" class="mmenu-link" onclick="event.preventDefault();closeMenu();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">
+      <div class="mmenu-link-body">
+        <span class="mmenu-link-title">FAQ</span>
+        <span class="mmenu-link-sub">Common questions answered</span>
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <button class="mmenu-cta" onclick="closeMenu();document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">Check My Inflammation Score →</button>
+
+  <div class="mmenu-divider" aria-hidden="true"></div>
+
+  <div class="mmenu-social">
+    <a href="https://t.me/gutguardph" target="_blank" rel="noopener" class="mmenu-social-btn" aria-label="GutGuard on Telegram">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.69 7.97c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.56 4.67-4.22c.2-.18-.04-.28-.32-.1L8.21 14.5l-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.16.84.11.12.6z"/></svg>
+      Telegram
+    </a>
+    <a href="https://wa.me/63900000000?text=Hi%2C+I%27d+like+to+know+more+about+GutGuard+Protocol" target="_blank" rel="noopener noreferrer" class="mmenu-social-btn" aria-label="GutGuard on WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.6 5.6 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+
+  <div class="mmenu-foot">
+    <div class="mmenu-foot-av">SA</div>
+    <div>
+      <div class="mmenu-foot-name">Dr. Shane Animas, MD</div>
+      <div class="mmenu-foot-role">Internal Medicine · GutGuard Medical Lead · GenSan</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════════════════ -->
+<main id="main">
+
+<!-- ── HERO ── -->
+<section class="hero" id="home" aria-labelledby="hero-h1">
+  <div class="hero-noise" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <!-- Left: copy -->
+      <div>
+        <div class="hero-stat" role="status">
+          <span class="hero-stat-dot" aria-hidden="true"></span>
+          <span class="hero-stat-text">68% of Philippine deaths start with chronic inflammation</span>
+        </div>
+        <h1 class="h1" id="hero-h1" data-r>
+          Most supplements<br>
+          are a guess.<br>
+          <em>Your blood is not.</em>
+        </h1>
+        <p class="body-lg hero-sub" data-r data-d="1">Upload the blood panel you already have from any Philippine laboratory. Your Lifestyle Inflammation Score calculates in 30 seconds from 8 clinical markers. A licensed doctor reads your results personally and prescribes the exact protocol your numbers call for — not a one-size-fits-all box.</p>
+        <div class="hero-actions" data-r data-d="2">
+          <button class="btn btn-primary-lt btn-lg" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'});track('hero_cta_click',{cta:'check_score'})">
+            Check My Score
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div class="hero-trust" data-r data-d="3">
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Doctor review within 24 hours
+          </span>
+          <span class="hero-trust-sep">·</span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Any Philippine lab accepted
+          </span>
+          <span class="hero-trust-sep">·</span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Free shipping nationwide
+          </span>
+        </div>
+      </div>
+
+      <!-- Right: score card -->
+      <div>
+        <div class="score-card" data-r data-d="1">
+          <div class="score-head">
+            <span class="score-title">Lifestyle Inflammation Score</span>
+            <span class="score-live-badge" aria-live="polite">
+              <span class="score-live-dot" aria-hidden="true"></span>
+              Sample
+            </span>
+          </div>
+          <div class="score-ring-area">
+            <div class="ring" id="scoreRingWrap" role="img" aria-label="GLIS score ring — 74 out of 100" class="ring-wrap">
+              <div class="ring-trk" id="ringTrk"></div>
+              <div class="ring-fill" id="ring" style="--ra:0deg"></div>
+              <div class="ring-c" aria-hidden="true">
+                <div class="score-num" id="score-num">0</div>
+                <div class="score-out-of">/ 100</div>
+              </div>
+            </div>
+          </div>
+          <div class="score-level" id="score-level">Moderate Inflammation</div>
+          <div class="score-rows">
+            <div class="score-row"><span class="score-row-name">C-Reactive Protein</span><span class="score-row-val hi">4.2 mg/L</span><span class="score-row-flag flag-hi">↑ High</span></div>
+            <div class="score-row"><span class="score-row-name">Triglycerides</span><span class="score-row-val hi">218 mg/dL</span><span class="score-row-flag flag-hi">↑ High</span></div>
+            <div class="score-row"><span class="score-row-name">HDL Cholesterol</span><span class="score-row-val hi">38 mg/dL</span><span class="score-row-flag flag-hi">↓ Low</span></div>
+            <div class="score-row"><span class="score-row-name">Fasting Glucose</span><span class="score-row-val ok">96 mg/dL</span><span class="score-row-flag flag-ok">Normal</span></div>
+          </div>
+          <button class="score-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'});track('hero_score_cta')">Get My Real Score →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stat-banner" role="region" aria-label="Key statistics">
+  <div class="wrap">
+    <div class="stat-grid">
+      <div class="stat-item" data-r>
+        <div class="stat-num" data-count="68" data-suffix="%">68%</div>
+        <div class="stat-label">of Philippine deaths involve chronic disease with inflammatory drivers <sup style="font-size:.6em;opacity:.6">¹</sup></div>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat-item" data-r data-d="2">
+        <div class="stat-num" data-count="94" data-suffix="%">94%</div>
+        <div class="stat-label">of GutGuard patients (n=127) show measurable GLIS improvement after one full protocol</div>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat-item" data-r data-d="4">
+        <div class="stat-num">&lt;24h</div>
+        <div class="stat-label">Doctor review &amp; protocol assigned</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:var(--fs-xs);color:var(--txt-dk-4);text-align:center;margin-top:16px;opacity:.7"><sup>¹</sup> Philippine Statistics Authority, 2022 Causes of Death. Non-communicable diseases with inflammatory risk factors. · GutGuard patient data, n=127, Q1 2024.</p></div>
+
+
+<!-- ── MEDIA MENTIONS ── -->
+<div class="media-bar">
+  <div class="media-bar-inner">
+    <span class="media-label">Featured in</span>
+    <span class="media-logo">Philippine Daily Inquirer</span>
+    <span class="media-logo">ANC Health</span>
+    <span class="media-logo">BusinessWorld PH</span>
+    <span class="media-logo">Manila Bulletin</span>
+    <span class="media-logo">Rappler Wellness</span>
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section" id="how-it-works" aria-labelledby="hw-h">
+  <div class="wrap">
+    <p class="eyebrow" data-r>The BioScan</p>
+    <h2 class="h2" id="hw-h" data-r data-d="1">From blood result to<br>doctor-assigned protocol in 24 hours.</h2>
+    <p class="body-lg body-lg sec-intro-lt" data-r data-d="2">Upload the blood panel you already have. No new tests needed.</p>
+    <div class="steps-grid section-gap">
+      <div class="step-card" data-r>
+        <div class="step-num">STEP 01</div>
+        <div class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h3 class="step-title">Upload your labs</h3>
+        <p class="step-desc">Photo or upload. CBC, lipid panel, metabolic panel. Any format. Works with all Philippine labs.</p>
+      </div>
+      <div class="step-card" data-r data-d="2">
+        <div class="step-num">STEP 02</div>
+        <div class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3 class="step-title">Get your GLIS instantly</h3>
+        <p class="step-desc">Your Lifestyle Inflammation Score calculated from 8 clinical markers. See exactly which are elevated.</p>
+      </div>
+      <div class="step-card" data-r data-d="4">
+        <div class="step-num">STEP 03</div>
+        <div class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3 class="step-title">Doctor reviews &amp; prescribes</h3>
+        <p class="step-desc">Dr. Shane reviews your scan within 24 hours. Protocol assigned. Portal activates.</p>
+      </div>
+    </div>
+    <div class="labs-strip" data-r>
+      <div class="labs-label">Accepted Philippine laboratories</div>
+      <div class="labs-tags">
+        <span class="lab-tag">Hi-Precision Diagnostics</span>
+        <span class="lab-tag">MedLab GenSan</span>
+        <span class="lab-tag">Philippine Red Cross Labs</span>
+        <span class="lab-tag">LabCorp Philippines</span>
+        <span class="lab-tag">St. Luke's Medical Labs</span>
+        <span class="lab-tag">The Medical City</span>
+        <span class="lab-tag">Makati Medical Center</span>
+        <span class="lab-tag">Any accredited PH lab</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARKERS ── -->
+<section class="section markers-sec" id="markers" aria-labelledby="m-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow-dk" data-r>The 8 Markers</p>
+    <h2 class="h2 disp sec-title-dk" id="m-h" data-r data-d="1">What your BioScan reads</h2>
+    <p class="body-lg body-lg sec-intro-dk" data-r data-d="2">Eight blood markers. One Lifestyle Inflammation Score.</p>
+    <div class="markers-grid section-gap">
+      <div class="marker-card" data-r><div class="m-abbr">CRP</div><div class="m-name">C-Reactive Protein</div><div class="m-desc">The primary direct marker of systemic inflammation. The clearest signal that your body is in a state of chronic stress.</div><span class="m-range">Normal: &lt;1.0 mg/L</span></div>
+      <div class="marker-card" data-r data-d="1"><div class="m-abbr">WBC</div><div class="m-name">White Blood Cells</div><div class="m-desc">Elevated WBC with no active infection signals chronic low-grade inflammation — your immune system is quietly overactivated.</div><span class="m-range">Normal: 4.5–11.0 ×10⁹/L</span></div>
+      <div class="marker-card" data-r data-d="2"><div class="m-abbr">NEUT</div><div class="m-name">Neutrophils</div><div class="m-desc">High neutrophils with high CRP confirms an active inflammatory burden. A key immune imbalance signal.</div><span class="m-range">Normal: 50–70%</span></div>
+      <div class="marker-card" data-r data-d="3"><div class="m-abbr">LYMPH</div><div class="m-name">Lymphocytes</div><div class="m-desc">Low lymphocytes alongside high neutrophils — a hallmark of chronic gut-driven inflammation.</div><span class="m-range">Normal: 20–40%</span></div>
+      <div class="marker-card" data-r data-d="4"><div class="m-abbr">GLU</div><div class="m-name">Fasting Glucose</div><div class="m-desc">Elevated fasting glucose is both a cause and consequence of gut inflammation. Your microbiome directly regulates insulin sensitivity.</div><span class="m-range">Normal: 70–99 mg/dL</span></div>
+      <div class="marker-card" data-r data-d="5"><div class="m-abbr">TRIG</div><div class="m-name">Triglycerides</div><div class="m-desc">High triglycerides signal metabolic inflammation — one of the most commonly elevated markers in Filipino patients.</div><span class="m-range">Normal: &lt;150 mg/dL</span></div>
+      <div class="marker-card" data-r data-d="6"><div class="m-abbr">HDL</div><div class="m-name">HDL Cholesterol</div><div class="m-desc">Low HDL is strongly linked to gut dysbiosis. GutGuard consistently raises HDL as the microbiome restores.</div><span class="m-range">Normal: &gt;40 (M) / &gt;50 (F)</span></div>
+      <div class="marker-card" data-r data-d="7"><div class="m-abbr">ALT</div><div class="m-name">Alanine Aminotransferase</div><div class="m-desc">Elevated ALT indicates gut-liver axis inflammation — a direct result of gut permeability allowing toxins to reach the liver.</div><span class="m-range">Normal: 7–56 U/L</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCORE RANGES ── -->
+<section class="section" id="score-ranges" aria-labelledby="sr-h">
+  <div class="wrap">
+    <p class="eyebrow" data-r>Your GLIS Result</p>
+    <h2 class="h2" id="sr-h" data-r data-d="1">What your score means</h2>
+    <p class="body-lg body-lg sec-intro-lt2" data-r data-d="2">Scored 0–100 from your eight markers. Higher means more systemic inflammation.</p>
+    <div class="ranges-grid section-gap">
+      <div class="range-card range-optimal" data-r><div class="range-score">0–25</div><div class="range-name">Optimal</div><div class="range-desc">No significant inflammation detected. Maintenance protocol recommended.</div><span class="range-proto">→ Trial or Start</span></div>
+      <div class="range-card range-mild" data-r data-d="2"><div class="range-score">26–50</div><div class="range-name">Mild Inflammation</div><div class="range-desc">Early markers present. The ideal intervention window — fully reversible.</div><span class="range-proto">→ Start Protocol</span></div>
+      <div class="range-card range-moderate" data-r data-d="4"><div class="range-score">51–75</div><div class="range-name">Moderate</div><div class="range-desc">Active systemic inflammation. Fatigue, poor sleep, bloating common. Measurable change within 30 days.</div><span class="range-proto">→ Grow Protocol</span></div>
+      <div class="range-card range-high" data-r data-d="6"><div class="range-score">76–100</div><div class="range-name">High Inflammation</div><div class="range-desc">Significant inflammatory burden. Doctor review is priority. Full 90-day intervention needed.</div><span class="range-proto">→ Power Protocol</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DOCTOR ── -->
+<section class="section doctor-sec" id="doctor" aria-labelledby="doc-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow-dk" data-r>Your Attending Doctor</p>
+    <h2 class="h2 disp sec-title-dk" id="doc-h" data-r data-d="1">Every patient gets a doctor. Not a chatbot.</h2>
+    <p class="body-lg body-lg sec-intro-dk" style="margin-bottom:clamp(32px,5vw,48px)" data-r data-d="2">Every BioScan goes to a licensed physician — not a recommendation engine, not a chatbot, not an algorithm. Dr. Shane reads your markers, flags what is elevated, and writes your protocol himself.</p>
+    <div class="doctor-card" data-r>
+      <div>
+        <div class="doctor-avatar" aria-label="Dr. Shane Animas photo placeholder">SA</div>
+      </div>
+      <div>
+        <h3 class="doctor-name">Dr. Shane Animas, MD</h3>
+        <p class="doctor-title">Internal Medicine · GutGuard Medical Lead · General Santos City</p>
+        <div class="doctor-badges">
+          <span class="tag tag-green">✓ Licensed Physician</span>
+          <span class="tag tag-blue">⚡ 24-hour response</span>
+        </div>
+        <blockquote class="doctor-quote">"A score of 74 is elevated but very workable. I review every scan personally and match the protocol to what I actually see in the markers — not just the number."</blockquote>
+        <div class="doctor-stats">
+          <div><div class="dstat-val">94%</div><div class="dstat-label">Patient improvement rate</div></div>
+          <div><div class="dstat-val">127</div><div class="dstat-label">Patients monitored</div></div>
+          <div><div class="dstat-val">4.9</div><div class="dstat-label">Patient rating</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="doctor-flow">
+      <div class="flow-step" data-r><div class="flow-step-n">01</div><div class="flow-step-l">Upload labs &amp; get GLIS</div></div>
+      <div class="flow-arr" aria-hidden="true">→</div>
+      <div class="flow-step" data-r data-d="1"><div class="flow-step-n">02</div><div class="flow-step-l">Request Dr. Shane</div></div>
+      <div class="flow-arr" aria-hidden="true">→</div>
+      <div class="flow-step" data-r data-d="2"><div class="flow-step-n">03</div><div class="flow-step-l">Review within 24h</div></div>
+      <div class="flow-arr" aria-hidden="true">→</div>
+      <div class="flow-step" data-r data-d="3"><div class="flow-step-n">04</div><div class="flow-step-l">Protocol assigned</div></div>
+      <div class="flow-arr" aria-hidden="true">→</div>
+      <div class="flow-step" data-r data-d="4"><div class="flow-step-n">05</div><div class="flow-step-l">Re-scanned at milestones</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCIENCE ── -->
+<section class="section science-sec" id="science" aria-labelledby="sci-h">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow eyebrow-dk" data-r>GutGuard Proprietary Framework</p>
+      <h2 class="h2 disp sec-title-dk" id="sci-h" data-r data-d="1">Three stages. One cascade.</h2>
+      <p class="body-lg body-lg sec-body-dk-c" data-r data-d="2">The MBS (Mitochondria Bio-regeneration System) is GutGuard's proprietary protocol — built on independently peer-reviewed mechanisms in pre-, pro-, and postbiotic science. The Urolithin-A and L-Tryptophan outcomes in Stage 3 are documented in published clinical research.</p>
+    </div>
+    <div class="mbs-grid section-gap">
+      <div class="mbs-card mbs-pre" data-r><div class="mbs-stage">STAGE 01 · PREBIOTICS</div><h3 class="mbs-title">Feed the right bacteria</h3><p class="mbs-desc">Patented prebiotic complex selectively nourishes the bacteria that produce anti-inflammatory short-chain fatty acids. Starves pathogenic strains.</p><span class="mbs-pill">Patented Prebiotic Complex</span></div>
+      <div class="mbs-card mbs-pro" data-r data-d="2"><div class="mbs-stage">STAGE 02 · PROBIOTICS</div><h3 class="mbs-title">Colonise with precision strains</h3><p class="mbs-desc">Nano-encapsulated target-specific strains survive stomach acid and colonise the exact gut zones where inflammation originates.</p><span class="mbs-pill">Nano-encapsulated Strains</span></div>
+      <div class="mbs-card mbs-post" data-r data-d="4"><div class="mbs-stage">STAGE 03 · POSTBIOTICS</div><h3 class="mbs-title">Activate cellular regeneration</h3><p class="mbs-desc">Urolithin-A activates mitophagy — clearing damaged mitochondria and rebuilding new ones. L-Tryptophan restores gut-brain signalling and sleep.</p><span class="mbs-pill">Urolithin-A + L-Tryptophan</span></div>
+    </div>
+    <div class="mbs-timeline" data-r>
+      <div class="mbs-tl-title">Timeline: What to expect</div>
+      <div class="mbs-tl-grid">
+        <div class="mbs-tl-item"><div class="mbs-tl-day">Day 1–7</div><div class="mbs-tl-text">Activation phase. Mitophagy begins. Better sleep within 5 days.</div></div>
+        <div class="mbs-tl-item"><div class="mbs-tl-day">Day 8–15</div><div class="mbs-tl-text">Regeneration phase. Energy stabilises. Brain fog clears.</div></div>
+        <div class="mbs-tl-item"><div class="mbs-tl-day">Day 15–30</div><div class="mbs-tl-text">Optimisation phase. Full anti-inflammatory effect. BioScan re-measures.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── COMPARISON ── -->
+<section class="section compare-sec" id="compare" aria-labelledby="cmp-h">
+  <div class="wrap">
+    <p class="eyebrow" data-r>Why GutGuard</p>
+    <h2 class="h2" id="cmp-h" data-r data-d="1">Not all gut supplements are equal</h2>
+    <p class="body-lg sec-intro-lt2" data-r data-d="2">Generic supplements are cheaper and easier to find. Here is what that tradeoff actually costs you.</p>
+    <div class="overflow-x" data-r>
+    <table class="compare-table" role="table" aria-label="GutGuard vs other options comparison">
+      <thead>
+        <tr>
+          <th class="sec-compare-th">Feature</th>
+          <th style="color:var(--txt-lt-3)">Generic<br>Supplement</th>
+          <th style="color:var(--txt-lt-3)">Other PH<br>Health Apps</th>
+          <th class="col-gg">GutGuard<br>Protocol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Starting price</td>
+          <td><span class="compare-yes" style="font-size:var(--fs-sm)">₱150–500/mo</span></td>
+          <td><span class="compare-partial">₱299–999/mo</span></td>
+          <td class="col-gg"><span style="font-size:var(--fs-sm);color:var(--txt-lt-2);font-weight:600">₱1,299 (Trial)</span></td>
+        </tr>
+        <tr>
+          <td>Baseline inflammation score</td>
+          <td><span class="compare-no">✕</span></td>
+          <td><span class="compare-no">✕</span></td>
+          <td class="col-gg"><span class="compare-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Doctor-reviewed results</td>
+          <td><span class="compare-no">✕</span></td>
+          <td><span class="compare-partial">Chat only</span></td>
+          <td class="col-gg"><span class="compare-yes">✓ Personal MD</span></td>
+        </tr>
+        <tr>
+          <td>Protocol matched to your score</td>
+          <td><span class="compare-no">✕</span></td>
+          <td><span class="compare-no">✕</span></td>
+          <td class="col-gg"><span class="compare-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Progress tracking via re-scan</td>
+          <td><span class="compare-no">✕</span></td>
+          <td><span class="compare-partial">Self-reported</span></td>
+          <td class="col-gg"><span class="compare-yes">✓ Blood markers</span></td>
+        </tr>
+        <tr>
+          <td>Urolithin-A postbiotic</td>
+          <td><span class="compare-no">✕</span></td>
+          <td><span class="compare-no">✕</span></td>
+          <td class="col-gg"><span class="compare-yes">✓ 250mg/cap</span></td>
+        </tr>
+        <tr>
+          <td>Free nationwide shipping</td>
+          <td><span class="compare-partial">Sometimes</span></td>
+          <td><span class="compare-partial">Limited</span></td>
+          <td class="col-gg"><span class="compare-yes">✓ Always free</span></td>
+        </tr>
+        <tr>
+          <td>Satisfaction guarantee</td>
+          <td><span class="compare-partial">7–14 days</span></td>
+          <td><span class="compare-no">✕</span></td>
+          <td class="col-gg col-gg-last"><span class="compare-yes">✓ Up to 90 days</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="section protocols-sec" id="pricing" aria-labelledby="price-h">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow" data-r>Choose your protocol</p>
+      <h2 class="h2" id="price-h" data-r data-d="1">Doctor-assigned based on your score</h2>
+      <p class="body-lg body-lg sec-body-lt-c" data-r data-d="2">Not sure which one? Dr. Shane assigns the right protocol based on your actual BioScan results.</p>
+    </div>
+    <div class="proto-grid section-gap">
+      <div class="proto-card" data-r>
+        <div class="proto-emoji">🌱</div>
+        <div class="proto-name">Trial Protocol</div>
+        <div class="proto-for">GLIS 0–30 · First-time users</div>
+        <div class="trial-toggle" role="group" aria-label="Trial format">
+          <button class="trial-opt active" id="trial-sachet" onclick="selectTrial('sachet')" aria-pressed="true">
+            Sachet<br><span style="font-weight:400;font-family:var(--f-body)">10 caps · ₱1,299</span>
+          </button>
+          <button class="trial-opt" id="trial-bottle" onclick="selectTrial('bottle')" aria-pressed="false">
+            Bottle<br><span style="font-weight:400;font-family:var(--f-body)">30 caps · ₱3,800</span>
+          </button>
+        </div>
+        <div class="proto-price" id="trial-price">₱130<span class="proto-cap-unit">/cap</span></div>
+        <div class="proto-cap-label" id="trial-cap-label">per capsule · SRP ₱150/cap</div>
+        <div class="proto-supply" id="trial-total">10 caps · 5 days</div>
+        <div class="proto-dose" id="trial-dose">1 cap morning · 1 cap evening</div>
+        <div class="proto-includes">
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 BioScan</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Doctor review</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free shipping</div>
+        </div>
+        <button class="proto-btn" id="trial-btn" onclick="addToCart('trial')">Enroll: Trial →</button>
+      </div>
+      <div class="proto-card" data-r data-d="1">
+        <div class="proto-emoji">⚡</div>
+        <div class="proto-name">Start Protocol</div>
+        <div class="proto-for">GLIS 26–50 · Mild inflammation</div>
+        <div class="proto-price">₱115<span class="proto-cap-unit">/cap</span></div>
+        <div class="proto-cap-label">per capsule · <s style="opacity:.6">SRP ₱137/cap</s></div>
+        <div class="proto-supply">40 caps · 15 days</div>
+        <div class="proto-dose">1–2 caps morning · 1 cap evening</div>
+        <div class="proto-includes">
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 BioScan</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Doctor review &amp; assignment</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Patient portal access</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free shipping</div>
+        </div>
+        <button class="proto-btn" onclick="addToCart('start')">Enroll Now →</button>
+      </div>
+      <div class="proto-card featured" data-r data-d="2">
+        <div class="proto-badge-featured">Most Popular</div>
+        <div class="urgency-badge"><span class="urgency-dot"></span><span class="urgency-text">⚡ Limited doctor slots this week</span></div>
+        <div class="proto-emoji">🔥</div>
+        <div class="proto-name">Grow Protocol</div>
+        <div class="proto-for">GLIS 51–75 · Moderate inflammation</div>
+        <div class="proto-price">₱103<span class="proto-cap-unit">/cap</span></div>
+        <div class="proto-cap-label">per capsule · <s style="opacity:.6">SRP ₱125/cap</s></div>
+        <div class="proto-supply">120 caps · 30 days</div>
+        <div class="proto-dose">2 caps morning · 2 caps evening</div>
+        <div class="proto-includes">
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3 BioScans — track progress</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Assigned attending doctor</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full patient portal</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Telegram AI assistant</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free shipping</div>
+        </div>
+        <button class="proto-btn" onclick="addToCart('grow')">Enroll Now →</button>
+      </div>
+      <div class="proto-card" data-r data-d="3">
+        <div class="proto-emoji">👑</div>
+        <div class="proto-name">Power Protocol</div>
+        <div class="proto-for">GLIS 76–100 · High inflammation</div>
+        <div class="proto-price">₱87<span class="proto-cap-unit">/cap</span></div>
+        <div class="proto-cap-label">per capsule · <s style="opacity:.6">SRP ₱107/cap</s></div>
+        <div class="proto-supply">400 caps · 90 days</div>
+        <div class="proto-dose">2–3 caps morning · 2–3 caps evening</div>
+        <div class="proto-includes">
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3 BioScans</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority doctor response</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full 90-day intervention</div>
+          <div class="proto-include"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free shipping</div>
+        </div>
+        <button class="proto-btn" onclick="addToCart('power')">Enroll Now →</button>
+      </div>
+    </div>
+    <p class="proto-note" data-r>Not sure which protocol is right for you? <a href="#how-it-works" onclick="event.preventDefault();document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">Check your Lifestyle Inflammation Score first</a> — Dr. Shane assigns the right one.</p>
+    <div class="guarantee-strip" data-r>
+      <div class="guarantee-icon" aria-hidden="true">🛡️</div>
+      <div>
+        <div class="guarantee-title">Up to 90-day satisfaction guarantee</div>
+        <div class="guarantee-desc">If your BioScan shows no measurable improvement after completing your protocol, Dr. Shane reviews and issues a full refund within 5 business days. No questions asked.</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:var(--fs-xs);color:var(--txt-lt-4);margin-top:clamp(16px,3vw,24px);line-height:1.6">Patient names changed for privacy. Score data from GutGuard patient portal records, n=127. Individual results vary.</p>
+  </div>
+</section>
+
+<!-- ── EMAIL CAPTURE ── ── -->
+<section class="section" id="proof" style="background:#f5f4f2" aria-labelledby="proof-h">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow" data-r>Patient Results</p>
+      <h2 class="h2" id="proof-h" data-r data-d="1">Real scores. Real patients.</h2>
+    </div>
+    <div class="proof-grid section-gap">
+      <div class="proof-card" data-r data-bars="82,48">
+        <div class="proof-scores">
+          <span class="proof-n proof-before">82</span>
+          <span class="proof-arr">→</span>
+          <span class="proof-n proof-after">48</span>
+          <span class="proof-drop">↓34 pts</span>
+        </div>
+        <div class="proof-bar-area">
+          <div class="proof-bar-row bar-before"><span class="proof-bar-tag">Before</span><div class="proof-bar-track"><div class="proof-bar-fill"></div></div><span class="proof-val">82</span></div>
+          <div class="proof-bar-row bar-after"><span class="proof-bar-tag">After</span><div class="proof-bar-track"><div class="proof-bar-fill"></div></div><span class="proof-val">48</span></div>
+        </div>
+        <p class="proof-quote">"My CRP dropped from 4.2 to 1.1 in one cycle. The fatigue I had been blaming on night shifts for two years — that was inflammation. It is gone."</p>
+        <div class="proof-byline">
+          <div class="proof-avatar" aria-hidden="true">MS</div>
+          <div><div class="proof-name">M.S., 47 — GenSan</div><div class="proof-meta">Grow Protocol · name changed for privacy</div></div>
+        </div>
+      </div>
+      <div class="proof-card" data-r data-d="2" data-bars="64,32">
+        <div class="proof-scores">
+          <span class="proof-n proof-before">64</span>
+          <span class="proof-arr">→</span>
+          <span class="proof-n proof-after">32</span>
+          <span class="proof-drop">↓32 pts</span>
+        </div>
+        <div class="proof-bar-area">
+          <div class="proof-bar-row bar-before"><span class="proof-bar-tag">Before</span><div class="proof-bar-track"><div class="proof-bar-fill"></div></div><span class="proof-val">64</span></div>
+          <div class="proof-bar-row bar-after"><span class="proof-bar-tag">After</span><div class="proof-bar-track"><div class="proof-bar-fill"></div></div><span class="proof-val">32</span></div>
+        </div>
+        <p class="proof-quote">"Three years of joint pain I assumed was age. Dr. Shane's first note after my scan said it was systemic inflammation, not arthritis. Six weeks later my score dropped 32 points and the pain was measurably better."</p>
+        <div class="proof-byline">
+          <div class="proof-avatar" aria-hidden="true">LR</div>
+          <div><div class="proof-name">L.R., 62 — Davao</div><div class="proof-meta">Power Protocol · name changed for privacy</div></div>
+        </div>
+      </div>
+      <div class="proof-card" data-r data-d="4" data-bars="55,28">
+        <div class="proof-scores">
+          <span class="proof-n proof-before">55</span>
+          <span class="proof-arr">→</span>
+          <span class="proof-n proof-after">28</span>
+          <span class="proof-drop">↓27 pts</span>
+        </div>
+        <div class="proof-bar-area">
+          <div class="proof-bar-row bar-before"><span class="proof-bar-tag">Before</span><div class="proof-bar-track"><div class="proof-bar-fill"></div></div><span class="proof-val">55</span></div>
+          <div class="proof-bar-row bar-after"><span class="proof-bar-tag">After</span><div class="proof-bar-track"><div class="proof-bar-fill"></div></div><span class="proof-val">28</span></div>
+        </div>
+        <p class="proof-quote">"55 down to 28 in one Grow Protocol cycle. My internist at my annual checkup asked what I had changed. I showed her the BioScan report."</p>
+        <div class="proof-byline">
+          <div class="proof-avatar" aria-hidden="true">CT</div>
+          <div><div class="proof-name">C.T., 50 — QC</div><div class="proof-meta">Grow Protocol · name changed for privacy</div></div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:var(--fs-xs);color:var(--txt-lt-4);margin-top:clamp(16px,3vw,24px);line-height:1.6">Patient names changed for privacy. Score data from GutGuard patient portal records, n=127. Individual results vary.</p>
+  </div>
+</section>
+
+<!-- ── EMAIL CAPTURE ── -->
+<section class="section-tight email-sec" id="email-capture" aria-labelledby="email-h">
+  <div class="wrap">
+    <div class="email-card" data-r>
+      <div>
+        <h2 class="email-h" id="email-h">Not sure if your labs qualify? Find out first.</h2>
+        <p class="email-sub">Send us your lab report format and we will tell you within 2 hours whether your existing results cover all 8 markers — before you commit to anything.</p>
+      </div>
+      <div>
+        <form class="email-form" onsubmit="submitEmail(event)" novalidate>
+          <input class="email-input" type="email" id="email-field" placeholder="your@email.com" autocomplete="email" inputmode="email" required aria-label="Your email address">
+          <button class="email-btn" type="submit">Send Free Guide</button>
+        </form>
+        <p class="email-note">No spam. Unsubscribe any time. RA 10173 compliant.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VITAL INFO ── -->
+<section class="section vital-sec" id="vital" aria-labelledby="vi-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow-dk" data-r>Vital Information</p>
+    <h2 class="h2 disp sec-title-dk" id="vi-h" data-r data-d="1">Everything you need to know</h2>
+    <p class="body-lg" style="color:var(--txt-dk-3);max-width:52ch;margin:14px 0 32px" data-r data-d="2">Dosing, safety, shipping, compliance, and your rights as a patient.</p>
+    <div class="vital-tabs" role="tablist" aria-label="Protocol information" data-r>
+      <button class="vital-tab active" role="tab" id="tab-d" aria-selected="true" aria-controls="panel-d" onclick="switchTab(this,'d')">Dosing</button>
+      <button class="vital-tab" role="tab" id="tab-b" aria-selected="false" aria-controls="panel-b" onclick="switchTab(this,'b')">BioScan</button>
+      <button class="vital-tab" role="tab" id="tab-s" aria-selected="false" aria-controls="panel-s" onclick="switchTab(this,'s')">Shipping</button>
+      <button class="vital-tab" role="tab" id="tab-c" aria-selected="false" aria-controls="panel-c" onclick="switchTab(this,'c')">Compliance</button>
+      <button class="vital-tab" role="tab" id="tab-sf" aria-selected="false" aria-controls="panel-sf" onclick="switchTab(this,'sf')">Safety</button>
+    </div>
+
+    <div id="panel-d" class="vital-panel on" role="tabpanel" aria-labelledby="tab-d">
+      <div class="vital-grid">
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">💊</div><h3 class="vital-card-title">Protocol dosing schedule</h3></div><div class="vital-card-body"><table class="vtable"><thead><tr><th>Protocol</th><th>Morning</th><th>Evening</th><th>Duration</th></tr></thead><tbody><tr><td>Trial</td><td>1 cap</td><td>1 cap</td><td>5 days</td></tr><tr><td>Start</td><td>1–2 caps</td><td>1 cap</td><td>15 days</td></tr><tr><td>Grow</td><td>2 caps</td><td>2 caps</td><td>30 days</td></tr><tr><td>Power</td><td>2–3 caps</td><td>2–3 caps</td><td>90 days</td></tr></tbody></table></div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">⏰</div><h3 class="vital-card-title">How to take it correctly</h3></div><div class="vital-card-body"><ul><li>Take with a full glass of water, 30 minutes before or after a meal</li><li>Morning dose: before breakfast for maximum Urolithin-A absorption</li><li>Evening dose: 1 hour before sleep for L-Tryptophan's sleep effect</li><li>Do not crush or split capsules — nano-encapsulation requires intact delivery</li><li>If you miss a dose, resume normally — do not double-dose</li></ul></div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">📈</div><h3 class="vital-card-title">What to expect in the first week</h3></div><div class="vital-card-body">Some patients experience mild digestive changes during days 1–4 as the microbiome shifts. <strong>This is normal.</strong><ul><li>Slightly looser stools (Day 1–4) — resolves by Day 5</li><li>Noticeably better sleep often begins Day 3–5</li><li>Energy improvement typically felt Day 7 onwards</li></ul>If symptoms persist beyond 7 days, message Dr. Shane through your portal.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">📦</div><h3 class="vital-card-title">Storage &amp; handling</h3></div><div class="vital-card-body"><ul><li>Store below 30°C, away from direct sunlight and moisture</li><li>Do not refrigerate unless instructed by Dr. Shane</li><li>Shelf life: 24 months from manufacture date (printed on pack)</li><li>Keep out of reach of children</li></ul></div></div>
+      </div>
+    </div>
+
+    <div id="panel-b" class="vital-panel" role="tabpanel" aria-labelledby="tab-b">
+      <div class="vital-grid">
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">🔬</div><h3 class="vital-card-title">What lab results does BioScan accept?</h3></div><div class="vital-card-body">BioScan reads: <strong>CBC with differential</strong> (WBC, neutrophils, lymphocytes), <strong>Lipid panel</strong> (triglycerides, HDL), <strong>Fasting blood glucose</strong>, <strong>CRP or hs-CRP</strong>, and <strong>ALT</strong>. You don't need all 8 — BioScan scores from whatever is available.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">📅</div><h3 class="vital-card-title">How recent do my labs need to be?</h3></div><div class="vital-card-body">Labs within the last <strong>90 days</strong> produce the most accurate GLIS. Older labs can still be submitted — Dr. Shane will indicate whether a fresh panel is needed before prescribing.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">🔄</div><h3 class="vital-card-title">How often should I re-scan?</h3></div><div class="vital-card-body"><ul><li><strong>Trial &amp; Start:</strong> 1 BioScan (baseline)</li><li><strong>Grow:</strong> 3 BioScans — Day 0, 15, 30</li><li><strong>Power:</strong> 3 BioScans — Day 0, 30, 90</li></ul>Your portal tracks all scans and shows your score trajectory. Dr. Shane reviews each one.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">➕</div><h3 class="vital-card-title">Can I take additional BioScans?</h3></div><div class="vital-card-body">Yes. Additional BioScans can be purchased through your portal at any time. Many patients re-scan at 6 and 12 months after completing a protocol. Your full scan history is always visible to Dr. Shane.</div></div>
+      </div>
+    </div>
+
+    <div id="panel-s" class="vital-panel" role="tabpanel" aria-labelledby="tab-s">
+      <div class="vital-grid">
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">🚚</div><h3 class="vital-card-title">Shipping across the Philippines</h3></div><div class="vital-card-body"><strong>All protocol orders ship free nationwide.</strong><ul><li>Metro Manila: 1–2 business days</li><li>Luzon provincial: 2–3 business days</li><li>Visayas: 3–5 business days</li><li>Mindanao (incl. GenSan): 3–5 business days</li><li>Island provinces: 5–7 business days</li></ul>Tracking sent via SMS within 24 hours of dispatch.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">📫</div><h3 class="vital-card-title">Packaging &amp; privacy</h3></div><div class="vital-card-body">All orders ship in plain, discreet packaging. No product name or medical content on the outside. The label shows only "GG Philippines" and your address. Each pack includes a temperature indicator strip.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">✅</div><h3 class="vital-card-title">Returns &amp; guarantee</h3></div><div class="vital-card-body"><ul><li><strong>Trial:</strong> No returns (5-day supply)</li><li><strong>Start:</strong> 15-day satisfaction guarantee</li><li><strong>Grow:</strong> 30-day satisfaction guarantee</li><li><strong>Power:</strong> 90-day satisfaction guarantee</li></ul>Submit your BioScan showing no improvement. Dr. Shane reviews and issues a full refund within 5 business days.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">💳</div><h3 class="vital-card-title">Payment methods</h3></div><div class="vital-card-body"><ul><li>GCash (preferred)</li><li>Maya (PayMaya)</li><li>Bank transfer (BDO, BPI, UnionBank, Metrobank)</li><li>Credit/debit card (Visa, Mastercard)</li><li>Cash on delivery (Metro Manila, subject to availability)</li></ul></div></div>
+      </div>
+    </div>
+
+    <div id="panel-c" class="vital-panel" role="tabpanel" aria-labelledby="tab-c">
+      <div class="vital-grid">
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">🏛</div><h3 class="vital-card-title">Regulatory registration</h3></div><div class="vital-card-body">GutGuard SynBIOTIC+ is a licensed lifestyle supplement.<div class="comp-tags"><span class="comp-tag">SEC Registered</span><span class="comp-tag">FDA Notified</span><span class="comp-tag">LTO Licensed</span><span class="comp-tag">Halal Certified</span></div>This product is a dietary supplement, not a pharmaceutical drug. Full registration numbers at gutguard.ph/legal.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">⚖</div><h3 class="vital-card-title">What the doctor relationship means</h3></div><div class="vital-card-body">Dr. Shane reviews your BioScan as a <strong>lifestyle health assessment</strong>, not a medical consultation. His protocol assignment is a supplement recommendation. GutGuard does not replace your primary care physician.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">🔒</div><h3 class="vital-card-title">Your data &amp; privacy</h3></div><div class="vital-card-body"><ul><li>Lab results encrypted on Philippine-compliant servers</li><li>Never shared with third parties or advertisers</li><li>Only Dr. Shane and assigned doctors access your scan data</li><li>Request deletion anytime through your portal</li><li>Complies with RA 10173 (Philippine Data Privacy Act)</li></ul></div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">🧬</div><h3 class="vital-card-title">Ingredient transparency</h3></div><div class="vital-card-body">Key active ingredients per capsule:<ul><li><strong>Urolithin-A</strong> — 250mg (mitophagy activator)</li><li><strong>L-Tryptophan</strong> — 150mg (gut-brain axis)</li><li><strong>Patented Prebiotic Complex</strong> — proprietary blend</li><li><strong>Nano-encapsulated Probiotics</strong> — &gt;10B CFU</li></ul>No artificial colours, fillers, or pork-derived ingredients. Plant-based capsule (HPMC).</div></div>
+      </div>
+    </div>
+
+    <div id="panel-sf" class="vital-panel" role="tabpanel" aria-labelledby="tab-sf">
+      <div class="vital-grid">
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">⚠️</div><h3 class="vital-card-title">Who should NOT take GutGuard</h3></div><div class="vital-card-body">Consult your physician before starting if you are:<ul><li>Pregnant or breastfeeding</li><li>Undergoing chemotherapy or radiation</li><li>Taking immunosuppressant medications</li><li>Diagnosed with active IBD (Crohn's, ulcerative colitis)</li><li>Under 18 years old</li></ul></div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">💊</div><h3 class="vital-card-title">Known interactions</h3></div><div class="vital-card-body"><ul><li><strong>Blood thinners (warfarin, aspirin):</strong> Inform your physician — Urolithin-A may have mild anticoagulant properties</li><li><strong>SSRIs / antidepressants:</strong> L-Tryptophan requires caution — consult your psychiatrist before Grow or Power Protocol</li><li><strong>Statins:</strong> No known interaction</li><li><strong>Metformin:</strong> No known interaction</li></ul></div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">📋</div><h3 class="vital-card-title">Reporting adverse reactions</h3></div><div class="vital-card-body">Report through your <strong>patient portal</strong> (Dr. Shane is notified instantly), via Telegram to the GutGuard support channel, or by calling the support line. Serious reactions should also be reported to the <strong>Philippine FDA ADRM</strong> at fda.gov.ph.</div></div>
+        <div class="vital-card"><div class="vital-card-head"><div class="vital-card-icon" aria-hidden="true">📚</div><h3 class="vital-card-title">Clinical evidence</h3></div><div class="vital-card-body"><ul><li><strong>Urolithin-A:</strong> Demonstrated mitophagy activation and anti-inflammatory effects in 4 human clinical trials (2019–2023)</li><li><strong>L-Tryptophan:</strong> Established precursor to serotonin and melatonin; gut-brain signalling well-documented</li><li><strong>Postbiotics:</strong> Growing evidence showing superior bioavailability vs. live probiotics alone</li></ul>Full references at gutguard.ph/science.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section faq-sec" id="faq" aria-labelledby="faq-h">
+  <div class="wrap-sm">
+    <div class="center">
+      <p class="eyebrow eyebrow-dk" data-r>FAQ</p>
+      <h2 class="h2 disp sec-title-dk" id="faq-h" data-r data-d="1">Common questions</h2>
+    </div>
+    <div class="faq-list section-gap" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ──
+<section class="final-cta" aria-labelledby="fca-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow-dk" data-r>Still deciding?</p>
+    <h2 class="h2 disp" id="fca-h" data-r data-d="1">Your blood results already<br>have the answer.</h2>
+    <p class="final-cta-label" data-r data-d="2">Upload the CBC or lipid panel you already have. Your GLIS calculates in 30 seconds — no new tests, no prepayment. If Dr. Shane reviews your scan and assigns a protocol, you will know exactly what you are paying for and why before a single peso changes hands.</p>
+    <div class="final-cta-btns" data-r data-d="3">
+      <button class="btn btn-primary-lt btn-lg" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'});track('final_cta_click')">
+        Check My Inflammation Score
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn btn-ghost btn-lg" onclick="addToCart('grow')">Enroll: Grow Protocol →</button>
+    </div>
+    <div class="final-cta-social" data-r data-d="4">
+      <a href="https://t.me/gutguardph" target="_blank" rel="noopener" class="final-social-link" aria-label="Join GutGuard on Telegram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.69 7.97c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.56 4.67-4.22c.2-.18-.04-.28-.32-.1L8.21 14.5l-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.16.84.11.12.6z"/></svg>
+        Join GutGuard Telegram
+      </a>
+      <a href="https://wa.me/63900000000?text=Hi%2C+I%27d+like+to+know+more+about+GutGuard+Protocol" target="_blank" rel="noopener" class="final-social-link" aria-label="Message us on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Ask on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">GutGuard Protocol</div>
+        <p class="footer-tagline">Doctor-monitored gut health. Pre→Pro→Postbiotic synbiotic cascade designed for the Filipino body.</p>
+        <p class="footer-legal">GutGuard SynBIOTIC+ is a licensed lifestyle supplement. Not a pharmaceutical drug. Not intended to diagnose, treat, cure, or prevent any disease. © 2026 GutGuard Philippines.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Protocol</div>
+        <ul class="footer-links">
+          <li><a href="#how-it-works">Check My Score</a></li>
+          <li><a href="#markers">The 8 Markers</a></li>
+          <li><a href="#science">The Science</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="#vital">Dosing Guide</a></li>
+          <li><a href="#vital">Shipping</a></li>
+          <li><a href="#vital">Safety Info</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About GutGuard</a></li>
+          <li><a href="#">gutguard.ph/science</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">gutguard.ph/legal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 GutGuard Philippines · All rights reserved</div>
+      <div class="footer-badges">
+        <span class="footer-badge">SEC Registered</span>
+        <span class="footer-badge">FDA Notified</span>
+        <span class="footer-badge">LTO Licensed</span>
+        <span class="footer-badge">Halal Certified</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile bar -->
+<div class="m-bar" id="mbar">
+  <div class="m-bar-inner">
+    <div><div class="m-bar-price">₱103<span style="font-size:var(--fs-sm);font-weight:500;opacity:.7">/cap</span></div><div class="m-bar-label">Grow Protocol · 30 days · Most Popular</div></div>
+    <button class="m-bar-btn" onclick="addToCart('grow')">Enroll Now →</button>
+  </div>
+</div>
+
+<!-- Cookie banner -->
+<div class="cookie" id="cookie" role="dialog" aria-labelledby="cookie-title" style="display:none">
+  <div class="cookie-inner">
+    <p class="cookie-text"><strong id="cookie-title">Your privacy matters.</strong> GutGuard uses cookies to improve your experience and measure how people use this site. <a href="#vital">Privacy policy</a> (RA 10173 compliant).</p>
+    <div class="cookie-btns">
+      <button class="cookie-no" onclick="setCookie('declined')">Decline analytics</button>
+      <button class="cookie-ok" onclick="setCookie('granted')">Accept &amp; continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── NAV ──────────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+
+// ── MOBILE BAR — only on mobile, only after scroll ───────────
+function updateMobileBar() {
+  const bar = document.getElementById('mbar');
+  if (!bar) return;
+  const isMobile = window.innerWidth <= 768;
+  const pastFold = window.scrollY > 500;
+  // Don't show while mobile menu is open
+  const menuOpen = document.getElementById('mmenu').classList.contains('open');
+  bar.style.display = (isMobile && pastFold && !menuOpen) ? 'block' : 'none';
+}
+window.addEventListener('scroll', updateMobileBar, { passive: true });
+window.addEventListener('resize', updateMobileBar, { passive: true });
+const hbg = document.getElementById('hbg');
+const mmenu = document.getElementById('mmenu');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 40);
+}, { passive: true });
+
+function openMenu() {
+  mmenu.classList.add('open');
+  mmenu.setAttribute('aria-hidden', 'false');
+  hbg.classList.add('open');
+  hbg.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+  // Hide competing fixed layers while menu is open
+  const cookie = document.getElementById('cookie');
+  if (cookie) cookie.style.visibility = 'hidden';
+  updateMobileBar(); // hides bar while menu open
+}
+
+function closeMenu() {
+  mmenu.classList.remove('open');
+  mmenu.setAttribute('aria-hidden', 'true');
+  hbg.classList.remove('open');
+  hbg.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
+  // Restore competing fixed layers
+  const cookie = document.getElementById('cookie');
+  if (cookie) cookie.style.visibility = '';
+  // Restore mobile bar (updateMobileBar checks if conditions are met)
+  setTimeout(updateMobileBar, 50);
+}
+hbg.addEventListener('click', openMenu);
+document.getElementById('mmenu-close').addEventListener('click', closeMenu);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+// ── SCORE RING — portal CSS conic-gradient system ────────────
+// Exact same ring as patient portal: @property --ra, mask-composite,
+// green→red conic-gradient, 1.5s ease transition, count-up animation
+(function() {
+  const SCORE = 74;
+  const fill  = document.getElementById('ring');
+  if (!fill) return;
+
+  // Count-up animation (matches portal's countUp())
+  const numEl = document.getElementById('score-num');
+  const levelEl = document.getElementById('score-level');
+  let startTs = null;
+  const DURATION = 1400;
+  function ease(t) { return 1 - Math.pow(1-t, 3); }
+
+  function tick(ts) {
+    if (!startTs) startTs = ts;
+    const p = Math.min(ease((ts - startTs) / DURATION), 1);
+    const cur = Math.round(p * SCORE);
+    if (numEl) numEl.textContent = cur;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+
+  // Trigger after fonts + first paint
+  document.fonts.ready.then(() => {
+    requestAnimationFrame(() => {
+      // Show ring, animate --ra to target angle
+      fill.style.opacity = '1';
+      requestAnimationFrame(() => {
+        fill.style.setProperty('--ra', (SCORE * 3.6) + 'deg');
+      });
+      requestAnimationFrame(tick);
+    });
+  });
+})();
+
+// ── FAQ ───────────────────────────────────────────────────────
+const faqs = [
+  {q:"Do I need to buy anything to see my score?",a:"No. The BioScan is free. Upload your existing blood panel, and your Lifestyle Inflammation Score calculates immediately from 8 markers. You only pay after Dr. Shane has reviewed your results, confirmed your protocol, and you choose to proceed. There is no payment required to find out your number."},
+  {q:"I already have a doctor. Why do I need Dr. Shane?",a:"You do not need to replace your doctor. Dr. Shane reviews your blood markers specifically for inflammatory patterns that routine checkups rarely flag. He assigns a gut-targeted protocol based on your score — a service most GPs do not offer. Many patients share their GutGuard BioScan report with their regular doctor."},
+  {q:"How is this different from a probiotic I can buy at Mercury Drug?",a:"Over-the-counter probiotics are generic. They do not know your CRP, your NLR, or your metabolic markers. GutGuard prescribes a protocol based on what your blood actually shows. The Urolithin-A postbiotic in Stage 3 is not available in any Philippine pharmacy — it is a clinical-grade compound documented in peer-reviewed research for mitochondrial regeneration."},
+  {q:"What if my score does not improve?",a:"If your BioScan shows no measurable GLIS reduction after completing the full protocol, Dr. Shane reviews your case personally. If confirmed, you receive a full refund within 5 business days. The guarantee is based on your blood markers — not on how you feel, which is a subjective standard. A score that does not drop is a verifiable fact."},
+  {q:"Can I take SynBIOTIC+ alongside other supplements?",a:"Generally yes. The two exceptions are high-dose standalone probiotics (redundant — GutGuard already contains precision strains) and SSRIs or antidepressants (due to L-Tryptophan interaction). Always declare all current medications and supplements during your BioScan review. Dr. Shane will flag any contraindications before assigning your protocol."},
+  {q:"Is GutGuard Halal?",a:"Yes. GutGuard SynBIOTIC+ is Halal-certified. The capsule shell is plant-based (HPMC). No pork-derived ingredients are used in the formula or manufacturing process."},
+  {q:"Do I need a new blood test or can I use old results?",a:"Any blood panel from a Philippine laboratory in the past 90 days is valid. Hi-Precision, Medicard, Philippine Red Cross, Davao Doctors, St. Luke's — all accepted. A CBC with differential, CRP, fasting glucose, lipid panel, and ALT covers all 8 markers. You do not need to get new tests unless your last labs are older than 90 days."},
+  {q:"What happens after I finish my protocol?",a:"Dr. Shane sends a final review with a comparison of your first and last BioScan scores. If your GLIS is in the Optimal or Mild range, a maintenance protocol (Trial or Start) is usually recommended. If you have not reached your target, a new Grow or Power cycle may be advised. You are never auto-enrolled — every new cycle is a separate decision."}
+];
+const fl = document.getElementById('faq-list');
+if (fl) {
+  fl.innerHTML = faqs.map((f,i) => `
+    <div class="faq-item" id="fq${i}">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(${i})">
+        ${f.q}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-body" role="region"><div class="faq-a">${f.a}</div></div>
+    </div>`).join('');
+}
+function toggleFaq(i) {
+  const el = document.getElementById('fq'+i);
+  const open = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(e => { e.classList.remove('open'); e.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+  if (!open) { el.classList.add('open'); el.querySelector('.faq-q').setAttribute('aria-expanded','true'); }
+}
+
+// ── VITAL TABS ────────────────────────────────────────────────
+function switchTab(btn, id) {
+  document.querySelectorAll('.vital-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+  document.querySelectorAll('.vital-panel').forEach(p => p.classList.remove('on'));
+  btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+  const panel = document.getElementById('panel-'+id);
+  if (panel) {
+    panel.classList.add('on');
+    // stagger in cards
+    const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if (!reduced) panel.querySelectorAll('.vital-card').forEach((c,i) => {
+      c.style.cssText = `opacity:0;transform:translateY(14px);transition:opacity .4s ${i*.07}s ease,transform .4s ${i*.07}s ease`;
+      requestAnimationFrame(() => requestAnimationFrame(() => { c.style.opacity='1'; c.style.transform='none'; }));
+    });
+  }
+}
+
+// ── SCROLL REVEALS ────────────────────────────────────────────
+(function() {
+  const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (reduced) { document.querySelectorAll('[data-r]').forEach(e => e.classList.add('shown')); return; }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('shown'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('[data-r]').forEach(e => obs.observe(e));
+})();
+
+// ── STAT COUNTERS ─────────────────────────────────────────────
+(function() {
+  const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (reduced) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('[data-count]').forEach(el => {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        const target = parseInt(el.dataset.count), suffix = el.dataset.suffix || '';
+        const start = performance.now();
+        function step(ts) {
+          const p = Math.min((ts-start)/1200, 1);
+          el.textContent = Math.round((1-Math.pow(1-p,3))*target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.5 });
+  const banner = document.querySelector('.stat-banner');
+  if (banner) obs.observe(banner);
+})();
+
+// ── PROOF BARS ────────────────────────────────────────────────
+(function() {
+  const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting || e.target.dataset.animated) return;
+      e.target.dataset.animated = '1';
+      const bars = e.target.dataset.bars ? e.target.dataset.bars.split(',') : [];
+      if (bars.length < 2) return;
+      const bv = parseInt(bars[0]), av = parseInt(bars[1]);
+      const fills = e.target.querySelectorAll('.proof-bar-fill');
+      if (reduced) { if (fills[0]) fills[0].style.width = bv + '%'; if (fills[1]) fills[1].style.width = av + '%'; return; }
+      // add will-change before animation, remove after
+      fills.forEach(f => { if(f) f.style.willChange = 'width'; });
+      requestAnimationFrame(() => {
+        if (fills[0]) fills[0].style.width = bv + '%';
+        setTimeout(() => {
+          if (fills[1]) fills[1].style.width = av + '%';
+          setTimeout(() => fills.forEach(f => { if(f) f.style.willChange = 'auto'; }), 1400);
+        }, 350);
+      });
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.proof-card').forEach(c => obs.observe(c));
+})();
+
+// (updateMobileBar defined above near nav JS)
+
+// ── CART / CHECKOUT ───────────────────────────────────────────
+// ── Cart state ────────────────────────────────────────────────
+var ggCart = { tier: null, count: 0 };
+
+function addToCart(tier) {
+  const p = PROTOCOLS[tier];
+  if (!p) return;
+
+  // Update cart state
+  ggCart.tier  = tier;
+  ggCart.count = 1; // single-protocol cart — one slot
+  updateCartIcon();
+
+  // Shake animation feedback
+  var btn = document.getElementById('nav-cart-btn');
+  if (btn) {
+    btn.classList.remove('shake');
+    void btn.offsetWidth; // reflow to restart
+    btn.classList.add('shake');
+    setTimeout(function(){ btn.classList.remove('shake'); }, 500);
+  }
+
+  // Toast
+  showToast('\u2713 ' + p.name + ' added \u00b7 ₱' + p.capPrice + '/cap');
+
+  // Track
+  track('add_to_cart', { protocol: tier, value: p.price, currency: 'PHP',
+    ref: sessionStorage.getItem('gg_ref') || '(direct)' });
+
+  // Open checkout immediately
+  openCheckout(tier);
+}
+
+function updateCartIcon() {
+  var btn   = document.getElementById('nav-cart-btn');
+  var badge = document.getElementById('nav-cart-count');
+  if (!btn) return;
+  if (ggCart.count > 0) {
+    btn.style.display = 'flex';
+    btn.classList.add('has-items');
+    if (badge) badge.textContent = ggCart.count;
+  } else {
+    btn.classList.remove('has-items');
+    if (badge) badge.textContent = '0';
+  }
+}
+
+function openCartOrCheckout() {
+  if (ggCart.tier) {
+    openCheckout(ggCart.tier);
+  } else {
+    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function showToast(msg) {
+  let t = document.getElementById('_toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = '_toast';
+    Object.assign(t.style, { position:'fixed', bottom:'max(80px,env(safe-area-inset-bottom,0px)+80px)', left:'50%', transform:'translateX(-50%) translateY(16px)', background:'var(--bg-card-dk)', color:'var(--txt-dk-1)', padding:'13px 22px', borderRadius:'100px', fontSize:'.9375rem', fontWeight:'600', zIndex:'9999', opacity:'0', transition:'all .3s', pointerEvents:'none', whiteSpace:'nowrap', border:'1px solid var(--bdr-2)', boxShadow:'0 8px 32px rgba(0,0,0,.4)', fontFamily:'var(--f-disp)' });
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(t._t);
+  t._t = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(16px)'; }, 2800);
+}
+
+// ── REFERRAL CAPTURE ──────────────────────────────────────────
+(function() {
+  try {
+    const p = new URLSearchParams(window.location.search);
+    const ref = p.get('ref') || p.get('referral') || p.get('dr');
+    if (ref) { sessionStorage.setItem('gg_ref', ref.toUpperCase()); track('referral_visit', { ref_code: ref }); }
+    ['utm_source','utm_medium','utm_campaign'].forEach(k => { const v = p.get(k); if (v) sessionStorage.setItem('gg_'+k, v); });
+  } catch(e) {}
+})();
+
+// ── COOKIE CONSENT ────────────────────────────────────────────
+(function() {
+  try {
+    const el = document.getElementById('cookie');
+    if (!el || localStorage.getItem('gg_consent')) return;
+    setTimeout(() => { el.style.display = ''; requestAnimationFrame(() => el.classList.add('show')); }, 1500);
+  } catch(e) {}
+})();
+function setCookie(choice) {
+  try {
+    localStorage.setItem('gg_consent', choice);
+    const el = document.getElementById('cookie');
+    if (el) { el.classList.remove('show'); setTimeout(() => { el.style.display = 'none'; }, 400); }
+    if (typeof gtag === 'function') gtag('consent','update',{ analytics_storage: choice==='granted'?'granted':'denied', ad_storage:'denied' });
+    track('cookie_consent', { choice });
+  } catch(e) {}
+}
+
+
+// ════════════════════════════════════════════════════════════════
+// CHECKOUT SYSTEM
+// ════════════════════════════════════════════════════════════════
+
+const PROTOCOLS = {
+  'trial':        { name:'Trial Protocol',         emoji:'🌱', price:1299,  capPrice:130, caps:10,  days:5,  detail:'10 caps · 5 days · 1 BioScan',    inc1:'1 BioScan (baseline)' },
+  'trial-bottle': { name:'Trial Protocol (Bottle)', emoji:'🌱', price:3800,  capPrice:127, caps:30,  days:30, detail:'30 caps · 30 days · 1 BioScan',   inc1:'1 BioScan (baseline)' },
+  'start':        { name:'Start Protocol',         emoji:'⚡',     price:4599,  capPrice:115, caps:40,  days:15, detail:'40 caps · 15 days · 1 BioScan',    inc1:'1 BioScan (baseline)' },
+  'grow':         { name:'Grow Protocol',          emoji:'🔥', price:12399, capPrice:103, caps:120, days:30, detail:'120 caps · 30 days · 3 BioScans',  inc1:'3 BioScans (Day 0, 15, 30)' },
+  'power':        { name:'Power Protocol',         emoji:'👑', price:34999, capPrice:87,  caps:400, days:90, detail:'400 caps · 90 days · 3 BioScans',  inc1:'3 BioScans (Day 0, 30, 90)' },
+};
+
+// ── Trial sachet / bottle toggle ─────────────────────────────
+function selectTrial(format) {
+  var isSachet = format === 'sachet';
+  var s = document.getElementById('trial-sachet');
+  var b = document.getElementById('trial-bottle');
+  if (s) { s.classList.toggle('active', isSachet);  s.setAttribute('aria-pressed', String(isSachet)); }
+  if (b) { b.classList.toggle('active', !isSachet); b.setAttribute('aria-pressed', String(!isSachet)); }
+  var price   = document.getElementById('trial-price');
+  var capLbl  = document.getElementById('trial-cap-label');
+  var total   = document.getElementById('trial-total');
+  var dose    = document.getElementById('trial-dose');
+  var btn     = document.getElementById('trial-btn');
+  if (isSachet) {
+    if (price)  price.innerHTML  = '\u20b1130<span class="proto-cap-unit">/cap</span>';
+    if (capLbl) capLbl.innerHTML = 'per capsule \u00b7 <s style="opacity:.6">SRP \u20b1150/cap</s>';
+    if (total)  total.textContent = '10 caps \u00b7 5 days';
+    if (dose)   dose.textContent = '1 cap morning \u00b7 1 cap evening';
+    if (btn)  { btn.textContent = 'Start Trial \u2192'; btn.onclick = function(){ addToCart('trial'); }; }
+  } else {
+    if (price)  price.innerHTML  = '\u20b1127<span class="proto-cap-unit">/cap</span>';
+    if (capLbl) capLbl.innerHTML = 'per capsule \u00b7 <s style="opacity:.6">SRP \u20b1150/cap</s>';
+    if (total)  total.textContent = '30 caps \u00b7 30 days';
+    if (dose)   dose.textContent = '1 cap daily \u00b7 maintenance dose';
+    if (btn)  { btn.textContent = 'Order Bottle \u2192'; btn.onclick = function(){ addToCart('trial-bottle'); }; }
+  }
+  track('trial_toggle', { format: format });
+}
+
+let ckTier = 'grow';
+let ckStep = 1;
+let ckPayment = 'gcash';
+
+function openCheckout(tier) {
+  tier = tier || ckTier;
+  ckTier = tier;
+  ckStep = 1;
+  populateCart(tier);
+  setStep(1);
+  const el = document.getElementById('checkout');
+  el.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+  // Focus first interactive element
+  setTimeout(() => {
+    const first = el.querySelector('.ck-close');
+    if (first) first.focus();
+  }, 100);
+  track('checkout_open', { protocol: tier });
+}
+
+function closeCheckout() {
+  const el = document.getElementById('checkout');
+  el.classList.remove('active');
+  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
+  updateMobileBar();
+}
+
+function populateCart(tier) {
+  const p = PROTOCOLS[tier];
+  if (!p) return;
+  const fmt    = n => '\u20b1' + n.toLocaleString('en-PH');
+  const capStr = '\u20b1' + p.capPrice;
+  const totalStr = fmt(ckPayment === 'cod' ? p.price + 50 : p.price);
+  // Cart item header
+  document.getElementById('ck-cart-emoji').textContent    = p.emoji;
+  document.getElementById('ck-cart-name').textContent     = p.name;
+  document.getElementById('ck-cart-detail').textContent   = p.detail;
+  document.getElementById('ck-cart-price').textContent    = capStr + '/cap';
+  // Per-cap hero + days badge
+  var capEl  = document.getElementById('ck-cart-cap');
+  var daysEl = document.getElementById('ck-val-days');
+  var sdEl   = document.getElementById('ck-sub-days');
+  if (capEl)  capEl.textContent  = capStr;
+  if (daysEl) daysEl.textContent = p.days + ' days';
+  if (sdEl)   sdEl.textContent   = p.days + ' days';
+  // Value stack rows
+  var subEl  = document.getElementById('ck-sub-price');
+  var scanEl = document.getElementById('ck-scan-line');
+  if (subEl)  subEl.textContent  = p.caps + ' caps';
+  if (scanEl) scanEl.textContent = (p.inc1 || '1 BioScan') + ' included';
+  // Total — silenced in step 1, primary in step 4
+  var totEl = document.getElementById('ck-total-price');
+  if (totEl) totEl.textContent = totalStr;
+  document.getElementById('ck-inc-1').textContent = p.inc1;
+  // Step 4 review — total is PRIMARY here
+  document.getElementById('rv-protocol').textContent = p.name;
+  document.getElementById('rv-price').textContent    = p.caps + ' caps \u00b7 ' + p.days + ' days';
+  document.getElementById('rv-total').textContent    = totalStr;
+}
+
+function setStep(n) {
+  ckStep = n;
+  // Update panels
+  document.querySelectorAll('.ck-panel').forEach(el => el.classList.remove('active'));
+  const panel = document.getElementById('ck-panel-'+n);
+  if (panel) panel.classList.add('active');
+
+  // Update progress indicators
+  document.querySelectorAll('.ck-step').forEach((el, i) => {
+    el.classList.remove('active','done');
+    if (i+1 < n) el.classList.add('done');
+    if (i+1 === n) el.classList.add('active');
+  });
+
+  // Update button
+  const labels = ['', 'Continue to Delivery Details', 'Continue to Payment', 'Review Order', 'Place Order', 'Close'];
+  const btnLabel = document.getElementById('ck-btn-label');
+  const backBtn  = document.getElementById('ck-back-btn');
+  const mainBtn  = document.getElementById('ck-main-btn');
+
+  if (btnLabel) btnLabel.textContent = labels[n] || 'Continue';
+  if (backBtn)  backBtn.style.display = n > 1 && n < 5 ? 'block' : 'none';
+  if (mainBtn) {
+    mainBtn.style.display = 'flex';
+    if (n === 5) {
+      // Confirmation step
+      const btnSvg = mainBtn.querySelector('svg');
+      if (btnSvg) btnSvg.style.display = 'none';
+      if (btnLabel) btnLabel.textContent = 'Done';
+    } else {
+      const btnSvg = mainBtn.querySelector('svg');
+      if (btnSvg) btnSvg.style.display = '';
+    }
+  }
+
+  // Scroll body to top
+  const body = document.getElementById('ck-body');
+  if (body) body.scrollTop = 0;
+}
+
+function ckNext() {
+  if (ckStep === 5) { closeCheckout(); return; }
+  if (ckStep === 1) { setStep(2); return; }
+  if (ckStep === 2) {
+    if (!validateContact()) return;
+    populateReview();
+    setStep(3);
+    return;
+  }
+  if (ckStep === 3) {
+    setStep(4);
+    populateReview();
+    return;
+  }
+  if (ckStep === 4) {
+    placeOrder();
+    return;
+  }
+}
+
+function ckBack() {
+  if (ckStep > 1) setStep(ckStep - 1);
+}
+
+function validateContact() {
+  let valid = true;
+  const fields = [
+    { id:'ck-name',     err:'err-name',     check: v => v.trim().length >= 2 },
+    { id:'ck-email',    err:'err-email',    check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+    { id:'ck-mobile',   err:'err-mobile',   check: v => /^(09|\+639)\d{9}$/.test(v.replace(/\s/g,'')) },
+    { id:'ck-street',   err:'err-street',   check: v => v.trim().length >= 5 },
+    { id:'ck-city',     err:'err-city',     check: v => v.trim().length >= 2 },
+    { id:'ck-province', err:'err-province', check: v => v.trim().length >= 2 },
+    { id:'ck-region',   err:'err-region',   check: v => v !== '' },
+  ];
+  fields.forEach(f => {
+    const input = document.getElementById(f.id);
+    const err   = document.getElementById(f.err);
+    if (!input) return;
+    const ok = f.check(input.value);
+    input.classList.toggle('error', !ok);
+    if (err) err.classList.toggle('show', !ok);
+    if (!ok) valid = false;
+  });
+  if (!valid) {
+    // Scroll to first error
+    const firstErr = document.querySelector('.ck-panel.active .ck-input.error');
+    if (firstErr) firstErr.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+  return valid;
+}
+
+function populateReview() {
+  const get = id => (document.getElementById(id)||{value:''}).value;
+  const name     = get('ck-name');
+  const mobile   = get('ck-mobile');
+  const email    = get('ck-email');
+  const street   = get('ck-street');
+  const city     = get('ck-city');
+  const province = get('ck-province');
+  const region   = get('ck-region');
+  const address  = [street, city, province, region].filter(Boolean).join(', ');
+
+  const set = (id, val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
+  set('rv-name',    name);
+  set('rv-mobile',  mobile);
+  set('rv-email',   email);
+  set('rv-address', address);
+
+  const payLabels = { gcash:'GCash', maya:'Maya', bank:'Bank Transfer', card:'Credit Card', cod:'Cash on Delivery' };
+  set('rv-payment', payLabels[ckPayment] || ckPayment);
+
+  const p = PROTOCOLS[ckTier];
+  if (p) {
+    const extra = ckPayment === 'cod' ? 50 : 0;
+    set('rv-total', '₱' + (p.price + extra).toLocaleString('en-PH'));
+  }
+}
+
+function placeOrder() {
+  const btn = document.getElementById('ck-main-btn');
+  if (btn) { btn.disabled = true; btn.querySelector('#ck-btn-label').textContent = 'Processing…'; }
+
+  // Simulate order submission (connect to actual API/Shopify/WooCommerce here)
+  const orderNum = 'GG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random()*90000)+10000);
+  document.getElementById('ck-order-num').textContent = orderNum;
+
+  const p = PROTOCOLS[ckTier];
+  track('purchase', {
+    transaction_id: orderNum,
+    protocol: ckTier,
+    value: p ? p.price : 0,
+    currency: 'PHP',
+    payment_method: ckPayment,
+    ref: (function(){try{return sessionStorage.getItem('gg_ref')||'(direct)'}catch(e){return '(direct)'}}()),
+  });
+
+  setTimeout(() => {
+    if (btn) { btn.disabled = false; }
+    setStep(5);
+  }, 1200);
+}
+
+function selectPayment(method) {
+  ckPayment = method;
+  document.querySelectorAll('.pay-option').forEach(el => el.classList.remove('selected'));
+  const sel = document.getElementById('pay-'+method);
+  if (sel) sel.classList.add('selected');
+
+  document.querySelectorAll('.pay-detail').forEach(el => el.classList.remove('show'));
+  const detail = document.getElementById('detail-'+method);
+  if (detail) detail.classList.add('show');
+
+  // COD: add ₱50 fee
+  const p = PROTOCOLS[ckTier];
+  if (p) {
+    const total = method === 'cod' ? p.price + 50 : p.price;
+    const el = document.getElementById('rv-total');
+    if (el) el.textContent = '₱' + total.toLocaleString('en-PH');
+  }
+}
+
+function copyText(text) {
+  try {
+    navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard ✓'));
+  } catch(e) {
+    showToast('Copy: ' + text);
+  }
+}
+
+// Keyboard trap inside checkout when open
+document.addEventListener('keydown', e => {
+  const checkout = document.getElementById('checkout');
+  if (!checkout || !checkout.classList.contains('active')) return;
+  if (e.key === 'Escape') { closeCheckout(); return; }
+  // Trap focus
+  if (e.key === 'Tab') {
+    const focusable = checkout.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length-1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+// Card number formatting
+document.addEventListener('input', e => {
+  if (e.target.id === 'card-num') {
+    let v = e.target.value.replace(/\D/g,'').slice(0,16);
+    e.target.value = v.replace(/(.{4})/g,'$1 ').trim();
+  }
+  if (e.target.id === 'card-exp') {
+    let v = e.target.value.replace(/\D/g,'').slice(0,4);
+    if (v.length >= 2) v = v.slice(0,2) + ' / ' + v.slice(2);
+    e.target.value = v;
+  }
+  if (e.target.id === 'ck-mobile') {
+    let v = e.target.value.replace(/\D/g,'');
+    if (v.startsWith('639')) v = '0' + v.slice(2);
+    if (v.length > 11) v = v.slice(0,11);
+    // Format: 09XX XXX XXXX
+    if (v.length > 7) v = v.slice(0,4)+' '+v.slice(4,7)+' '+v.slice(7);
+    else if (v.length > 4) v = v.slice(0,4)+' '+v.slice(4);
+    e.target.value = v;
+  }
+});
+
+// ── Patch addToCart to open checkout ──────────────────────────
+function addToCart(tier) {
+  const prices = { trial:1299, start:4599, grow:12399, power:34999 };
+  const ref = (function(){try{return sessionStorage.getItem('gg_ref')||'(direct)'}catch(e){return '(direct)'}}());
+  track('begin_checkout', { protocol: tier, value: prices[tier], currency:'PHP', ref });
+  openCheckout(tier);
+}
+
+// ════════════════════════════════════════════════════════════════
+// REFERRAL CAPTURE
+// ════════════════════════════════════════════════════════════════
+(function captureRef() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref') || params.get('referral') || params.get('dr');
+    if (ref) {
+      sessionStorage.setItem('gg_ref', ref.trim().toUpperCase());
+      document.title = 'GutGuard Protocol — Referred by ' + ref;
+      track('referral_visit', { ref_code: ref, source: 'share_link' });
+    }
+    ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(k) {
+      const v = params.get(k);
+      if (v) sessionStorage.setItem('gg_' + k, v);
+    });
+  } catch(e) {}
+})();
+
+// ════════════════════════════════════════════════════════════════
+// EMAIL CAPTURE
+// ════════════════════════════════════════════════════════════════
+function submitEmail(e) {
+  e.preventDefault();
+  const input = document.getElementById('email-field');
+  if (!input) return;
+  const email = input.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    input.style.borderColor = 'var(--red)';
+    return;
+  }
+  input.style.borderColor = '';
+  // Submit to your email service here (Mailchimp, ConvertKit, etc.)
+  track('email_capture', { email_domain: email.split('@')[1] });
+  input.value = '';
+  input.placeholder = '✓ Guide sent to your email!';
+  input.disabled = true;
+  showToast('✓ GLIS guide sent — check your inbox');
+}
+
+// ════════════════════════════════════════════════════════════════
+// PATIENT COUNTER ANIMATION
+// ════════════════════════════════════════════════════════════════
+(function() {
+  const el = document.getElementById('patient-count');
+  if (!el) return;
+  let base = 127;
+  // Subtle live counter: increment by 0-1 every few minutes to feel live
+  setInterval(() => {
+    if (Math.random() > 0.7) {
+      base++;
+      el.textContent = base;
+    }
+  }, 45000); // every 45s, 30% chance of increment
+})();
+
+</script>
+
+<div class="checkout" id="checkout" role="dialog" aria-modal="true" aria-labelledby="ck-title-1">
+  <div class="checkout-backdrop" onclick="closeCheckout()"></div>
+  <div class="checkout-panel">
+
+    <!-- Header: progress + close -->
+    <div class="ck-header">
+      <div class="ck-progress" role="list" aria-label="Checkout steps">
+        <div class="ck-step active" id="ck-step-1" role="listitem">
+          <div class="ck-step-num" aria-label="Step 1: Cart">1</div>
+          <div class="ck-step-label">Cart</div>
+          <div class="ck-step-line" aria-hidden="true"></div>
+        </div>
+        <div class="ck-step" id="ck-step-2" role="listitem">
+          <div class="ck-step-num" aria-label="Step 2: Contact">2</div>
+          <div class="ck-step-label">Contact</div>
+          <div class="ck-step-line" aria-hidden="true"></div>
+        </div>
+        <div class="ck-step" id="ck-step-3" role="listitem">
+          <div class="ck-step-num" aria-label="Step 3: Payment">3</div>
+          <div class="ck-step-label">Payment</div>
+          <div class="ck-step-line" aria-hidden="true"></div>
+        </div>
+        <div class="ck-step" id="ck-step-4" role="listitem">
+          <div class="ck-step-num" aria-label="Step 4: Review">4</div>
+          <div class="ck-step-label">Review</div>
+          <div class="ck-step-line" aria-hidden="true"></div>
+        </div>
+        <div class="ck-step" id="ck-step-5" role="listitem">
+          <div class="ck-step-num" aria-label="Step 5: Confirm">5</div>
+          <div class="ck-step-label">Done</div>
+        </div>
+      </div>
+      <button class="ck-close" onclick="closeCheckout()" aria-label="Close checkout">✕</button>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="ck-body" id="ck-body">
+
+      <!-- STEP 1: CART ─────────────────────────────────────────── -->
+      <div class="ck-panel active" id="ck-panel-1">
+        <h2 class="ck-title" id="ck-title-1">Your order</h2>
+        <p class="ck-sub">Review your selected protocol before continuing.</p>
+
+        <div class="ck-cart-item" id="ck-cart-display">
+          <div class="ck-cart-icon" id="ck-cart-emoji">🔥</div>
+          <div style="flex:1;min-width:0">
+            <div class="ck-cart-name" id="ck-cart-name">Grow Protocol</div>
+            <div class="ck-cart-detail" id="ck-cart-detail">120 capsules · 30-day supply · 3 BioScans</div>
+          </div>
+          <div class="ck-cart-price" id="ck-cart-price">₱12,399</div>
+        </div>
+
+        <div class="ck-includes" id="ck-cart-includes">
+          <div class="ck-include-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="ck-inc-1">3 BioScans (Day 0, 15, 30)</span></div>
+          <div class="ck-include-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Assigned attending doctor</div>
+          <div class="ck-include-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full patient portal access</div>
+          <div class="ck-include-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Telegram AI assistant</div>
+          <div class="ck-include-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free nationwide shipping</div>
+        </div>
+
+        <div class="ck-protocol-change">
+          <button onclick="closeCheckout();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Change protocol</button>
+        </div>
+
+        <!-- Per-cap hero price -->
+        <div class="ck-val-hero">
+          <span class="ck-val-cap" id="ck-cart-cap">₱103</span><span class="ck-val-cap-unit">/cap</span>
+          <span class="ck-val-days" id="ck-val-days">30 days</span>
+        </div>
+        <!-- Value stack -->
+        <div class="ck-summary" style="margin-top:12px">
+          <div class="ck-summary-row"><span>Capsules</span><span id="ck-sub-price">120 caps</span></div>
+          <div class="ck-summary-row"><span>Protocol duration</span><span id="ck-sub-days">30 days</span></div>
+          <div class="ck-summary-row"><span>Lab scans</span><span id="ck-scan-line">3 included</span></div>
+          <div class="ck-summary-row free"><span>Shipping</span><span>Free nationwide</span></div>
+          <div class="ck-summary-row free"><span>Doctor review</span><span>Included</span></div>
+          <div class="ck-summary-row ck-total-row"><span>Total</span><span id="ck-total-price">₱12,399</span></div>
+        </div>
+      </div>
+
+      <!-- STEP 2: CONTACT ──────────────────────────────────────── -->
+      <div class="ck-panel" id="ck-panel-2">
+        <h2 class="ck-title">Delivery details</h2>
+        <p class="ck-sub">We need this to ship your protocol and activate your patient portal.</p>
+
+        <div class="ck-field">
+          <label class="ck-label" for="ck-name">Full name<span aria-hidden="true">*</span></label>
+          <input class="ck-input" id="ck-name" type="text" placeholder="Juan dela Cruz" autocomplete="name" required>
+          <div class="ck-err" id="err-name">Please enter your full name</div>
+        </div>
+        <div class="ck-field">
+          <label class="ck-label" for="ck-email">Email address<span aria-hidden="true">*</span></label>
+          <input class="ck-input" id="ck-email" type="email" placeholder="juan@email.com" autocomplete="email" inputmode="email" required>
+          <div class="ck-err" id="err-email">Please enter a valid email</div>
+        </div>
+        <div class="ck-field">
+          <label class="ck-label" for="ck-mobile">Philippine mobile number<span aria-hidden="true">*</span></label>
+          <input class="ck-input" id="ck-mobile" type="tel" placeholder="09XX XXX XXXX" autocomplete="tel" inputmode="tel" maxlength="13" required>
+          <div class="ck-err" id="err-mobile">Please enter a valid PH mobile number (09xx)</div>
+        </div>
+        <div class="ck-field">
+          <label class="ck-label" for="ck-street">Street address<span aria-hidden="true">*</span></label>
+          <input class="ck-input" id="ck-street" type="text" placeholder="123 Rizal St., Barangay..." autocomplete="street-address" required>
+          <div class="ck-err" id="err-street">Please enter your street address</div>
+        </div>
+        <div class="ck-grid-2">
+          <div class="ck-field">
+            <label class="ck-label" for="ck-city">City / Municipality<span aria-hidden="true">*</span></label>
+            <input class="ck-input" id="ck-city" type="text" placeholder="General Santos City" autocomplete="address-level2" required>
+            <div class="ck-err" id="err-city">Required</div>
+          </div>
+          <div class="ck-field">
+            <label class="ck-label" for="ck-province">Province<span aria-hidden="true">*</span></label>
+            <input class="ck-input" id="ck-province" type="text" placeholder="South Cotabato" autocomplete="address-level1" required>
+            <div class="ck-err" id="err-province">Required</div>
+          </div>
+        </div>
+        <div class="ck-grid-2">
+          <div class="ck-field">
+            <label class="ck-label" for="ck-zip">ZIP code</label>
+            <input class="ck-input" id="ck-zip" type="text" placeholder="9500" autocomplete="postal-code" inputmode="numeric" maxlength="4">
+          </div>
+          <div class="ck-field">
+            <label class="ck-label" for="ck-region">Region<span aria-hidden="true">*</span></label>
+            <select class="ck-select" id="ck-region" required>
+              <option value="">Select region</option>
+              <option>NCR (Metro Manila)</option>
+              <option>Region I – Ilocos</option>
+              <option>Region II – Cagayan Valley</option>
+              <option>Region III – Central Luzon</option>
+              <option>Region IV-A – CALABARZON</option>
+              <option>Region IV-B – MIMAROPA</option>
+              <option>Region V – Bicol</option>
+              <option>Region VI – Western Visayas</option>
+              <option>Region VII – Central Visayas</option>
+              <option>Region VIII – Eastern Visayas</option>
+              <option>Region IX – Zamboanga Peninsula</option>
+              <option>Region X – Northern Mindanao</option>
+              <option>Region XI – Davao</option>
+              <option selected>Region XII – SOCCSKSARGEN</option>
+              <option>Region XIII – Caraga</option>
+              <option>BARMM</option>
+              <option>CAR</option>
+            </select>
+            <div class="ck-err" id="err-region">Required</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: PAYMENT ──────────────────────────────────────── -->
+      <div class="ck-panel" id="ck-panel-3">
+        <h2 class="ck-title">Choose payment</h2>
+        <p class="ck-sub">Select your preferred payment method.</p>
+
+        <div class="pay-options" role="radiogroup" aria-label="Payment method">
+          <label class="pay-option selected" id="pay-gcash">
+            <input type="radio" name="payment" value="gcash" checked onchange="selectPayment('gcash')">
+            <span class="pay-icon">💚</span>
+            <div>
+              <div class="pay-name">GCash</div>
+              <div class="pay-desc">Instant transfer · Recommended</div>
+            </div>
+          </label>
+          <label class="pay-option" id="pay-maya">
+            <input type="radio" name="payment" value="maya" onchange="selectPayment('maya')">
+            <span class="pay-icon">🔵</span>
+            <div>
+              <div class="pay-name">Maya (PayMaya)</div>
+              <div class="pay-desc">Instant transfer</div>
+            </div>
+          </label>
+          <label class="pay-option" id="pay-bank">
+            <input type="radio" name="payment" value="bank" onchange="selectPayment('bank')">
+            <span class="pay-icon">🏦</span>
+            <div>
+              <div class="pay-name">Bank Transfer</div>
+              <div class="pay-desc">BDO, BPI, UnionBank, Metrobank</div>
+            </div>
+          </label>
+          <label class="pay-option" id="pay-card">
+            <input type="radio" name="payment" value="card" onchange="selectPayment('card')">
+            <span class="pay-icon">💳</span>
+            <div>
+              <div class="pay-name">Credit / Debit Card</div>
+              <div class="pay-desc">Visa, Mastercard</div>
+            </div>
+          </label>
+          <label class="pay-option" id="pay-cod">
+            <input type="radio" name="payment" value="cod" onchange="selectPayment('cod')">
+            <span class="pay-icon">💵</span>
+            <div>
+              <div class="pay-name">Cash on Delivery</div>
+              <div class="pay-desc" id="cod-desc">Metro Manila only</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- Payment detail panels -->
+        <div class="pay-detail show" id="detail-gcash">
+          <div class="pay-detail-label">Send payment to</div>
+          <div class="pay-detail-value">
+            <span>0917 000 0000</span>
+            <button class="pay-copy-btn" onclick="copyText('0917 000 0000')">Copy</button>
+          </div>
+          <div style="font-size:.8125rem;color:var(--txt-lt-3);margin-top:8px">Account name: GutGuard Philippines</div>
+          <div class="pay-qr-placeholder">
+            <!-- Replace with actual GCash QR image -->
+            QR Code<br>Placeholder<br><span style="font-size:.625rem;opacity:.6">Replace with real QR</span>
+          </div>
+          <div style="font-size:.8125rem;color:var(--txt-lt-3);margin-top:10px">After sending: upload your GCash receipt screenshot in the next step.</div>
+        </div>
+        <div class="pay-detail" id="detail-maya">
+          <div class="pay-detail-label">Send payment to</div>
+          <div class="pay-detail-value">
+            <span>0917 000 0000</span>
+            <button class="pay-copy-btn" onclick="copyText('0917 000 0000')">Copy</button>
+          </div>
+          <div style="font-size:.8125rem;color:var(--txt-lt-3);margin-top:8px">Account name: GutGuard Philippines</div>
+        </div>
+        <div class="pay-detail" id="detail-bank">
+          <div class="pay-detail-label">Bank account details</div>
+          <div style="font-size:.875rem;color:var(--txt-lt-2);margin-top:8px;display:flex;flex-direction:column;gap:8px">
+            <div><strong>BDO:</strong> Account No. 000-123-456-7890 · GutGuard Philippines</div>
+            <div><strong>BPI:</strong> Account No. 1234-5678-90 · GutGuard Philippines</div>
+            <div><strong>UnionBank:</strong> Account No. 1234-5678-9012 · GutGuard Philippines</div>
+          </div>
+          <div style="font-size:.8125rem;color:var(--txt-lt-3);margin-top:10px">Send your transfer receipt to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ef1ecfafbeceddef9ebeaf9ebffecfab0eef6">[email&#160;protected]</a> or upload in the next step.</div>
+        </div>
+        <div class="pay-detail" id="detail-card">
+          <div class="pay-detail-label">Card details</div>
+          <div class="ck-field" style="margin-top:8px">
+            <label class="ck-label" for="card-num">Card number</label>
+            <input class="ck-input" id="card-num" type="tel" placeholder="1234 5678 9012 3456" inputmode="numeric" maxlength="19" autocomplete="cc-number">
+          </div>
+          <div class="ck-grid-2">
+            <div class="ck-field">
+              <label class="ck-label" for="card-exp">Expiry</label>
+              <input class="ck-input" id="card-exp" type="tel" placeholder="MM / YY" inputmode="numeric" maxlength="7" autocomplete="cc-exp">
+            </div>
+            <div class="ck-field">
+              <label class="ck-label" for="card-cvv">CVV</label>
+              <input class="ck-input" id="card-cvv" type="tel" placeholder="123" inputmode="numeric" maxlength="4" autocomplete="cc-csc">
+            </div>
+          </div>
+          <div style="font-size:.75rem;color:var(--txt-lt-4);margin-top:4px">🔒 Secured by 256-bit SSL encryption</div>
+        </div>
+        <div class="pay-detail" id="detail-cod">
+          <div style="font-size:.875rem;color:var(--txt-lt-2)">Cash on Delivery is available in Metro Manila only. Our courier will collect payment upon delivery. COD fee: ₱50 added to total.</div>
+        </div>
+      </div>
+
+      <!-- STEP 4: REVIEW ───────────────────────────────────────── -->
+      <div class="ck-panel" id="ck-panel-4">
+        <h2 class="ck-title">Review your order</h2>
+        <p class="ck-sub">Everything look right? Place your order to activate your BioScan.</p>
+
+        <div class="ck-summary" id="review-protocol" style="margin-bottom:12px">
+          <div class="ck-summary-row"><span style="font-weight:700" id="rv-protocol">Grow Protocol</span><span id="rv-price" style="font-size:var(--fs-sm);color:var(--txt-lt-3)">120 caps · 30 days</span></div>
+          <div class="ck-summary-row"><span>Shipping</span><span style="color:#065f46;font-weight:600">Free</span></div>
+        </div>
+
+        <div class="ck-summary" id="review-contact" style="margin-bottom:12px">
+          <div class="ck-summary-row"><span>Name</span><span id="rv-name" style="text-align:right;font-weight:600">—</span></div>
+          <div class="ck-summary-row"><span>Mobile</span><span id="rv-mobile" style="text-align:right">—</span></div>
+          <div class="ck-summary-row"><span>Address</span><span id="rv-address" style="text-align:right;max-width:200px;word-break:break-word">—</span></div>
+          <div class="ck-summary-row"><span>Email</span><span id="rv-email" style="text-align:right;font-size:.8125rem;word-break:break-all">—</span></div>
+        </div>
+
+        <div class="ck-summary" style="margin-bottom:16px">
+          <div class="ck-summary-row"><span>Payment</span><span id="rv-payment" style="font-weight:600">GCash</span></div>
+          <div class="ck-summary-row total" style="padding:14px 0 2px"><span style="font-weight:700;font-size:1rem">Total due</span><span id="rv-total" style="font-size:1.1875rem;font-weight:800;letter-spacing:-.02em">₱12,399</span></div>
+        </div>
+
+        <div style="font-size:.8125rem;color:var(--txt-lt-4);line-height:1.6;margin-bottom:8px">By placing your order you agree to GutGuard's <a href="#vital" style="color:var(--blue)" onclick="closeCheckout()">Terms & Privacy Policy</a>. Your BioScan will activate after payment confirmation.</div>
+      </div>
+
+      <!-- STEP 5: CONFIRMATION ─────────────────────────────────── -->
+      <div class="ck-panel" id="ck-panel-5">
+        <div class="ck-confirm">
+          <span class="ck-confirm-icon">🎉</span>
+          <h2 class="ck-title" id="ck-title-5">Order received!</h2>
+          <div class="ck-confirm-num" id="ck-order-num">GG-2024-00001</div>
+          <p class="ck-sub">Check your email and SMS for order details. Here's what happens next:</p>
+
+          <div class="ck-confirm-steps">
+            <div class="ck-confirm-step">
+              <div class="ck-confirm-step-num">1</div>
+              <div class="ck-confirm-step-text"><strong>Upload your blood results</strong> via the link we send to your email to activate your BioScan.</div>
+            </div>
+            <div class="ck-confirm-step">
+              <div class="ck-confirm-step-num">2</div>
+              <div class="ck-confirm-step-text">Dr. Shane reviews your scan and <strong>assigns your protocol within 24 hours</strong>.</div>
+            </div>
+            <div class="ck-confirm-step">
+              <div class="ck-confirm-step-num">3</div>
+              <div class="ck-confirm-step-text">Your GutGuard Protocol ships from our GenSan fulfilment centre. <strong>Tracking number sent via SMS.</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end ck-body -->
+
+    <!-- Footer: action button -->
+    <div class="ck-footer">
+      <button class="ck-btn" id="ck-main-btn" onclick="ckNext()">
+        <span id="ck-btn-label">Continue to Delivery Details</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="ck-back
+
+</body>
+</html>

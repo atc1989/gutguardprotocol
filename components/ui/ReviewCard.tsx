@@ -33,7 +33,7 @@ export default function ReviewCard({
   quote,
 }: ReviewCardProps) {
   return (
-    <article className="flex h-[389.69px] w-full max-w-[330.67px] flex-col rounded-[18px] border border-[#E7E7EA] bg-white px-[21px] py-[20px] shadow-none">
+    <article className="flex w-full max-w-[330.67px] flex-col rounded-[18px] border border-[#E7E7EA] bg-white px-[21px] py-[20px] shadow-none lg:h-[389.69px]">
       <div className="flex items-center justify-between">
         <div className="flex h-[45px] items-center gap-[7px]">
           <span
@@ -110,7 +110,7 @@ export default function ReviewCard({
         className={[
           inter.className,
           "mt-[14px] text-[14px] font-normal italic leading-[23.8px] tracking-[0] text-[#6B6B71]",
-          quoteSizeClassName ?? "max-w-[268.61px] min-h-[88.39px]",
+          quoteSizeClassName ?? "w-full max-w-[268.61px] lg:min-h-[88.39px]",
         ].join(" ")}
       >
         {quote}

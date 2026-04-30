@@ -11,14 +11,20 @@ export default function AccordionItem({
 }: AccordionItemProps) {
   return (
     <details
-      className="group rounded-2xl border border-[#12206a] bg-[#11206a] px-5 py-4 text-white"
+      className="group overflow-hidden rounded-[20px] bg-[#020B41] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)]"
       open={defaultOpen}
     >
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium sm:text-base">
-        <span>{question}</span>
-        <span className="text-lg transition-transform duration-200 group-open:rotate-45">+</span>
+      <summary className="flex min-h-[58px] cursor-pointer list-none items-center justify-between gap-4 px-[18px] py-[12px] text-left">
+        <span className="min-w-0 pr-4 text-[14px] font-normal leading-[1.4] text-white">
+          {question}
+        </span>
+        <span className="shrink-0 text-[16px] leading-none text-white/80 transition-transform duration-200 group-open:rotate-45">
+          +
+        </span>
       </summary>
-      <p className="pt-3 text-sm leading-6 text-white/70">{answer}</p>
+      <div className="border-t border-white/10 px-[18px] pb-[16px] pt-[12px]">
+        <p className="text-[14px] leading-[1.6] text-[#A3A3A8]">{answer}</p>
+      </div>
     </details>
   );
 }

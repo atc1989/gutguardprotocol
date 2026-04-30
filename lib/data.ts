@@ -20,9 +20,9 @@ import type {
 } from "./types";
 
 export const gutGuardNavLinks: NavLinkItem[] = [
-  { href: "#journey", label: "How It Works" },
-  { href: "#science", label: "The Science" },
-  { href: "#plans", label: "Pricing" },
+  { href: "#journey-anchor", label: "How It Works" },
+  { href: "#science-anchor", label: "The Science" },
+  { href: "#pricing-anchor", label: "Pricing" },
 ];
 
 export const heroBullets: HeroBulletItem[] = [
@@ -377,39 +377,44 @@ export const knowledgeCards: KnowledgeCardItem[] = [
 
 export const faqItems: FaqItem[] = [
   {
-    question: "Do I need to stop anything to see my score?",
+    question: "Do I need to buy anything to see my score?",
     answer:
-      "No. GutGuard reads the bloodwork you already have. Your doctor review accounts for the context of your current routine.",
+      "No. The BioScan is free. Upload your existing blood panel, and your Lifestyle Inflammation Score calculates immediately from 8 markers. You only pay after Dr. Shane has reviewed your results, confirmed your protocol, and you choose to proceed. There is no payment required to find out your number.",
   },
   {
-    question: "I already have a doctor. Why do I need Dr Shane?",
+    question: "I already have a doctor. Why do I need Dr. Shane?",
     answer:
-      "GutGuard adds a protocol layer specifically for inflammation scoring and supplement sequencing. It does not replace your primary physician.",
+      "You do not need to replace your doctor. Dr. Shane reviews your blood markers specifically for inflammatory patterns that routine checkups rarely flag. He assigns a gut-targeted protocol based on your score - a service most GPs do not offer. Many patients share their GutGuard BioScan report with their regular doctor.",
   },
   {
-    question: "How is this different from probiotics or a stool test?",
+    question: "How is this different from a probiotic I can buy at Mercury Drug?",
     answer:
-      "This starts with blood markers and physician review, then assigns a protocol tier. It is designed for people who already have routine labs.",
+      "Over-the-counter probiotics are generic. They do not know your CRP, your NLR, or your metabolic markers. GutGuard prescribes a protocol based on what your blood actually shows. The Urolithin-A postbiotic in Stage 3 is not available in any Philippine pharmacy - it is a clinical-grade compound documented in peer-reviewed research for mitochondrial regeneration.",
   },
   {
     question: "What if my score does not improve?",
     answer:
-      "The plan includes re-scoring and escalation paths so your protocol can be adjusted if your markers remain elevated.",
+      "If your BioScan shows no measurable GLIS reduction after completing the full protocol, Dr. Shane reviews your case personally. If confirmed, you receive a full refund within 5 business days. The guarantee is based on your blood markers - not on how you feel, which is a subjective standard. A score that does not drop is a verifiable fact.",
   },
   {
-    question: "Can I take SynBioX alongside other supplements?",
+    question: "Can I take SynBIOTIC+ alongside other supplements?",
     answer:
-      "Usually yes, but the physician review is where overlap, timing, and interactions are screened before you begin.",
+      "Generally yes. The two exceptions are high-dose standalone probiotics (redundant - GutGuard already contains precision strains) and SSRIs or antidepressants (due to L-Tryptophan interaction). Always declare all current medications and supplements during your BioScan review. Dr. Shane will flag any contraindications before assigning your protocol.",
   },
   {
-    question: "Do I need new bloodwork or can I use old results?",
+    question: "Is GutGuard Halal?",
     answer:
-      "You can start with recent lab work. If the panel is too old or missing key markers, the review will tell you what needs updating.",
+      "Yes. GutGuard SynBIOTIC+ is Halal-certified. The capsule shell is plant-based (HPMC). No pork-derived ingredients are used in the formula or manufacturing process.",
   },
   {
-    question: "What happens if the lab quality is poor?",
+    question: "Do I need a new blood test or can I use old results?",
     answer:
-      "GutGuard screens for missing or low-confidence inputs. If the panel quality is not sufficient, you will be told before protocol matching.",
+      "Any blood panel from a Philippine laboratory in the past 90 days is valid. Hi-Precision, Medicard, Philippine Red Cross, Davao Doctors, St. Luke's - all accepted. A CBC with differential, CRP, fasting glucose, lipid panel, and ALT covers all 8 markers. You do not need to get new tests unless your last labs are older than 90 days.",
+  },
+  {
+    question: "What happens after I finish my protocol?",
+    answer:
+      "Dr. Shane sends a final review with a comparison of your first and last BioScan scores. If your GLIS is in the Optimal or Mild range, a maintenance protocol (Trial or Start) is usually recommended. If you have not reached your target, a new Grow or Power cycle may be advised. You are never auto-enrolled - every new cycle is a separate decision.",
   },
 ];
 

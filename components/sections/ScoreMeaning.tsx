@@ -24,10 +24,10 @@ const inter = Inter({
 
 export default function ScoreMeaning() {
   return (
-    <section className="bg-white py-16 sm:pb-[118px] sm:pt-[138px]">
+    <section className="bg-white py-16 lg:pb-[118px] lg:pt-[138px]" id="score-ranges">
       <Container>
-        <div className="space-y-10 sm:mx-auto sm:w-[1040px]">
-          <div className="sm:w-[583.89px]">
+        <div className="space-y-10 lg:mx-auto lg:w-[1040px]">
+          <div className="lg:w-[583.89px]">
             <p
               className={[
                 firaCode.className,
@@ -47,7 +47,7 @@ export default function ScoreMeaning() {
             <p
               className={[
                 inter.className,
-                "mt-[14.52px] max-w-[583.89px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#6B6B71] sm:h-[52.5px]",
+                "mt-[14.52px] max-w-[583.89px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#6B6B71] lg:h-[52.5px]",
               ].join(" ")}
             >
               Scored 0–100 from your eight markers. Higher means more systemic

@@ -24,9 +24,10 @@ const inter = Inter({
 
 export default function BioScanReads() {
   return (
-    <section className="bg-[#142344] py-16 sm:h-[1035.8px] sm:py-0">
+    <section className="bg-[#142344] py-16 sm:py-0" id="bioscan">
+      <div aria-hidden="true" className="sr-only" id="markers" />
       <Container>
-        <div className="space-y-10 sm:pt-[140.61px]">
+        <div className="space-y-10 sm:pb-[96px] sm:pt-[140.61px]">
           <div className="sm:w-[593.26px]">
             <p
               className={[

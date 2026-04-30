@@ -117,14 +117,14 @@ const featureLabelSizeClasses: Record<string, string> = {
 
 export default function ComparisonTable() {
   return (
-    <section className="bg-[#020B41] py-12 sm:h-[1010.83px] sm:py-0">
+    <section className="bg-[#020B41] py-12 sm:py-0" id="compare">
       <Container>
-        <div className="space-y-12 sm:pt-[138.87px]">
+        <div className="space-y-12 lg:pb-[96px] lg:pt-[138.87px]">
           <div className="space-y-6 text-left">
             <p
               className={[
                 firaCode.className,
-                "h-[11px] w-[103.17px] text-[11px] font-bold uppercase leading-[18.15px] tracking-[1.98px] text-[#1A56DB]",
+                "min-h-[11px] w-[103.17px] text-[11px] font-bold uppercase leading-[18.15px] tracking-[1.98px] text-[#1A56DB]",
               ].join(" ")}
             >
               WHY GUTGUARD
@@ -133,7 +133,7 @@ export default function ComparisonTable() {
             <h2
               className={[
                 plusJakartaSans.className,
-                "h-[66px] w-full max-w-[796px] text-[52px] font-bold leading-[57.2px] tracking-[-1.56px] text-white",
+                "w-full max-w-[796px] text-[40px] font-bold leading-[1.05] tracking-[-0.04em] text-white sm:text-[52px] sm:leading-[57.2px] sm:tracking-[-1.56px]",
               ].join(" ")}
             >
               Not all gut supplements are equal
@@ -142,7 +142,7 @@ export default function ComparisonTable() {
             <p
               className={[
                 inter.className,
-                "h-[52.5px] max-w-[557.83px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#6B6B71]",
+                "max-w-[557.83px] text-[18px] font-normal leading-[31.5px] tracking-[0] text-[#6B6B71] lg:h-[52.5px]",
               ].join(" ")}
             >
               Generic supplements are cheaper and easier to find. Here is what that tradeoff
@@ -150,7 +150,7 @@ export default function ComparisonTable() {
             </p>
           </div>
 
-          <div className="h-[564.5px] w-full overflow-x-auto lg:w-[1040px]">
+          <div className="-mx-4 w-[calc(100%+2rem)] overflow-x-auto px-4 sm:mx-0 sm:w-full sm:px-0 lg:w-[1040px]">
             <div className="min-w-[1040px]">
               <div className="grid grid-cols-[332px_198px_204px_254px] lg:min-h-[564.5px]">
                 <div
