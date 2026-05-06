@@ -1,0 +1,10 @@
+alter table public.orders add column if not exists ttclid text;
+alter table public.orders add column if not exists ttp text;
+alter table public.orders add column if not exists landing_page text;
+alter table public.orders add column if not exists tt_test_event_code text;
+alter table public.orders add column if not exists utm_source text;
+alter table public.orders add column if not exists utm_medium text;
+alter table public.orders add column if not exists utm_campaign text;
+alter table public.orders add column if not exists utm_content text;
+alter table public.orders add column if not exists utm_term text;
+alter table public.orders add column if not exists tiktok_event_id text;
