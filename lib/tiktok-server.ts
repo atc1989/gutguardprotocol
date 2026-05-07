@@ -60,6 +60,21 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
   const pixelId = getTikTokPixelId();
   const accessToken = getTikTokEventsApiToken();
 
+  console.info("TikTok env check", {
+    event: input.event,
+    hasAccessToken: Boolean(accessToken),
+    hasPixelId: Boolean(pixelId),
+    host: (() => {
+      try {
+        return input.eventUrl ? new URL(input.eventUrl).host : null;
+      } catch {
+        return null;
+      }
+    })(),
+    tokenLength: accessToken?.length ?? 0,
+    vercelEnv: process.env.VERCEL_ENV || null,
+  });
+
   if (!pixelId || !accessToken) {
     return { ok: false as const, skipped: true as const };
   }
