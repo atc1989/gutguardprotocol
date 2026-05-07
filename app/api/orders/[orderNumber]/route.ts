@@ -48,7 +48,7 @@ export async function PATCH(
 
   if (payload.status === "paid" || payload.status === "completed") {
     try {
-      await sendTikTokServerEvent({
+      const trackingResult = await sendTikTokServerEvent({
         context: {
           landingPage: data.landing_page || undefined,
           testEventCode: data.tt_test_event_code || undefined,
@@ -78,6 +78,14 @@ export async function PATCH(
           quantity: data.product_quantity,
         }),
         userAgent: request.headers.get("user-agent"),
+      });
+
+      console.info("TikTok purchase event sent", {
+        event: "Purchase",
+        orderNumber: data.order_number,
+        status: payload.status,
+        testEventCode: data.tt_test_event_code || null,
+        trackingResult,
       });
     } catch (trackingError) {
       console.error("TikTok purchase event failed", trackingError);

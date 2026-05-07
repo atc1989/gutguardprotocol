@@ -241,7 +241,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await sendTikTokServerEvent({
+    const trackingResult = await sendTikTokServerEvent({
       context: tracking,
       event: "Lead",
       eventId: payload.tiktokEventId || createEventId("submit-form"),
@@ -262,6 +262,13 @@ export async function POST(request: Request) {
       }),
       userAgent: request.headers.get("user-agent"),
       userIp: getUserIpAddress(request),
+    });
+
+    console.info("TikTok lead event sent", {
+      event: "Lead",
+      orderNumber,
+      testEventCode: tracking?.testEventCode || null,
+      trackingResult,
     });
   } catch (error) {
     console.error("TikTok submit event failed", error);
