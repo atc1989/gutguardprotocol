@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 
 import Analytics from "@/components/app/Analytics";
 import CookieConsent from "@/components/app/CookieConsent";
+import TikTokPixel from "@/components/app/TikTokPixel";
 import Navbar from "@/components/layout/Navbar";
 import { medicalWebPageSchema, siteConfig } from "@/lib/site";
 
@@ -21,6 +22,7 @@ type RootLayoutProps = {
 };
 
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const tikTokPixelId = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -62,6 +64,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
         <Analytics measurementId={measurementId} />
+        <TikTokPixel pixelId={tikTokPixelId} />
         <Navbar />
         <div id="root">{children}</div>
         <CookieConsent />
