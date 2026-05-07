@@ -39,6 +39,324 @@ const defaultContactFields: ContactFields = {
 
 const stepLabels = ["Cart", "Contact", "Payment", "Review", "Done"] as const;
 
+const regionOptions = [
+  "NCR (Metro Manila)",
+  "Region III - Central Luzon",
+  "Region IV-A - CALABARZON",
+  "Region VII - Central Visayas",
+  "Region XI - Davao",
+  "Region XII - SOCCSKSARGEN",
+] as const;
+
+const provincesByRegion: Record<(typeof regionOptions)[number], string[]> = {
+  "NCR (Metro Manila)": ["Metro Manila"],
+  "Region III - Central Luzon": [
+    "Aurora",
+    "Bataan",
+    "Bulacan",
+    "Nueva Ecija",
+    "Pampanga",
+    "Tarlac",
+    "Zambales",
+  ],
+  "Region IV-A - CALABARZON": ["Batangas", "Cavite", "Laguna", "Quezon", "Rizal"],
+  "Region VII - Central Visayas": ["Bohol", "Cebu", "Negros Oriental", "Siquijor"],
+  "Region XI - Davao": ["Davao de Oro", "Davao del Norte", "Davao del Sur", "Davao Occidental", "Davao Oriental"],
+  "Region XII - SOCCSKSARGEN": ["Cotabato", "Sarangani", "South Cotabato", "Sultan Kudarat"],
+};
+
+const citiesByProvince: Record<string, string[]> = {
+  "Metro Manila": [
+    "Caloocan",
+    "Las Pinas",
+    "Makati",
+    "Malabon",
+    "Mandaluyong",
+    "Manila",
+    "Marikina",
+    "Muntinlupa",
+    "Navotas",
+    "Paranaque",
+    "Pasay",
+    "Pasig",
+    "Quezon City",
+    "San Juan",
+    "Taguig",
+    "Valenzuela",
+    "Pateros",
+  ],
+  Aurora: [
+    "Baler",
+    "Casiguran",
+    "Dilasag",
+    "Dinalungan",
+    "Dingalan",
+    "Dipaculao",
+    "Maria Aurora",
+    "San Luis",
+  ],
+  Bataan: ["Abucay", "Bagac", "Balanga", "Dinalupihan", "Hermosa", "Limay", "Mariveles", "Morong", "Orani", "Orion", "Pilar", "Samal"],
+  Bulacan: [
+    "Angat",
+    "Balagtas",
+    "Baliwag",
+    "Bocaue",
+    "Bulakan",
+    "Bustos",
+    "Calumpit",
+    "Doña Remedios Trinidad",
+    "Guiguinto",
+    "Hagonoy",
+    "Malolos",
+    "Marilao",
+    "Meycauayan",
+    "Norzagaray",
+    "Obando",
+    "Pandi",
+    "Paombong",
+    "Plaridel",
+    "Pulilan",
+    "San Ildefonso",
+    "San Jose del Monte",
+    "San Miguel",
+    "San Rafael",
+    "Santa Maria",
+  ],
+  "Nueva Ecija": [
+    "Aliaga",
+    "Bongabon",
+    "Cabanatuan",
+    "Cabiao",
+    "Carranglan",
+    "Cuyapo",
+    "Gabaldon",
+    "Gapan",
+    "General Mamerto Natividad",
+    "General Tinio",
+    "Guimba",
+    "Jaen",
+    "Laur",
+    "Licab",
+    "Llanera",
+    "Lupao",
+    "Munoz",
+    "Nampicuan",
+    "Palayan",
+    "Pantabangan",
+    "Penaranda",
+    "Quezon",
+    "Rizal",
+    "San Antonio",
+    "San Isidro",
+    "San Jose City",
+    "San Leonardo",
+    "Santa Rosa",
+    "Santo Domingo",
+    "Talavera",
+    "Talugtug",
+    "Zaragoza",
+  ],
+  Pampanga: [
+    "Angeles",
+    "Apalit",
+    "Arayat",
+    "Bacolor",
+    "Candaba",
+    "Floridablanca",
+    "Guagua",
+    "Lubao",
+    "Mabalacat",
+    "Macabebe",
+    "Magalang",
+    "Masantol",
+    "Mexico",
+    "Minalin",
+    "Porac",
+    "San Fernando",
+    "San Luis",
+    "San Simon",
+    "Santa Ana",
+    "Santa Rita",
+    "Santo Tomas",
+    "Sasmuan",
+  ],
+  Tarlac: [
+    "Anao",
+    "Bamban",
+    "Camiling",
+    "Capas",
+    "Concepcion",
+    "Gerona",
+    "La Paz",
+    "Mayantoc",
+    "Moncada",
+    "Paniqui",
+    "Pura",
+    "Ramos",
+    "San Clemente",
+    "San Jose",
+    "San Manuel",
+    "Santa Ignacia",
+    "Tarlac City",
+    "Victoria",
+  ],
+  Zambales: ["Botolan", "Cabangan", "Candelaria", "Castillejos", "Iba", "Masinloc", "Olongapo", "Palauig", "San Antonio", "San Felipe", "San Marcelino", "San Narciso", "Santa Cruz", "Subic"],
+  Batangas: [
+    "Agoncillo",
+    "Alitagtag",
+    "Balayan",
+    "Balete",
+    "Batangas City",
+    "Bauan",
+    "Calaca",
+    "Calatagan",
+    "Cuenca",
+    "Ibaan",
+    "Laurel",
+    "Lemery",
+    "Lian",
+    "Lipa",
+    "Lobo",
+    "Mabini",
+    "Malvar",
+    "Mataasnakahoy",
+    "Nasugbu",
+    "Padre Garcia",
+    "Rosario",
+    "San Jose",
+    "San Juan",
+    "San Luis",
+    "San Nicolas",
+    "San Pascual",
+    "Santa Teresita",
+    "Santo Tomas",
+    "Taal",
+    "Talisay",
+    "Tanauan",
+    "Taysan",
+    "Tingloy",
+    "Tuy",
+  ],
+  Cavite: [
+    "Alfonso",
+    "Amadeo",
+    "Bacoor",
+    "Carmona",
+    "Cavite City",
+    "Dasmarinas",
+    "General Emilio Aguinaldo",
+    "General Mariano Alvarez",
+    "General Trias",
+    "Imus",
+    "Indang",
+    "Kawit",
+    "Magallanes",
+    "Maragondon",
+    "Mendez",
+    "Naic",
+    "Noveleta",
+    "Rosario",
+    "Silang",
+    "Tagaytay",
+    "Tanza",
+    "Ternate",
+    "Trece Martires",
+  ],
+  Laguna: [
+    "Alaminos",
+    "Bay",
+    "Binan",
+    "Cabuyao",
+    "Calamba",
+    "Calauan",
+    "Cavinti",
+    "Famy",
+    "Kalayaan",
+    "Liliw",
+    "Los Banos",
+    "Luisiana",
+    "Lumban",
+    "Mabitac",
+    "Magdalena",
+    "Majayjay",
+    "Nagcarlan",
+    "Paete",
+    "Pagsanjan",
+    "Pakil",
+    "Pangil",
+    "Pila",
+    "Rizal",
+    "San Pablo",
+    "San Pedro",
+    "Santa Cruz",
+    "Santa Maria",
+    "Santa Rosa",
+    "Siniloan",
+    "Victoria",
+  ],
+  Quezon: [
+    "Agdangan",
+    "Alabat",
+    "Atimonan",
+    "Buenavista",
+    "Burdeos",
+    "Calauag",
+    "Candelaria",
+    "Catanauan",
+    "Dolores",
+    "General Luna",
+    "General Nakar",
+    "Guinayangan",
+    "Gumaca",
+    "Infanta",
+    "Jomalig",
+    "Lopez",
+    "Lucban",
+    "Lucena",
+    "Macalelon",
+    "Mauban",
+    "Mulanay",
+    "Padre Burgos",
+    "Pagbilao",
+    "Panukulan",
+    "Patnanungan",
+    "Perez",
+    "Pitogo",
+    "Plaridel",
+    "Polillo",
+    "Quezon",
+    "Real",
+    "Sampaloc",
+    "San Andres",
+    "San Antonio",
+    "San Francisco",
+    "San Narciso",
+    "Sariaya",
+    "Tagkawayan",
+    "Tayabas",
+    "Tiaong",
+    "Unisan",
+  ],
+  Rizal: ["Angono", "Antipolo", "Baras", "Binangonan", "Cainta", "Cardona", "Jala-Jala", "Morong", "Pililla", "Rodriguez", "San Mateo", "Tanay", "Taytay", "Teresa"],
+  Bohol: ["Alburquerque", "Alicia", "Anda", "Antequera", "Baclayon", "Balilihan", "Batuan", "Bien Unido", "Bilar", "Buenavista", "Calape", "Candijay", "Carmen", "Catigbian", "Clarin", "Corella", "Cortes", "Dagohoy", "Danao", "Dauis", "Dimiao", "Duero", "Garcia Hernandez", "Getafe", "Guindulman", "Inabanga", "Jagna", "Lila", "Loay", "Loboc", "Loon", "Mabini", "Maribojoc", "Panglao", "Pilar", "President Carlos P. Garcia", "Sagbayan", "San Isidro", "San Miguel", "Sevilla", "Sierra Bullones", "Sikatuna", "Tagbilaran", "Talibon", "Trinidad", "Tubigon", "Ubay", "Valencia"],
+  Cebu: ["Alcantara", "Alcoy", "Alegria", "Aloguinsan", "Argao", "Asturias", "Badian", "Balamban", "Bantayan", "Barili", "Bogo", "Boljoon", "Borbon", "Carcar", "Carmen", "Catmon", "Cebu City", "Compostela", "Consolacion", "Cordova", "Daanbantayan", "Dalaguete", "Danao", "Dumanjug", "Ginatilan", "Lapu-Lapu City", "Liloan", "Madridejos", "Malabuyoc", "Mandaue", "Medellin", "Minglanilla", "Moalboal", "Naga", "Oslob", "Pilar", "Pinamungajan", "Poro", "Ronda", "Samboan", "San Fernando", "San Francisco", "San Remigio", "Santa Fe", "Santander", "Sibonga", "Sogod", "Tabogon", "Tabuelan", "Talisay", "Toledo", "Tuburan", "Tudela"],
+  "Negros Oriental": ["Amlan", "Ayungon", "Bacong", "Bais", "Basay", "Bayawan", "Bindoy", "Canlaon", "Dauin", "Dumaguete", "Guihulngan", "Jimalalud", "La Libertad", "Mabinay", "Manjuyod", "Pamplona", "San Jose", "Santa Catalina", "Siaton", "Sibulan", "Tanjay", "Tayasan", "Valencia", "Vallehermoso", "Zamboanguita"],
+  Siquijor: ["Enrique Villanueva", "Larena", "Lazi", "Maria", "San Juan", "Siquijor"],
+  "Davao de Oro": ["Compostela", "Laak", "Mabini", "Maco", "Maragusan", "Mawab", "Monkayo", "Montevista", "Nabunturan", "New Bataan", "Pantukan"],
+  "Davao del Norte": ["Asuncion", "Braulio E. Dujali", "Carmen", "Kapalong", "New Corella", "Panabo", "Samal", "San Isidro", "Santo Tomas", "Tagum", "Talaingod"],
+  "Davao del Sur": ["Bansalan", "Davao City", "Digos", "Hagonoy", "Kiblawan", "Magsaysay", "Malalag", "Matanao", "Padada", "Santa Cruz", "Sulop"],
+  "Davao Occidental": ["Don Marcelino", "Jose Abad Santos", "Malita", "Santa Maria", "Sarangani"],
+  "Davao Oriental": ["Baganga", "Banaybanay", "Boston", "Caraga", "Cateel", "Governor Generoso", "Lupon", "Manay", "Mati", "San Isidro", "Tarragona"],
+  Cotabato: ["Alamada", "Aleosan", "Antipas", "Arakan", "Banisilan", "Carmen", "Kabacan", "Kidapawan", "Libungan", "M'lang", "Magpet", "Makilala", "Matalam", "Midsayap", "Pigcawayan", "Pikit", "President Roxas", "Tulunan"],
+  Sarangani: ["Alabel", "Glan", "Kiamba", "Maasim", "Maitum", "Malapatan", "Malungon"],
+  "South Cotabato": ["Banga", "General Santos", "Koronadal", "Lake Sebu", "Norala", "Polomolok", "Santo Nino", "Surallah", "T'boli", "Tampakan", "Tantangan", "Tupi"],
+  "Sultan Kudarat": ["Bagumbayan", "Columbio", "Esperanza", "Isulan", "Kalamansig", "Lambayong", "Lebak", "Lutayan", "Palimbang", "President Quirino", "Senator Ninoy Aquino", "Tacurong"],
+};
+
+function capitalizeWords(value: string) {
+  return value.replace(/\b([a-z])/g, (match) => match.toUpperCase());
+}
+
 export default function CheckoutModal() {
   const [activeProtocolKey, setActiveProtocolKey] = useState<ProtocolKey>("grow");
   const [contactFields, setContactFields] = useState<ContactFields>(defaultContactFields);
@@ -50,6 +368,8 @@ export default function CheckoutModal() {
   const [step, setStep] = useState<CheckoutStep>(1);
 
   const activeProtocol = protocolCatalog[activeProtocolKey];
+  const provinceOptions = provincesByRegion[contactFields.region as keyof typeof provincesByRegion] || [];
+  const cityOptions = citiesByProvince[contactFields.province] || [];
 
   const previewOrderNumber = useMemo(() => {
     const stamp = new Date().toISOString().slice(2, 10).replace(/-/g, "");
@@ -114,7 +434,20 @@ export default function CheckoutModal() {
   }
 
   function updateField(field: keyof ContactFields, value: string) {
-    setContactFields((current) => ({ ...current, [field]: value }));
+    if (field === "region") {
+      setContactFields((current) => ({ ...current, city: "", province: "", region: value }));
+      return;
+    }
+
+    if (field === "province") {
+      setContactFields((current) => ({ ...current, city: "", province: value }));
+      return;
+    }
+
+    const nextValue =
+      field === "name" || field === "street" ? capitalizeWords(value) : value;
+
+    setContactFields((current) => ({ ...current, [field]: nextValue }));
   }
 
   function validateContactFields() {
@@ -440,30 +773,57 @@ export default function CheckoutModal() {
                   id="checkout-street"
                   name="address1"
                   onChange={(event) => updateField("street", event.target.value)}
-                  placeholder="Street address"
+                  placeholder="Street / House No."
                   value={contactFields.street}
                 />
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <input
-                    autoComplete="address-level2"
+                  <select
                     className="min-h-[48px] rounded-[14px] border border-black/10 bg-white px-4 text-sm text-[#111113]"
-                    id="checkout-city"
-                    name="city"
-                    onChange={(event) => updateField("city", event.target.value)}
-                    placeholder="City / Municipality"
-                    value={contactFields.city}
-                  />
-                  <input
+                    id="checkout-region"
+                    name="region"
+                    onChange={(event) => updateField("region", event.target.value)}
+                    value={contactFields.region}
+                  >
+                    {regionOptions.map((region) => (
+                      <option key={region} value={region}>
+                        {region}
+                      </option>
+                    ))}
+                  </select>
+                  <select
                     autoComplete="address-level1"
                     className="min-h-[48px] rounded-[14px] border border-black/10 bg-white px-4 text-sm text-[#111113]"
                     id="checkout-province"
                     name="state"
+                    disabled={!contactFields.region}
                     onChange={(event) => updateField("province", event.target.value)}
-                    placeholder="Province"
                     value={contactFields.province}
-                  />
+                  >
+                    <option value="">Province</option>
+                    {provinceOptions.map((province) => (
+                      <option key={province} value={province}>
+                        {province}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
+                  <select
+                    autoComplete="address-level2"
+                    className="min-h-[48px] rounded-[14px] border border-black/10 bg-white px-4 text-sm text-[#111113] disabled:bg-[#f5f4f2] disabled:text-[#A3A3A8]"
+                    disabled={!contactFields.province}
+                    id="checkout-city"
+                    name="city"
+                    onChange={(event) => updateField("city", event.target.value)}
+                    value={contactFields.city}
+                  >
+                    <option value="">City / Municipality</option>
+                    {cityOptions.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
                   <input
                     autoComplete="postal-code"
                     className="min-h-[48px] rounded-[14px] border border-black/10 bg-white px-4 text-sm text-[#111113]"
@@ -474,20 +834,6 @@ export default function CheckoutModal() {
                     placeholder="ZIP code"
                     value={contactFields.zip}
                   />
-                  <select
-                    className="min-h-[48px] rounded-[14px] border border-black/10 bg-white px-4 text-sm text-[#111113]"
-                    id="checkout-region"
-                    name="region"
-                    onChange={(event) => updateField("region", event.target.value)}
-                    value={contactFields.region}
-                  >
-                    <option value="NCR (Metro Manila)">NCR (Metro Manila)</option>
-                    <option value="Region III - Central Luzon">Region III - Central Luzon</option>
-                    <option value="Region IV-A - CALABARZON">Region IV-A - CALABARZON</option>
-                    <option value="Region VII - Central Visayas">Region VII - Central Visayas</option>
-                    <option value="Region XI - Davao">Region XI - Davao</option>
-                    <option value="Region XII - SOCCSKSARGEN">Region XII - SOCCSKSARGEN</option>
-                  </select>
                 </div>
               </div>
             </div>
