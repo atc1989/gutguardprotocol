@@ -139,14 +139,23 @@ export function buildTikTokEventPayload(input: {
 }
 
 export function buildTikTokRegistrationPayload(input: {
+  description?: string;
   eventId?: string;
   orderId?: string;
   price?: string;
+  productId: string;
+  productName: string;
+  quantity: string;
 }) {
   return {
+    content_id: input.productId,
+    content_name: input.productName,
+    content_type: "product",
     currency: "PHP",
+    description: input.description,
     event_id: input.eventId,
     order_id: input.orderId,
+    quantity: normalizeQuantity(input.quantity),
     value: input.price ? normalizePrice(input.price) : undefined,
   } satisfies TikTokEventPayload;
 }

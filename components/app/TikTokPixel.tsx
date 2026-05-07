@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import { getTrackingWindow } from "@/lib/browser-window";
 import {
   consentStorageKey,
   getTrackingStorageKey,
@@ -18,7 +19,7 @@ type TikTokPixelProps = {
 };
 
 function readConsent() {
-  return window.localStorage.getItem(consentStorageKey) as ConsentState | null;
+  return getTrackingWindow().localStorage.getItem(consentStorageKey) as ConsentState | null;
 }
 
 export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
@@ -27,66 +28,72 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    const trackingWindow = getTrackingWindow();
     const testEventCode =
-      typeof window === "undefined"
+      typeof trackingWindow === "undefined"
         ? undefined
-        : new URLSearchParams(window.location.search).get("tt_test_event_code") || undefined;
+        : new URLSearchParams(trackingWindow.location.search).get("tt_test_event_code") || undefined;
 
-    window.gutguardTikTokDebug = {
+    trackingWindow.gutguardTikTokDebug = {
       hasPixelId: Boolean(pixelId),
       isConsentGranted,
       isLoaded,
       pathname,
       testEventCode,
-      ttqPresent: Boolean(window.ttq),
+      ttqPresent: Boolean(trackingWindow.ttq),
     };
   }, [isConsentGranted, isLoaded, pathname, pixelId]);
 
   useEffect(() => {
+    const trackingWindow = getTrackingWindow();
+
     function syncConsent() {
       setIsConsentGranted(readConsent() === "granted");
     }
 
     syncConsent();
-    window.addEventListener("storage", syncConsent);
-    window.addEventListener("gutguard:consent-updated", syncConsent as EventListener);
+    trackingWindow.addEventListener("storage", syncConsent);
+    trackingWindow.addEventListener("gutguard:consent-updated", syncConsent as EventListener);
 
     return () => {
-      window.removeEventListener("storage", syncConsent);
-      window.removeEventListener("gutguard:consent-updated", syncConsent as EventListener);
+      trackingWindow.removeEventListener("storage", syncConsent);
+      trackingWindow.removeEventListener("gutguard:consent-updated", syncConsent as EventListener);
     };
   }, []);
 
   useEffect(() => {
-    const currentSearchParams = new URLSearchParams(window.location.search);
+    const trackingWindow = getTrackingWindow();
+    const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
     const queryString = currentSearchParams.toString();
-    const landingPage = `${window.location.origin}${pathname}${queryString ? `?${queryString}` : ""}`;
+    const landingPage = `${trackingWindow.location.origin}${pathname}${queryString ? `?${queryString}` : ""}`;
 
-    window.localStorage.setItem(getTrackingStorageKey("utm_campaign"), currentSearchParams.get("utm_campaign") || window.localStorage.getItem(getTrackingStorageKey("utm_campaign")) || "");
-    window.localStorage.setItem(getTrackingStorageKey("utm_content"), currentSearchParams.get("utm_content") || window.localStorage.getItem(getTrackingStorageKey("utm_content")) || "");
-    window.localStorage.setItem(getTrackingStorageKey("utm_medium"), currentSearchParams.get("utm_medium") || window.localStorage.getItem(getTrackingStorageKey("utm_medium")) || "");
-    window.localStorage.setItem(getTrackingStorageKey("utm_source"), currentSearchParams.get("utm_source") || window.localStorage.getItem(getTrackingStorageKey("utm_source")) || "");
-    window.localStorage.setItem(getTrackingStorageKey("utm_term"), currentSearchParams.get("utm_term") || window.localStorage.getItem(getTrackingStorageKey("utm_term")) || "");
-    window.localStorage.setItem(landingPageStorageKey, landingPage);
+    trackingWindow.localStorage.setItem(getTrackingStorageKey("utm_campaign"), currentSearchParams.get("utm_campaign") || trackingWindow.localStorage.getItem(getTrackingStorageKey("utm_campaign")) || "");
+    trackingWindow.localStorage.setItem(getTrackingStorageKey("utm_content"), currentSearchParams.get("utm_content") || trackingWindow.localStorage.getItem(getTrackingStorageKey("utm_content")) || "");
+    trackingWindow.localStorage.setItem(getTrackingStorageKey("utm_medium"), currentSearchParams.get("utm_medium") || trackingWindow.localStorage.getItem(getTrackingStorageKey("utm_medium")) || "");
+    trackingWindow.localStorage.setItem(getTrackingStorageKey("utm_source"), currentSearchParams.get("utm_source") || trackingWindow.localStorage.getItem(getTrackingStorageKey("utm_source")) || "");
+    trackingWindow.localStorage.setItem(getTrackingStorageKey("utm_term"), currentSearchParams.get("utm_term") || trackingWindow.localStorage.getItem(getTrackingStorageKey("utm_term")) || "");
+    trackingWindow.localStorage.setItem(landingPageStorageKey, landingPage);
 
     const ttclid = currentSearchParams.get("ttclid");
     const ttTestEventCode = currentSearchParams.get("tt_test_event_code");
 
     if (ttclid) {
-      window.localStorage.setItem(ttclidStorageKey, ttclid);
+      trackingWindow.localStorage.setItem(ttclidStorageKey, ttclid);
     }
 
     if (ttTestEventCode) {
-      window.localStorage.setItem(ttTestEventCodeStorageKey, ttTestEventCode);
+      trackingWindow.localStorage.setItem(ttTestEventCodeStorageKey, ttTestEventCode);
     }
   }, [pathname]);
 
   useEffect(() => {
-    window.gutguardTrackingContext = () => readStoredTrackingContext();
+    getTrackingWindow().gutguardTrackingContext = () => readStoredTrackingContext();
   }, []);
 
   useEffect(() => {
-    if (!pixelId || !isConsentGranted || isLoaded || window.ttq) {
+    const trackingWindow = getTrackingWindow();
+
+    if (!pixelId || !isConsentGranted || isLoaded || trackingWindow.ttq) {
       return;
     }
 
@@ -135,21 +142,28 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
   }, [isConsentGranted, isLoaded, pixelId]);
 
   useEffect(() => {
-    window.gutguardTikTokTrack = (event, payload) => {
-      if (!isConsentGranted || !window.ttq?.track) {
+    const trackingWindow = getTrackingWindow();
+
+    trackingWindow.gutguardTikTokTrack = (
+      event: string,
+      payload?: Record<string, unknown>,
+    ) => {
+      if (!isConsentGranted || !trackingWindow.ttq?.track) {
         return;
       }
 
-      window.ttq.track(event, payload);
+      trackingWindow.ttq.track(event, payload);
     };
   }, [isConsentGranted]);
 
   useEffect(() => {
-    if (!pixelId || !isConsentGranted || !window.ttq?.page) {
+    const trackingWindow = getTrackingWindow();
+
+    if (!pixelId || !isConsentGranted || !trackingWindow.ttq?.page) {
       return;
     }
 
-    window.ttq.page();
+    trackingWindow.ttq.page();
   }, [isConsentGranted, isLoaded, pathname, pixelId]);
 
   return null;

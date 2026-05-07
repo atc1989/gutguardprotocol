@@ -2,6 +2,14 @@
 
 type TrackingWindow = Window & {
   gtag?: (...args: unknown[]) => void;
+  gutguardTikTokDebug?: {
+    hasPixelId: boolean;
+    isConsentGranted: boolean;
+    isLoaded: boolean;
+    pathname: string;
+    testEventCode?: string;
+    ttqPresent: boolean;
+  };
   gutguardTikTokTrack?: (event: string, payload?: Record<string, unknown>) => void;
   gutguardTrackingContext?: () => Record<string, string | undefined>;
   ttq?: {
@@ -16,3 +24,5 @@ type TrackingWindow = Window & {
 export function getTrackingWindow() {
   return window as TrackingWindow;
 }
+
+export type { TrackingWindow };

@@ -252,9 +252,13 @@ export async function POST(request: Request) {
         phone_number: payload.mobile,
       },
       payload: buildTikTokRegistrationPayload({
+        description: protocol.detail,
         eventId: payload.tiktokEventId || undefined,
         orderId: orderNumber,
         price: protocol.price,
+        productId: payload.protocolKey,
+        productName: protocol.displayName,
+        quantity: protocol.quantity,
       }),
       userAgent: request.headers.get("user-agent"),
       userIp: getUserIpAddress(request),

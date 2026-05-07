@@ -515,9 +515,13 @@ export default function CheckoutModal() {
         getTrackingWindow().gutguardTikTokTrack?.(
           "Lead",
           buildTikTokRegistrationPayload({
+            description: activeProtocol.detail,
             eventId: orderEventId,
             orderId: result.orderNumber,
             price: activeProtocol.price,
+            productId: activeProtocolKey,
+            productName: activeProtocol.displayName,
+            quantity: activeProtocol.quantity,
           }),
         );
       }
