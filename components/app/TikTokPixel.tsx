@@ -121,7 +121,7 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
           var firstScript = d.getElementsByTagName("script")[0];
           firstScript.parentNode.insertBefore(scriptTag, firstScript);
         };
-        ttq.load("${pixelId}");
+        ttq.load(${JSON.stringify(pixelId)});
         ttq.enableCookie && ttq.enableCookie();
       }(window, document, "ttq");
     `;
