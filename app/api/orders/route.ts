@@ -202,6 +202,8 @@ export async function POST(request: Request) {
 
   const orderNumber = buildOrderNumber(payload.protocolKey);
   const tracking = payload.tracking;
+  let leadTrackingError: string | null = null;
+  let leadTrackingStatus: "failed" | "not_attempted" | "sent" = "not_attempted";
   const insertValues = {
     city: toNullable(payload.city?.trim()),
     customer_name: toNullable(payload.name?.trim()),
@@ -264,6 +266,7 @@ export async function POST(request: Request) {
       userIp: getUserIpAddress(request),
     });
 
+    leadTrackingStatus = trackingResult.ok ? "sent" : "failed";
     console.info("TikTok lead event sent", {
       event: "Lead",
       orderNumber,
@@ -271,8 +274,15 @@ export async function POST(request: Request) {
       trackingResult,
     });
   } catch (error) {
+    leadTrackingStatus = "failed";
+    leadTrackingError = error instanceof Error ? error.message : "Unknown TikTok lead error";
     console.error("TikTok submit event failed", error);
   }
 
-  return NextResponse.json({ ok: true, orderNumber });
+  return NextResponse.json({
+    leadTrackingError,
+    leadTrackingStatus,
+    ok: true,
+    orderNumber,
+  });
 }
