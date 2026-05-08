@@ -40,7 +40,16 @@ function getTikTokPixelId() {
 }
 
 function getTikTokEventsApiToken() {
-  return process.env.TIKTOK_EVENTS_API_ACCESS_TOKEN?.trim();
+  const rawToken = process.env.TIKTOK_EVENTS_API_ACCESS_TOKEN?.trim();
+
+  if (!rawToken) {
+    return undefined;
+  }
+
+  return rawToken
+    .replace(/^TIKTOK_EVENTS_API_ACCESS_TOKEN=/i, "")
+    .replace(/^Bearer\s+/i, "")
+    .trim();
 }
 
 function getTikTokEventsApiUrl() {
@@ -59,6 +68,11 @@ export { buildTikTokEventPayload, buildTikTokRegistrationPayload };
 export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
   const pixelId = getTikTokPixelId();
   const accessToken = getTikTokEventsApiToken();
+  const eventsApiUrl = getTikTokEventsApiUrl();
+
+  console.info("TikTok sender version 2", {
+    event: input.event,
+  });
 
   console.info("TikTok env check", {
     event: input.event,
@@ -109,19 +123,74 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
     ],
   };
 
-  const response = await fetch(
-    `${getTikTokEventsApiUrl()}?access_token=${encodeURIComponent(accessToken)}`,
-    {
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
+  const requestBody = JSON.stringify(body);
+  const requestHeaders = {
+    Authorization: `Bearer ${accessToken}`,
+    "Access-Token": accessToken,
+    "Content-Type": "application/json",
+  };
+
+  console.info("TikTok request config", {
+    event: input.event,
+    eventSourceId: pixelId,
+    hasTestEventCode: Boolean(body.test_event_code),
+    headers: {
+      hasAccessTokenHeader: Boolean(requestHeaders["Access-Token"]),
+      hasAuthorizationHeader: Boolean(requestHeaders.Authorization),
     },
-  );
+    url: eventsApiUrl,
+  });
+
+  const response = await fetch(eventsApiUrl, {
+    body: requestBody,
+    headers: {
+      ...requestHeaders,
+    },
+    method: "POST",
+  });
 
   if (!response.ok) {
     const errorText = await response.text();
+
+    if (
+      /access_token is empty/i.test(errorText) &&
+      !eventsApiUrl.includes("access_token=")
+    ) {
+      const retryUrl = new URL(eventsApiUrl);
+      retryUrl.searchParams.set("access_token", accessToken);
+
+      console.warn("TikTok auth retry with query token", {
+        event: input.event,
+        orderId: input.payload?.order_id || null,
+        retryUrl: retryUrl.toString().replace(accessToken, "[redacted]"),
+      });
+
+      const retryResponse = await fetch(retryUrl.toString(), {
+        body: requestBody,
+        headers: {
+          ...requestHeaders,
+        },
+        method: "POST",
+      });
+
+      if (retryResponse.ok) {
+        return { ok: true as const, skipped: false as const };
+      }
+
+      const retryErrorText = await retryResponse.text();
+      console.error("TikTok retry response", {
+        event: input.event,
+        responseText: retryErrorText,
+        status: retryResponse.status,
+      });
+      throw new Error(`TikTok Events API failed: ${retryResponse.status} ${retryErrorText}`);
+    }
+
+    console.error("TikTok primary response", {
+      event: input.event,
+      responseText: errorText,
+      status: response.status,
+    });
     throw new Error(`TikTok Events API failed: ${response.status} ${errorText}`);
   }
 
