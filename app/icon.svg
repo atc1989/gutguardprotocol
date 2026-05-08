@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="GutGuard icon">
+  <rect width="128" height="128" rx="28" fill="#fbfaf7"/>
+  <path d="M33 64c0-18 12-31 29-31 12 0 20 6 25 14l-14 8c-3-5-8-8-14-8-9 0-15 7-15 17s6 17 15 17c6 0 11-3 14-8l14 8c-5 8-13 14-25 14-17 0-29-13-29-31Z" fill="#111827"/>
+  <path d="M77 33h18c7 0 12 5 12 12v38c0 7-5 12-12 12H77V81h14c2 0 4-2 4-4V51c0-2-2-4-4-4H77V33Z" fill="#1d23d8"/>
+</svg>

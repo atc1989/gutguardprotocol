@@ -26,6 +26,7 @@ const tikTokPixelId = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
+  applicationName: siteConfig.name,
   title: siteConfig.title,
   description: siteConfig.description,
   alternates: {
@@ -35,6 +36,12 @@ export const metadata: Metadata = {
     title: "Find out if chronic inflammation is already affecting you",
     description:
       "Upload your existing blood results. Get your Lifestyle Inflammation Score. A doctor reviews and assigns your protocol.",
+    images: [
+      {
+        alt: "GutGuard Protocol",
+        url: "/opengraph-image",
+      },
+    ],
     locale: siteConfig.locale,
     siteName: siteConfig.name,
     type: "website",
@@ -45,6 +52,7 @@ export const metadata: Metadata = {
     title: "Find out if chronic inflammation is already affecting you",
     description:
       "Upload your existing blood results. Get your Lifestyle Inflammation Score. A doctor reviews and assigns your protocol.",
+    images: ["/twitter-image"],
   },
 };
 

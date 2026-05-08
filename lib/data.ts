@@ -441,9 +441,10 @@ export const footerColumns: FooterColumnItem[] = [
     title: "Company",
     links: [
       { href: "#top", label: "About GutGuard" },
-      { href: "#science", label: "gutguard.ph/science" },
-      { href: "#top", label: "Privacy Policy" },
-      { href: "#top", label: "gutguard.ph/legal" },
+      { href: "/science", label: "Science" },
+      { href: "/legal", label: "Legal & Compliance" },
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms of Service" },
     ],
   },
 ];
