@@ -70,10 +70,6 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
   const accessToken = getTikTokEventsApiToken();
   const eventsApiUrl = getTikTokEventsApiUrl();
 
-  console.info("TikTok sender version 2", {
-    event: input.event,
-  });
-
   console.info("TikTok env check", {
     event: input.event,
     hasAccessToken: Boolean(accessToken),
@@ -130,17 +126,6 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
     "Content-Type": "application/json",
   };
 
-  console.info("TikTok request config", {
-    event: input.event,
-    eventSourceId: pixelId,
-    hasTestEventCode: Boolean(body.test_event_code),
-    headers: {
-      hasAccessTokenHeader: Boolean(requestHeaders["Access-Token"]),
-      hasAuthorizationHeader: Boolean(requestHeaders.Authorization),
-    },
-    url: eventsApiUrl,
-  });
-
   const response = await fetch(eventsApiUrl, {
     body: requestBody,
     headers: {
@@ -178,19 +163,9 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
       }
 
       const retryErrorText = await retryResponse.text();
-      console.error("TikTok retry response", {
-        event: input.event,
-        responseText: retryErrorText,
-        status: retryResponse.status,
-      });
       throw new Error(`TikTok Events API failed: ${retryResponse.status} ${retryErrorText}`);
     }
 
-    console.error("TikTok primary response", {
-      event: input.event,
-      responseText: errorText,
-      status: response.status,
-    });
     throw new Error(`TikTok Events API failed: ${response.status} ${errorText}`);
   }
 
