@@ -9,6 +9,7 @@ type OrderRecord = {
   customer_name: string;
   email: string;
   id: string;
+  landing_page?: string | null;
   mobile: string;
   order_number: string;
   payment_method: string;
@@ -16,6 +17,15 @@ type OrderRecord = {
   product_name: string;
   protocol_key: string;
   status: string;
+  tiktok_event_id?: string | null;
+  tt_test_event_code?: string | null;
+  ttclid?: string | null;
+  ttp?: string | null;
+  utm_campaign?: string | null;
+  utm_content?: string | null;
+  utm_medium?: string | null;
+  utm_source?: string | null;
+  utm_term?: string | null;
 };
 
 type OrdersResponse = {
@@ -24,6 +34,16 @@ type OrdersResponse = {
 };
 
 const filterOptions = ["all", ...orderStatuses] as const;
+
+function buildTikTokFlags(order: OrderRecord) {
+  return [
+    order.tt_test_event_code ? `test ${order.tt_test_event_code}` : null,
+    order.tiktok_event_id ? "event id" : null,
+    order.ttclid ? "ttclid" : null,
+    order.ttp ? "ttp" : null,
+    order.utm_source ? `utm ${order.utm_source}` : null,
+  ].filter(Boolean) as string[];
+}
 
 export default function OrdersAdmin() {
   const [adminToken, setAdminToken] = useState("");
@@ -197,61 +217,105 @@ export default function OrdersAdmin() {
                 <th className="border-b border-black/10 px-3 py-3">Protocol</th>
                 <th className="border-b border-black/10 px-3 py-3">Price</th>
                 <th className="border-b border-black/10 px-3 py-3">Status</th>
+                <th className="border-b border-black/10 px-3 py-3">TikTok</th>
                 <th className="border-b border-black/10 px-3 py-3">Actions</th>
               </tr>
             </thead>
             <tbody>
               {orders.length ? (
-                orders.map((order) => (
-                  <tr className="align-top text-sm text-[#111113]" key={order.id}>
-                    <td className="border-b border-black/5 px-3 py-4">
-                      <div className="font-semibold">{order.order_number}</div>
-                      <div className="mt-1 text-xs text-[#6B6B71]">
-                        {new Date(order.created_at).toLocaleString()}
-                      </div>
-                    </td>
-                    <td className="border-b border-black/5 px-3 py-4">
-                      <div>{order.customer_name}</div>
-                      <div className="mt-1 text-xs text-[#6B6B71]">{order.email}</div>
-                      <div className="text-xs text-[#6B6B71]">{order.mobile}</div>
-                    </td>
-                    <td className="border-b border-black/5 px-3 py-4">
-                      <div>{order.product_name}</div>
-                      <div className="mt-1 text-xs uppercase text-[#6B6B71]">
-                        {order.protocol_key}
-                      </div>
-                      <div className="text-xs text-[#6B6B71]">{order.payment_method}</div>
-                    </td>
-                    <td className="border-b border-black/5 px-3 py-4">{order.price}</td>
-                    <td className="border-b border-black/5 px-3 py-4">
-                      <span className="rounded-full bg-[#f4f4f5] px-3 py-1 text-xs font-semibold uppercase">
-                        {order.status}
-                      </span>
-                    </td>
-                    <td className="border-b border-black/5 px-3 py-4">
-                      <div className="flex flex-wrap gap-2">
-                        {orderStatuses.map((status) => (
-                          <button
-                            className={[
-                              "rounded-full border px-3 py-1 text-xs",
-                              order.status === status
-                                ? "border-[#2948ff] bg-[#eef2ff] text-[#2948ff]"
-                                : "border-black/10 bg-white text-[#44444A]",
-                            ].join(" ")}
-                            key={status}
-                            onClick={() => void updateOrderStatus(order.order_number, status)}
-                            type="button"
-                          >
-                            {status}
-                          </button>
-                        ))}
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                orders.map((order) => {
+                  const tiktokFlags = buildTikTokFlags(order);
+
+                  return (
+                    <tr className="align-top text-sm text-[#111113]" key={order.id}>
+                      <td className="border-b border-black/5 px-3 py-4">
+                        <div className="font-semibold">{order.order_number}</div>
+                        <div className="mt-1 text-xs text-[#6B6B71]">
+                          {new Date(order.created_at).toLocaleString()}
+                        </div>
+                      </td>
+                      <td className="border-b border-black/5 px-3 py-4">
+                        <div>{order.customer_name}</div>
+                        <div className="mt-1 text-xs text-[#6B6B71]">{order.email}</div>
+                        <div className="text-xs text-[#6B6B71]">{order.mobile}</div>
+                      </td>
+                      <td className="border-b border-black/5 px-3 py-4">
+                        <div>{order.product_name}</div>
+                        <div className="mt-1 text-xs uppercase text-[#6B6B71]">
+                          {order.protocol_key}
+                        </div>
+                        <div className="text-xs text-[#6B6B71]">{order.payment_method}</div>
+                      </td>
+                      <td className="border-b border-black/5 px-3 py-4">{order.price}</td>
+                      <td className="border-b border-black/5 px-3 py-4">
+                        <span className="rounded-full bg-[#f4f4f5] px-3 py-1 text-xs font-semibold uppercase">
+                          {order.status}
+                        </span>
+                      </td>
+                      <td className="border-b border-black/5 px-3 py-4">
+                        <div className="max-w-[280px] space-y-2">
+                          <div className="flex flex-wrap gap-2">
+                            {tiktokFlags.length ? (
+                              tiktokFlags.map((flag) => (
+                                <span
+                                  className="rounded-full bg-[#f4f4f5] px-3 py-1 text-[11px] font-medium text-[#44444A]"
+                                  key={flag}
+                                >
+                                  {flag}
+                                </span>
+                              ))
+                            ) : (
+                              <span className="text-xs text-[#6B6B71]">No TikTok context stored</span>
+                            )}
+                          </div>
+                          <div className="rounded-[16px] border border-black/10 bg-[#fbfaf7] p-3 text-xs text-[#6B6B71]">
+                            <div className="font-semibold text-[#111113]">Debug</div>
+                            <div className="mt-1 break-all">
+                              Log search: <span className="font-mono">{order.order_number}</span>
+                            </div>
+                            {order.tt_test_event_code ? (
+                              <div className="mt-1 break-all">
+                                Test code: <span className="font-mono">{order.tt_test_event_code}</span>
+                              </div>
+                            ) : null}
+                            {order.tiktok_event_id ? (
+                              <div className="mt-1 break-all">
+                                Event id: <span className="font-mono">{order.tiktok_event_id}</span>
+                              </div>
+                            ) : null}
+                            {order.landing_page ? (
+                              <div className="mt-1 break-all">
+                                Landing: <span className="font-mono">{order.landing_page}</span>
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="border-b border-black/5 px-3 py-4">
+                        <div className="flex flex-wrap gap-2">
+                          {orderStatuses.map((status) => (
+                            <button
+                              className={[
+                                "rounded-full border px-3 py-1 text-xs",
+                                order.status === status
+                                  ? "border-[#2948ff] bg-[#eef2ff] text-[#2948ff]"
+                                  : "border-black/10 bg-white text-[#44444A]",
+                              ].join(" ")}
+                              key={status}
+                              onClick={() => void updateOrderStatus(order.order_number, status)}
+                              type="button"
+                            >
+                              {status}
+                            </button>
+                          ))}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
-                  <td className="px-3 py-8 text-sm text-[#6B6B71]" colSpan={6}>
+                  <td className="px-3 py-8 text-sm text-[#6B6B71]" colSpan={7}>
                     {isLoading
                       ? "Loading orders..."
                       : "No orders match the current filter. Enter your admin token and load orders."}

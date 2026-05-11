@@ -120,7 +120,29 @@ export async function GET(request: Request) {
   let query = supabase
     .from("orders")
     .select(
-      "id, order_number, protocol_key, product_name, price, customer_name, email, mobile, payment_method, status, created_at",
+      [
+        "id",
+        "order_number",
+        "protocol_key",
+        "product_name",
+        "price",
+        "customer_name",
+        "email",
+        "mobile",
+        "payment_method",
+        "status",
+        "created_at",
+        "landing_page",
+        "tt_test_event_code",
+        "tiktok_event_id",
+        "ttclid",
+        "ttp",
+        "utm_campaign",
+        "utm_content",
+        "utm_medium",
+        "utm_source",
+        "utm_term",
+      ].join(", "),
     )
     .order("created_at", { ascending: false })
     .limit(100);
