@@ -438,8 +438,12 @@ export default function CheckoutModal() {
 
   function updateField(field: keyof ContactFields, value: string) {
     if (field === "mobile") {
-      const digits = value.replace(/\D/g, "").slice(0, 12);
-      setContactFields((current) => ({ ...current, mobile: digits }));
+      const digits = value.replace(/\D/g, "");
+      const normalized =
+        digits.startsWith("09") ? `63${digits.slice(1)}` :
+        digits.startsWith("9") ? `63${digits}` :
+        digits;
+      setContactFields((current) => ({ ...current, mobile: normalized.slice(0, 12) }));
       return;
     }
 
@@ -798,7 +802,7 @@ export default function CheckoutModal() {
                   inputMode="tel"
                   name="phone"
                   onChange={(event) => updateField("mobile", event.target.value)}
-                  placeholder="Philippine mobile number"
+                  placeholder="639123456789"
                   type="tel"
                   value={contactFields.mobile}
                 />
