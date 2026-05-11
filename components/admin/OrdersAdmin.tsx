@@ -64,8 +64,21 @@ function formatSentAt(value?: string | null) {
   return new Date(value).toLocaleString();
 }
 
+function getTikTokStatusClasses(status?: string | null) {
+  if (status === "sent") {
+    return "border-[#bbf7d0] bg-[#f0fdf4] text-[#166534]";
+  }
+
+  if (status === "failed") {
+    return "border-[#fecaca] bg-[#fff1f2] text-[#b42318]";
+  }
+
+  return "border-black/10 bg-[#f4f4f5] text-[#44444A]";
+}
+
 export default function OrdersAdmin() {
   const [adminToken, setAdminToken] = useState("");
+  const [copiedValue, setCopiedValue] = useState<string | null>(null);
   const [expandedOrderNumber, setExpandedOrderNumber] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -162,6 +175,20 @@ export default function OrdersAdmin() {
       );
     } catch {
       setErrorMessage("Could not update order status.");
+    }
+  }
+
+  async function copyValue(label: string, value?: string | null) {
+    if (!value?.trim()) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopiedValue(label);
+      setTimeout(() => setCopiedValue((current) => (current === label ? null : current)), 1500);
+    } catch {
+      setErrorMessage(`Could not copy ${label}.`);
     }
   }
 
@@ -297,6 +324,14 @@ export default function OrdersAdmin() {
                                     {flag}
                                   </span>
                                 ))}
+                                <span
+                                  className={[
+                                    "rounded-full border px-3 py-1 text-[11px] font-medium",
+                                    getTikTokStatusClasses(order.tiktok_last_status),
+                                  ].join(" ")}
+                                >
+                                  {order.tiktok_last_status || "not stored"}
+                                </span>
                               </div>
                               <button
                                 className="text-xs font-medium text-[#2948ff] underline underline-offset-2"
@@ -309,7 +344,7 @@ export default function OrdersAdmin() {
                               >
                                 {isExpanded ? "Hide debug details" : "Show debug details"}
                               </button>
-                              <div className="flex flex-wrap gap-2">
+                              <div className="flex flex-wrap gap-2 pt-1">
                                 <button
                                   className="rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-medium text-[#44444A]"
                                   onClick={() =>
@@ -339,18 +374,45 @@ export default function OrdersAdmin() {
                           )}
 
                           {isExpanded ? (
-                            <div className="rounded-[16px] border border-black/10 bg-[#fbfaf7] p-3 text-xs text-[#6B6B71]">
-                              <div className="font-semibold text-[#111113]">Debug</div>
-                              <div className="mt-2 space-y-2">
+                            <div className="rounded-[16px] border border-black/10 bg-[#fbfaf7] p-4 text-xs text-[#6B6B71]">
+                              <div className="flex items-center justify-between gap-3">
+                                <div className="font-semibold text-[#111113]">Debug</div>
+                                {copiedValue ? (
+                                  <div className="text-[11px] font-medium text-[#166534]">
+                                    Copied {copiedValue}
+                                  </div>
+                                ) : null}
+                              </div>
+                              <div className="mt-3 space-y-3">
                                 <div>
-                                  <div className="font-medium text-[#44444A]">Log search</div>
+                                  <div className="flex items-center justify-between gap-2">
+                                    <div className="font-medium text-[#44444A]">Log search</div>
+                                    <button
+                                      className="text-[11px] font-medium text-[#2948ff]"
+                                      onClick={() => void copyValue("log search", order.order_number)}
+                                      type="button"
+                                    >
+                                      Copy
+                                    </button>
+                                  </div>
                                   <div className="font-mono text-[11px] text-[#111113]">
                                     {order.order_number}
                                   </div>
                                 </div>
                                 {order.tt_test_event_code ? (
                                   <div>
-                                    <div className="font-medium text-[#44444A]">Test code</div>
+                                    <div className="flex items-center justify-between gap-2">
+                                      <div className="font-medium text-[#44444A]">Test code</div>
+                                      <button
+                                        className="text-[11px] font-medium text-[#2948ff]"
+                                        onClick={() =>
+                                          void copyValue("test code", order.tt_test_event_code)
+                                        }
+                                        type="button"
+                                      >
+                                        Copy
+                                      </button>
+                                    </div>
                                     <div className="font-mono text-[11px] text-[#111113]">
                                       {order.tt_test_event_code}
                                     </div>
@@ -358,7 +420,18 @@ export default function OrdersAdmin() {
                                 ) : null}
                                 {order.tiktok_event_id ? (
                                   <div>
-                                    <div className="font-medium text-[#44444A]">Event id</div>
+                                    <div className="flex items-center justify-between gap-2">
+                                      <div className="font-medium text-[#44444A]">Event id</div>
+                                      <button
+                                        className="text-[11px] font-medium text-[#2948ff]"
+                                        onClick={() =>
+                                          void copyValue("event id", order.tiktok_event_id)
+                                        }
+                                        type="button"
+                                      >
+                                        Copy
+                                      </button>
+                                    </div>
                                     <div className="break-all font-mono text-[11px] text-[#111113]">
                                       {order.tiktok_event_id}
                                     </div>
@@ -366,7 +439,18 @@ export default function OrdersAdmin() {
                                 ) : null}
                                 {order.landing_page ? (
                                   <div>
-                                    <div className="font-medium text-[#44444A]">Landing</div>
+                                    <div className="flex items-center justify-between gap-2">
+                                      <div className="font-medium text-[#44444A]">Landing</div>
+                                      <button
+                                        className="text-[11px] font-medium text-[#2948ff]"
+                                        onClick={() =>
+                                          void copyValue("landing url", order.landing_page)
+                                        }
+                                        type="button"
+                                      >
+                                        Copy
+                                      </button>
+                                    </div>
                                     <div className="break-all font-mono text-[11px] text-[#111113]">
                                       {order.landing_page}
                                     </div>
@@ -374,9 +458,18 @@ export default function OrdersAdmin() {
                                 ) : null}
                                 <div>
                                   <div className="font-medium text-[#44444A]">Last status</div>
-                                  <div className="text-[#111113]">
-                                    {order.tiktok_last_status || "Not stored"}
-                                    {order.tiktok_last_event ? ` · ${order.tiktok_last_event}` : ""}
+                                  <div className="flex flex-wrap items-center gap-2">
+                                    <span
+                                      className={[
+                                        "rounded-full border px-2.5 py-1 text-[11px] font-medium",
+                                        getTikTokStatusClasses(order.tiktok_last_status),
+                                      ].join(" ")}
+                                    >
+                                      {order.tiktok_last_status || "Not stored"}
+                                    </span>
+                                    {order.tiktok_last_event ? (
+                                      <span className="text-[#111113]">{order.tiktok_last_event}</span>
+                                    ) : null}
                                   </div>
                                 </div>
                                 <div>
