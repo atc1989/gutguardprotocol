@@ -17,7 +17,13 @@ type OrderRecord = {
   product_name: string;
   protocol_key: string;
   status: string;
+  tiktok_last_error?: string | null;
+  tiktok_last_event?: string | null;
+  tiktok_last_sent_at?: string | null;
+  tiktok_last_status?: string | null;
   tiktok_event_id?: string | null;
+  tiktok_lead_sent_at?: string | null;
+  tiktok_purchase_sent_at?: string | null;
   tt_test_event_code?: string | null;
   ttclid?: string | null;
   ttp?: string | null;
@@ -33,6 +39,11 @@ type OrdersResponse = {
   orders?: OrderRecord[];
 };
 
+type UpdateOrderResponse = {
+  error?: string;
+  order?: OrderRecord;
+};
+
 const filterOptions = ["all", ...orderStatuses] as const;
 
 function buildTikTokFlags(order: OrderRecord) {
@@ -43,6 +54,14 @@ function buildTikTokFlags(order: OrderRecord) {
     order.ttp ? "ttp" : null,
     order.utm_source ? `utm ${order.utm_source}` : null,
   ].filter(Boolean) as string[];
+}
+
+function formatSentAt(value?: string | null) {
+  if (!value) {
+    return null;
+  }
+
+  return new Date(value).toLocaleString();
 }
 
 export default function OrdersAdmin() {
@@ -99,7 +118,7 @@ export default function OrdersAdmin() {
     }
   }
 
-  async function updateOrderStatus(orderNumber: string, status: string) {
+  async function updateOrder(orderNumber: string, body: { resendEvent?: "Lead" | "Purchase"; status?: string }) {
     if (!adminToken.trim()) {
       setErrorMessage("Enter your admin token to update orders.");
       return;
@@ -110,7 +129,7 @@ export default function OrdersAdmin() {
 
     try {
       const response = await fetch(`/api/orders/${orderNumber}`, {
-        body: JSON.stringify({ status }),
+        body: JSON.stringify(body),
         headers: {
           Authorization: `Bearer ${adminToken.trim()}`,
           "Content-Type": "application/json",
@@ -118,7 +137,7 @@ export default function OrdersAdmin() {
         method: "PATCH",
       });
 
-      const result = (await response.json()) as { error?: string };
+      const result = (await response.json()) as UpdateOrderResponse;
 
       if (!response.ok) {
         setErrorMessage(result.error || "Could not update order status.");
@@ -127,10 +146,20 @@ export default function OrdersAdmin() {
 
       setOrders((current) =>
         current.map((order) =>
-          order.order_number === orderNumber ? { ...order, status } : order,
+          order.order_number === orderNumber
+            ? {
+                ...order,
+                ...(body.status ? { status: body.status } : {}),
+                ...(result.order || {}),
+              }
+            : order,
         ),
       );
-      setSuccessMessage(`Updated ${orderNumber} to ${status}.`);
+      setSuccessMessage(
+        body.status
+          ? `Updated ${orderNumber} to ${body.status}.`
+          : `Resent TikTok ${body.resendEvent?.toLowerCase()} event for ${orderNumber}.`,
+      );
     } catch {
       setErrorMessage("Could not update order status.");
     }
@@ -227,6 +256,7 @@ export default function OrdersAdmin() {
                 orders.map((order) => {
                   const tiktokFlags = buildTikTokFlags(order);
                   const isExpanded = expandedOrderNumber === order.order_number;
+                  const canResendPurchase = ["completed", "paid", "shipped"].includes(order.status);
 
                   return (
                     <tr className="align-top text-sm text-[#111113]" key={order.id}>
@@ -279,6 +309,30 @@ export default function OrdersAdmin() {
                               >
                                 {isExpanded ? "Hide debug details" : "Show debug details"}
                               </button>
+                              <div className="flex flex-wrap gap-2">
+                                <button
+                                  className="rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-medium text-[#44444A]"
+                                  onClick={() =>
+                                    void updateOrder(order.order_number, { resendEvent: "Lead" })
+                                  }
+                                  type="button"
+                                >
+                                  Resend Lead
+                                </button>
+                                <button
+                                  className={[
+                                    "rounded-full border px-3 py-1 text-[11px] font-medium",
+                                    canResendPurchase
+                                      ? "border-black/10 bg-white text-[#44444A]"
+                                      : "cursor-not-allowed border-black/5 bg-[#f4f4f5] text-[#9A9AA1]",
+                                  ].join(" ")}
+                                  disabled={!canResendPurchase}
+                                  onClick={() => void updateOrder(order.order_number, { resendEvent: "Purchase" })}
+                                  type="button"
+                                >
+                                  Resend Purchase
+                                </button>
+                              </div>
                             </>
                           ) : (
                             <span className="text-xs text-[#6B6B71]">No TikTok context stored</span>
@@ -318,6 +372,39 @@ export default function OrdersAdmin() {
                                     </div>
                                   </div>
                                 ) : null}
+                                <div>
+                                  <div className="font-medium text-[#44444A]">Last status</div>
+                                  <div className="text-[#111113]">
+                                    {order.tiktok_last_status || "Not stored"}
+                                    {order.tiktok_last_event ? ` · ${order.tiktok_last_event}` : ""}
+                                  </div>
+                                </div>
+                                <div>
+                                  <div className="font-medium text-[#44444A]">Lead sent</div>
+                                  <div className="text-[#111113]">
+                                    {formatSentAt(order.tiktok_lead_sent_at) || "Not stored"}
+                                  </div>
+                                </div>
+                                <div>
+                                  <div className="font-medium text-[#44444A]">Purchase sent</div>
+                                  <div className="text-[#111113]">
+                                    {formatSentAt(order.tiktok_purchase_sent_at) || "Not stored"}
+                                  </div>
+                                </div>
+                                <div>
+                                  <div className="font-medium text-[#44444A]">Last send</div>
+                                  <div className="text-[#111113]">
+                                    {formatSentAt(order.tiktok_last_sent_at) || "Not stored"}
+                                  </div>
+                                </div>
+                                {order.tiktok_last_error ? (
+                                  <div>
+                                    <div className="font-medium text-[#44444A]">Last error</div>
+                                    <div className="break-all text-[#b42318]">
+                                      {order.tiktok_last_error}
+                                    </div>
+                                  </div>
+                                ) : null}
                               </div>
                             </div>
                           ) : null}
@@ -334,7 +421,7 @@ export default function OrdersAdmin() {
                                   : "border-black/10 bg-white text-[#44444A]",
                               ].join(" ")}
                               key={status}
-                              onClick={() => void updateOrderStatus(order.order_number, status)}
+                              onClick={() => void updateOrder(order.order_number, { status })}
                               type="button"
                             >
                               {status}

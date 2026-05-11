@@ -6,6 +6,7 @@ import { isOrderAdminAuthorized } from "@/lib/order-admin";
 import { buildOrderNumber, isOrderStatus, isPaymentMethod, isProtocolKey } from "@/lib/orders";
 import type { OrderPayload } from "@/lib/orders";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { persistTikTokOrderStatus } from "@/lib/tiktok-order-status";
 import {
   buildTikTokRegistrationPayload,
   sendTikTokServerEvent,
@@ -107,6 +108,83 @@ async function insertOrderRecord(
   return supabase.from("orders").insert(fallbackValues);
 }
 
+async function loadOrdersWithOptionalTikTokFields(
+  supabase: SupabaseClient,
+  rawStatus: string,
+  search: string,
+) {
+  const baseFields = [
+    "id",
+    "order_number",
+    "protocol_key",
+    "product_name",
+    "price",
+    "customer_name",
+    "email",
+    "mobile",
+    "payment_method",
+    "status",
+    "created_at",
+  ];
+  const optionalTikTokFields = [
+    "landing_page",
+    "tt_test_event_code",
+    "tiktok_event_id",
+    "ttclid",
+    "ttp",
+    "utm_campaign",
+    "utm_content",
+    "utm_medium",
+    "utm_source",
+    "utm_term",
+    "tiktok_last_error",
+    "tiktok_last_event",
+    "tiktok_last_sent_at",
+    "tiktok_last_status",
+    "tiktok_lead_sent_at",
+    "tiktok_purchase_sent_at",
+  ];
+
+  const buildQuery = (fields: string[]) => {
+    let query = supabase
+      .from("orders")
+      .select(fields.join(", "))
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    if (rawStatus && rawStatus !== "all") {
+      query = query.eq("status", rawStatus);
+    }
+
+    if (search) {
+      query = query.or(
+        [
+          `order_number.ilike.%${search}%`,
+          `email.ilike.%${search}%`,
+          `customer_name.ilike.%${search}%`,
+        ].join(","),
+      );
+    }
+
+    return query;
+  };
+
+  const fullResult = await buildQuery([...baseFields, ...optionalTikTokFields]);
+
+  if (
+    !fullResult.error ||
+    !(
+      fullResult.error.code === "42703" ||
+      fullResult.error.code === "PGRST204" ||
+      /column/i.test(fullResult.error.message || "")
+    )
+  ) {
+    return fullResult;
+  }
+
+  return buildQuery(baseFields);
+}
+
 export async function GET(request: Request) {
   if (!isOrderAdminAuthorized(request)) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
@@ -117,55 +195,13 @@ export async function GET(request: Request) {
   const search = searchParams.get("search")?.trim() || "";
   const supabase = createServerSupabaseClient();
 
-  let query = supabase
-    .from("orders")
-    .select(
-      [
-        "id",
-        "order_number",
-        "protocol_key",
-        "product_name",
-        "price",
-        "customer_name",
-        "email",
-        "mobile",
-        "payment_method",
-        "status",
-        "created_at",
-        "landing_page",
-        "tt_test_event_code",
-        "tiktok_event_id",
-        "ttclid",
-        "ttp",
-        "utm_campaign",
-        "utm_content",
-        "utm_medium",
-        "utm_source",
-        "utm_term",
-      ].join(", "),
-    )
-    .order("created_at", { ascending: false })
-    .limit(100);
-
   if (rawStatus && rawStatus !== "all") {
     if (!isOrderStatus(rawStatus)) {
       return NextResponse.json({ error: "Invalid status filter." }, { status: 400 });
     }
-
-    query = query.eq("status", rawStatus);
   }
 
-  if (search) {
-    query = query.or(
-      [
-        `order_number.ilike.%${search}%`,
-        `email.ilike.%${search}%`,
-        `customer_name.ilike.%${search}%`,
-      ].join(","),
-    );
-  }
-
-  const { data, error } = await query;
+  const { data, error } = await loadOrdersWithOptionalTikTokFields(supabase, rawStatus, search);
 
   if (error) {
     console.error("Order list failed", error);
@@ -292,8 +328,17 @@ export async function POST(request: Request) {
       testEventCode: tracking?.testEventCode || null,
       trackingResult,
     });
+    await persistTikTokOrderStatus(supabase, orderNumber, {
+      event: "Lead",
+      status: "sent",
+    });
   } catch (error) {
     console.error("TikTok submit event failed", error);
+    await persistTikTokOrderStatus(supabase, orderNumber, {
+      error: error instanceof Error ? error.message : "Unknown TikTok lead failure",
+      event: "Lead",
+      status: "failed",
+    });
   }
 
   return NextResponse.json({ ok: true, orderNumber });

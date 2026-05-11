@@ -3,9 +3,134 @@ import { NextResponse } from "next/server";
 import { isOrderAdminAuthorized } from "@/lib/order-admin";
 import { isOrderStatus } from "@/lib/orders";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { buildTikTokEventPayload, sendTikTokServerEvent } from "@/lib/tiktok-server";
+import { persistTikTokOrderStatus } from "@/lib/tiktok-order-status";
+import {
+  buildTikTokEventPayload,
+  buildTikTokRegistrationPayload,
+  sendTikTokServerEvent,
+} from "@/lib/tiktok-server";
 
-type UpdateOrderStatusPayload = { status?: string };
+type UpdateOrderStatusPayload = {
+  resendEvent?: "Lead" | "Purchase";
+  status?: string;
+};
+
+function buildTrackingContext(order: Record<string, string | null>) {
+  return {
+    landingPage: order.landing_page || undefined,
+    testEventCode: order.tt_test_event_code || undefined,
+    ttclid: order.ttclid || undefined,
+    ttp: order.ttp || undefined,
+    utmCampaign: order.utm_campaign || undefined,
+    utmContent: order.utm_content || undefined,
+    utmMedium: order.utm_medium || undefined,
+    utmSource: order.utm_source || undefined,
+    utmTerm: order.utm_term || undefined,
+  };
+}
+
+async function sendLeadForOrder(
+  request: Request,
+  supabase: ReturnType<typeof createServerSupabaseClient>,
+  order: Record<string, string | null>,
+) {
+  try {
+    const trackingResult = await sendTikTokServerEvent({
+      context: buildTrackingContext(order),
+      event: "Lead",
+      eventId: order.tiktok_event_id || `submit-form-${order.order_number}`,
+      eventUrl: order.landing_page || request.url,
+      match: {
+        email: order.email || undefined,
+        external_id: order.order_number || undefined,
+        phone_number: order.mobile || undefined,
+      },
+      payload: buildTikTokRegistrationPayload({
+        description: order.product_detail || "",
+        eventId: order.tiktok_event_id || undefined,
+        orderId: order.order_number || undefined,
+        price: order.price || "0",
+        productId: order.protocol_key || "",
+        productName: order.product_name || "",
+        quantity: order.product_quantity || "0",
+      }),
+      userAgent: request.headers.get("user-agent"),
+    });
+
+    console.info("TikTok lead event sent", {
+      event: "Lead",
+      orderNumber: order.order_number,
+      testEventCode: order.tt_test_event_code || null,
+      trackingResult,
+    });
+    await persistTikTokOrderStatus(supabase, order.order_number || "", {
+      event: "Lead",
+      status: "sent",
+    });
+    return { ok: true as const };
+  } catch (trackingError) {
+    console.error("TikTok lead event failed", trackingError);
+    await persistTikTokOrderStatus(supabase, order.order_number || "", {
+      error: trackingError instanceof Error ? trackingError.message : "Unknown TikTok lead failure",
+      event: "Lead",
+      status: "failed",
+    });
+    return { error: "Could not resend TikTok lead event.", ok: false as const };
+  }
+}
+
+async function sendPurchaseForOrder(
+  request: Request,
+  supabase: ReturnType<typeof createServerSupabaseClient>,
+  order: Record<string, string | null>,
+  status: string,
+) {
+  try {
+    const trackingResult = await sendTikTokServerEvent({
+      context: buildTrackingContext(order),
+      event: "Purchase",
+      eventId: `${order.order_number}-${status}`,
+      match: {
+        email: order.email || undefined,
+        external_id: order.order_number || undefined,
+        phone_number: order.mobile || undefined,
+      },
+      payload: buildTikTokEventPayload({
+        description: order.product_detail || "",
+        eventId: `${order.order_number}-${status}`,
+        orderId: order.order_number || undefined,
+        paymentType: order.payment_method || undefined,
+        price: order.price || "0",
+        productId: order.protocol_key || "",
+        productName: order.product_name || "",
+        quantity: order.product_quantity || "0",
+      }),
+      userAgent: request.headers.get("user-agent"),
+    });
+
+    console.info("TikTok purchase event sent", {
+      event: "Purchase",
+      orderNumber: order.order_number,
+      status,
+      testEventCode: order.tt_test_event_code || null,
+      trackingResult,
+    });
+    await persistTikTokOrderStatus(supabase, order.order_number || "", {
+      event: "Purchase",
+      status: "sent",
+    });
+    return { ok: true as const };
+  } catch (trackingError) {
+    console.error("TikTok purchase event failed", trackingError);
+    await persistTikTokOrderStatus(supabase, order.order_number || "", {
+      error:
+        trackingError instanceof Error ? trackingError.message : "Unknown TikTok purchase failure",
+      event: "Purchase",
+      status: "failed",
+    });
+    return { error: "Could not resend TikTok purchase event.", ok: false as const };
+  }
+}
 
 export async function PATCH(
   request: Request,
@@ -24,18 +149,30 @@ export async function PATCH(
   }
 
   if (!payload.status || !isOrderStatus(payload.status)) {
-    return NextResponse.json({ error: "A valid order status is required." }, { status: 400 });
+    if (!payload.resendEvent) {
+      return NextResponse.json({ error: "A valid order status is required." }, { status: 400 });
+    }
   }
 
   const supabase = createServerSupabaseClient();
-  const { data, error } = await supabase
-    .from("orders")
-    .update({
-      status: payload.status,
-    })
-    .eq("order_number", params.orderNumber)
-    .select("*")
-    .maybeSingle();
+  const loadOrder = () =>
+    supabase.from("orders").select("*").eq("order_number", params.orderNumber).maybeSingle();
+
+  let data;
+  let error;
+
+  if (payload.status) {
+    ({ data, error } = await supabase
+      .from("orders")
+      .update({
+        status: payload.status,
+      })
+      .eq("order_number", params.orderNumber)
+      .select("*")
+      .maybeSingle());
+  } else {
+    ({ data, error } = await loadOrder());
+  }
 
   if (error) {
     console.error("Order status update failed", error);
@@ -46,51 +183,42 @@ export async function PATCH(
     return NextResponse.json({ error: "Order not found." }, { status: 404 });
   }
 
-  if (payload.status === "paid" || payload.status === "completed") {
-    try {
-      const trackingResult = await sendTikTokServerEvent({
-        context: {
-          landingPage: data.landing_page || undefined,
-          testEventCode: data.tt_test_event_code || undefined,
-          ttclid: data.ttclid || undefined,
-          ttp: data.ttp || undefined,
-          utmCampaign: data.utm_campaign || undefined,
-          utmContent: data.utm_content || undefined,
-          utmMedium: data.utm_medium || undefined,
-          utmSource: data.utm_source || undefined,
-          utmTerm: data.utm_term || undefined,
-        },
-        event: "Purchase",
-        eventId: `${data.order_number}-${payload.status}`,
-        match: {
-          email: data.email,
-          external_id: data.order_number,
-          phone_number: data.mobile,
-        },
-        payload: buildTikTokEventPayload({
-          description: data.product_detail,
-          eventId: `${data.order_number}-${payload.status}`,
-          orderId: data.order_number,
-          paymentType: data.payment_method,
-          price: data.price,
-          productId: data.protocol_key,
-          productName: data.product_name,
-          quantity: data.product_quantity,
-        }),
-        userAgent: request.headers.get("user-agent"),
-      });
+  if (payload.resendEvent === "Lead") {
+    const resendResult = await sendLeadForOrder(request, supabase, data);
 
-      console.info("TikTok purchase event sent", {
-        event: "Purchase",
-        orderNumber: data.order_number,
-        status: payload.status,
-        testEventCode: data.tt_test_event_code || null,
-        trackingResult,
-      });
-    } catch (trackingError) {
-      console.error("TikTok purchase event failed", trackingError);
+    if (!resendResult.ok) {
+      return NextResponse.json({ error: resendResult.error }, { status: 500 });
     }
   }
 
-  return NextResponse.json({ ok: true, order: data });
+  if (payload.resendEvent === "Purchase") {
+    const purchaseStatus =
+      data.status === "paid" || data.status === "completed" || data.status === "shipped"
+        ? data.status
+        : null;
+
+    if (!purchaseStatus) {
+      return NextResponse.json(
+        { error: "Purchase can only be resent for paid, shipped, or completed orders." },
+        { status: 400 },
+      );
+    }
+
+    const resendResult = await sendPurchaseForOrder(request, supabase, data, purchaseStatus);
+
+    if (!resendResult.ok) {
+      return NextResponse.json({ error: resendResult.error }, { status: 500 });
+    }
+  }
+
+  if (payload.status === "paid" || payload.status === "completed") {
+    await sendPurchaseForOrder(request, supabase, data, payload.status);
+  }
+
+  const latestOrder =
+    payload.resendEvent || (payload.status === "paid" || payload.status === "completed")
+      ? (await loadOrder()).data || data
+      : data;
+
+  return NextResponse.json({ ok: true, order: latestOrder });
 }
