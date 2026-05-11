@@ -27,11 +27,25 @@ type OrderRecord = {
   tt_test_event_code?: string | null;
   ttclid?: string | null;
   ttp?: string | null;
+  tiktok_events?: TikTokEventRecord[];
   utm_campaign?: string | null;
   utm_content?: string | null;
   utm_medium?: string | null;
   utm_source?: string | null;
   utm_term?: string | null;
+};
+
+type TikTokEventRecord = {
+  created_at: string;
+  error_text?: string | null;
+  event_id?: string | null;
+  event_name: string;
+  id: string;
+  order_number: string;
+  payload_json?: Record<string, unknown> | null;
+  send_status: "failed" | "sent";
+  sent_at: string;
+  test_event_code?: string | null;
 };
 
 type OrdersResponse = {
@@ -45,6 +59,7 @@ type UpdateOrderResponse = {
 };
 
 const filterOptions = ["all", ...orderStatuses] as const;
+const tiktokFilterOptions = ["all", "sent", "failed"] as const;
 
 function buildTikTokFlags(order: OrderRecord) {
   return [
@@ -85,6 +100,8 @@ export default function OrdersAdmin() {
   const [orders, setOrders] = useState<OrderRecord[]>([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<(typeof filterOptions)[number]>("all");
+  const [tiktokStatusFilter, setTikTokStatusFilter] =
+    useState<(typeof tiktokFilterOptions)[number]>("all");
   const [successMessage, setSuccessMessage] = useState("");
 
   async function loadOrders() {
@@ -106,6 +123,10 @@ export default function OrdersAdmin() {
 
       if (search.trim()) {
         params.set("search", search.trim());
+      }
+
+      if (tiktokStatusFilter !== "all") {
+        params.set("tiktokStatus", tiktokStatusFilter);
       }
 
       const response = await fetch(`/api/orders?${params.toString()}`, {
@@ -199,7 +220,13 @@ export default function OrdersAdmin() {
 
     void loadOrders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusFilter]);
+  }, [statusFilter, tiktokStatusFilter]);
+
+  const lastCopiedEventHistory = copiedValue?.startsWith("event history");
+
+  function formatEventHistoryLabel(orderNumber: string) {
+    return `event history ${orderNumber}`;
+  }
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
@@ -253,6 +280,24 @@ export default function OrdersAdmin() {
           ))}
         </div>
 
+        <div className="mt-3 flex flex-wrap gap-2">
+          {tiktokFilterOptions.map((option) => (
+            <button
+              className={[
+                "rounded-full border px-4 py-2 text-sm",
+                tiktokStatusFilter === option
+                  ? "border-[#111113] bg-[#111113] text-white"
+                  : "border-black/10 bg-white text-[#44444A]",
+              ].join(" ")}
+              key={option}
+              onClick={() => setTikTokStatusFilter(option)}
+              type="button"
+            >
+              TikTok {option}
+            </button>
+          ))}
+        </div>
+
         {errorMessage ? (
           <p className="mt-4 rounded-[16px] border border-[#fecaca] bg-[#fff1f2] px-4 py-3 text-sm text-[#b42318]">
             {errorMessage}
@@ -284,6 +329,7 @@ export default function OrdersAdmin() {
                   const tiktokFlags = buildTikTokFlags(order);
                   const isExpanded = expandedOrderNumber === order.order_number;
                   const canResendPurchase = ["completed", "paid", "shipped"].includes(order.status);
+                  const eventHistory = order.tiktok_events || [];
 
                   return (
                     <tr className="align-top text-sm text-[#111113]" key={order.id}>
@@ -379,7 +425,7 @@ export default function OrdersAdmin() {
                                 <div className="font-semibold text-[#111113]">Debug</div>
                                 {copiedValue ? (
                                   <div className="text-[11px] font-medium text-[#166534]">
-                                    Copied {copiedValue}
+                                    Copied {lastCopiedEventHistory ? "event history" : copiedValue}
                                   </div>
                                 ) : null}
                               </div>
@@ -498,6 +544,67 @@ export default function OrdersAdmin() {
                                     </div>
                                   </div>
                                 ) : null}
+                                <div>
+                                  <div className="mb-2 flex items-center justify-between gap-2">
+                                    <div className="font-medium text-[#44444A]">Recent TikTok events</div>
+                                    {eventHistory.length ? (
+                                      <button
+                                        className="text-[11px] font-medium text-[#2948ff]"
+                                        onClick={() =>
+                                          void copyValue(
+                                            formatEventHistoryLabel(order.order_number),
+                                            eventHistory
+                                              .map(
+                                                (event) =>
+                                                  `${event.sent_at} | ${event.event_name} | ${event.send_status} | ${event.event_id || "-"}`,
+                                              )
+                                              .join("\n"),
+                                          )
+                                        }
+                                        type="button"
+                                      >
+                                        Copy
+                                      </button>
+                                    ) : null}
+                                  </div>
+                                  {eventHistory.length ? (
+                                    <div className="space-y-2">
+                                      {eventHistory.slice(0, 5).map((event) => (
+                                        <div
+                                          className="rounded-[12px] border border-black/10 bg-white px-3 py-2"
+                                          key={event.id}
+                                        >
+                                          <div className="flex flex-wrap items-center gap-2">
+                                            <span
+                                              className={[
+                                                "rounded-full border px-2.5 py-1 text-[11px] font-medium",
+                                                getTikTokStatusClasses(event.send_status),
+                                              ].join(" ")}
+                                            >
+                                              {event.send_status}
+                                            </span>
+                                            <span className="text-[#111113]">{event.event_name}</span>
+                                            <span className="text-[#6B6B71]">
+                                              {formatSentAt(event.sent_at)}
+                                            </span>
+                                          </div>
+                                          {event.event_id ? (
+                                            <div className="mt-1 break-all font-mono text-[11px] text-[#6B6B71]">
+                                              {event.event_id}
+                                            </div>
+                                          ) : null}
+                                          {event.error_text ? (
+                                            <div className="mt-1 break-all text-[11px] text-[#b42318]">
+                                              {event.error_text}
+                                            </div>
+                                          ) : null}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  ) : (
+                                    <div className="text-[#6B6B71]">No event history stored yet</div>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           ) : null}

@@ -6,6 +6,10 @@ import { isOrderAdminAuthorized } from "@/lib/order-admin";
 import { buildOrderNumber, isOrderStatus, isPaymentMethod, isProtocolKey } from "@/lib/orders";
 import type { OrderPayload } from "@/lib/orders";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import {
+  appendTikTokOrderEvent,
+  loadTikTokOrderEvents,
+} from "@/lib/tiktok-order-events";
 import { persistTikTokOrderStatus } from "@/lib/tiktok-order-status";
 import {
   buildTikTokRegistrationPayload,
@@ -112,6 +116,7 @@ async function loadOrdersWithOptionalTikTokFields(
   supabase: SupabaseClient,
   rawStatus: string,
   search: string,
+  tiktokStatus: string,
 ) {
   const baseFields = [
     "id",
@@ -145,7 +150,7 @@ async function loadOrdersWithOptionalTikTokFields(
     "tiktok_purchase_sent_at",
   ];
 
-  const buildQuery = (fields: string[]) => {
+  const buildQuery = (fields: string[], includeTikTokStatusFilter = true) => {
     let query = supabase
       .from("orders")
       .select(fields.join(", "))
@@ -166,6 +171,10 @@ async function loadOrdersWithOptionalTikTokFields(
       );
     }
 
+    if (includeTikTokStatusFilter && tiktokStatus) {
+      query = query.eq("tiktok_last_status", tiktokStatus);
+    }
+
     return query;
   };
 
@@ -182,7 +191,7 @@ async function loadOrdersWithOptionalTikTokFields(
     return fullResult;
   }
 
-  return buildQuery(baseFields);
+  return buildQuery(baseFields, false);
 }
 
 export async function GET(request: Request) {
@@ -193,6 +202,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const rawStatus = searchParams.get("status")?.trim() || "";
   const search = searchParams.get("search")?.trim() || "";
+  const rawTikTokStatus = searchParams.get("tiktokStatus")?.trim() || "";
   const supabase = createServerSupabaseClient();
 
   if (rawStatus && rawStatus !== "all") {
@@ -201,14 +211,47 @@ export async function GET(request: Request) {
     }
   }
 
-  const { data, error } = await loadOrdersWithOptionalTikTokFields(supabase, rawStatus, search);
+  if (rawTikTokStatus && rawTikTokStatus !== "all" && !["sent", "failed"].includes(rawTikTokStatus)) {
+    return NextResponse.json({ error: "Invalid TikTok status filter." }, { status: 400 });
+  }
+
+  const { data, error } = await loadOrdersWithOptionalTikTokFields(
+    supabase,
+    rawStatus,
+    search,
+    rawTikTokStatus === "all" ? "" : rawTikTokStatus,
+  );
 
   if (error) {
     console.error("Order list failed", error);
     return NextResponse.json({ error: "Could not load orders." }, { status: 500 });
   }
 
-  return NextResponse.json({ ok: true, orders: data });
+  const orders = Array.isArray(data) ? ((data as unknown) as Array<Record<string, unknown>>) : [];
+  const orderNumbers = orders
+    .map((order) => order.order_number)
+    .filter((value): value is string => Boolean(value));
+  const eventHistory = await loadTikTokOrderEvents(supabase, orderNumbers);
+
+  if (eventHistory.error) {
+    console.error("TikTok order event load failed", eventHistory.error);
+  }
+
+  const eventsByOrder = new Map<string, unknown[]>();
+
+  for (const row of eventHistory.rows) {
+    const current = eventsByOrder.get(row.order_number) || [];
+    current.push(row);
+    eventsByOrder.set(row.order_number, current);
+  }
+
+  const ordersWithHistory = orders.map((order) => ({
+    ...order,
+    tiktok_events:
+      typeof order.order_number === "string" ? eventsByOrder.get(order.order_number) || [] : [],
+  }));
+
+  return NextResponse.json({ ok: true, orders: ordersWithHistory });
 }
 
 export async function POST(request: Request) {
@@ -299,10 +342,11 @@ export async function POST(request: Request) {
   }
 
   try {
+    const leadEventId = payload.tiktokEventId || createEventId("submit-form");
     const trackingResult = await sendTikTokServerEvent({
       context: tracking,
       event: "Lead",
-      eventId: payload.tiktokEventId || createEventId("submit-form"),
+      eventId: leadEventId,
       eventUrl: tracking?.landingPage || request.url,
       match: {
         email,
@@ -328,12 +372,28 @@ export async function POST(request: Request) {
       testEventCode: tracking?.testEventCode || null,
       trackingResult,
     });
+    await appendTikTokOrderEvent(supabase, {
+      eventId: leadEventId,
+      eventName: "Lead",
+      orderNumber,
+      payload: trackingResult,
+      status: "sent",
+      testEventCode: tracking?.testEventCode || tracking?.serverTestEventCode || null,
+    });
     await persistTikTokOrderStatus(supabase, orderNumber, {
       event: "Lead",
       status: "sent",
     });
   } catch (error) {
     console.error("TikTok submit event failed", error);
+    await appendTikTokOrderEvent(supabase, {
+      error: error instanceof Error ? error.message : "Unknown TikTok lead failure",
+      eventId: payload.tiktokEventId || null,
+      eventName: "Lead",
+      orderNumber,
+      status: "failed",
+      testEventCode: tracking?.testEventCode || tracking?.serverTestEventCode || null,
+    });
     await persistTikTokOrderStatus(supabase, orderNumber, {
       error: error instanceof Error ? error.message : "Unknown TikTok lead failure",
       event: "Lead",

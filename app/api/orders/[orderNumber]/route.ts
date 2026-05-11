@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { isOrderAdminAuthorized } from "@/lib/order-admin";
 import { isOrderStatus } from "@/lib/orders";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { appendTikTokOrderEvent } from "@/lib/tiktok-order-events";
 import { persistTikTokOrderStatus } from "@/lib/tiktok-order-status";
 import {
   buildTikTokEventPayload,
@@ -34,11 +35,13 @@ async function sendLeadForOrder(
   supabase: ReturnType<typeof createServerSupabaseClient>,
   order: Record<string, string | null>,
 ) {
+  const eventId = order.tiktok_event_id || `submit-form-${order.order_number}`;
+
   try {
     const trackingResult = await sendTikTokServerEvent({
       context: buildTrackingContext(order),
       event: "Lead",
-      eventId: order.tiktok_event_id || `submit-form-${order.order_number}`,
+      eventId,
       eventUrl: order.landing_page || request.url,
       match: {
         email: order.email || undefined,
@@ -63,6 +66,14 @@ async function sendLeadForOrder(
       testEventCode: order.tt_test_event_code || null,
       trackingResult,
     });
+    await appendTikTokOrderEvent(supabase, {
+      eventId,
+      eventName: "Lead",
+      orderNumber: order.order_number || "",
+      payload: trackingResult,
+      status: "sent",
+      testEventCode: order.tt_test_event_code || null,
+    });
     await persistTikTokOrderStatus(supabase, order.order_number || "", {
       event: "Lead",
       status: "sent",
@@ -70,6 +81,14 @@ async function sendLeadForOrder(
     return { ok: true as const };
   } catch (trackingError) {
     console.error("TikTok lead event failed", trackingError);
+    await appendTikTokOrderEvent(supabase, {
+      error: trackingError instanceof Error ? trackingError.message : "Unknown TikTok lead failure",
+      eventId,
+      eventName: "Lead",
+      orderNumber: order.order_number || "",
+      status: "failed",
+      testEventCode: order.tt_test_event_code || null,
+    });
     await persistTikTokOrderStatus(supabase, order.order_number || "", {
       error: trackingError instanceof Error ? trackingError.message : "Unknown TikTok lead failure",
       event: "Lead",
@@ -85,11 +104,13 @@ async function sendPurchaseForOrder(
   order: Record<string, string | null>,
   status: string,
 ) {
+  const eventId = `${order.order_number}-${status}`;
+
   try {
     const trackingResult = await sendTikTokServerEvent({
       context: buildTrackingContext(order),
       event: "Purchase",
-      eventId: `${order.order_number}-${status}`,
+      eventId,
       match: {
         email: order.email || undefined,
         external_id: order.order_number || undefined,
@@ -97,7 +118,7 @@ async function sendPurchaseForOrder(
       },
       payload: buildTikTokEventPayload({
         description: order.product_detail || "",
-        eventId: `${order.order_number}-${status}`,
+        eventId,
         orderId: order.order_number || undefined,
         paymentType: order.payment_method || undefined,
         price: order.price || "0",
@@ -115,6 +136,14 @@ async function sendPurchaseForOrder(
       testEventCode: order.tt_test_event_code || null,
       trackingResult,
     });
+    await appendTikTokOrderEvent(supabase, {
+      eventId,
+      eventName: "Purchase",
+      orderNumber: order.order_number || "",
+      payload: trackingResult,
+      status: "sent",
+      testEventCode: order.tt_test_event_code || null,
+    });
     await persistTikTokOrderStatus(supabase, order.order_number || "", {
       event: "Purchase",
       status: "sent",
@@ -122,6 +151,15 @@ async function sendPurchaseForOrder(
     return { ok: true as const };
   } catch (trackingError) {
     console.error("TikTok purchase event failed", trackingError);
+    await appendTikTokOrderEvent(supabase, {
+      error:
+        trackingError instanceof Error ? trackingError.message : "Unknown TikTok purchase failure",
+      eventId,
+      eventName: "Purchase",
+      orderNumber: order.order_number || "",
+      status: "failed",
+      testEventCode: order.tt_test_event_code || null,
+    });
     await persistTikTokOrderStatus(supabase, order.order_number || "", {
       error:
         trackingError instanceof Error ? trackingError.message : "Unknown TikTok purchase failure",
