@@ -169,6 +169,11 @@ export function normalizePhoneForTikTok(value?: string | null) {
   return digits;
 }
 
+export function isValidPhilippineMobileForTikTok(value?: string | null) {
+  const normalized = normalizePhoneForTikTok(value);
+  return Boolean(normalized && /^639\d{9}$/.test(normalized));
+}
+
 export function normalizeEmailForTikTok(value?: string | null) {
   const normalized = value?.trim().toLowerCase();
   return normalized || undefined;

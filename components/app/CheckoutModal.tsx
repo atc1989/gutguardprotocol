@@ -11,6 +11,8 @@ import {
   buildTikTokIdentifyPayload,
   buildTikTokRegistrationPayload,
   createEventId,
+  isValidPhilippineMobileForTikTok,
+  normalizePhoneForTikTok,
   readStoredTrackingContext,
 } from "@/lib/tiktok";
 
@@ -435,6 +437,12 @@ export default function CheckoutModal() {
   }
 
   function updateField(field: keyof ContactFields, value: string) {
+    if (field === "mobile") {
+      const digits = value.replace(/\D/g, "").slice(0, 12);
+      setContactFields((current) => ({ ...current, mobile: digits }));
+      return;
+    }
+
     if (field === "region") {
       setContactFields((current) => ({ ...current, city: "", province: "", region: value }));
       return;
@@ -455,7 +463,7 @@ export default function CheckoutModal() {
     return (
       contactFields.name.trim() &&
       contactFields.email.trim() &&
-      contactFields.mobile.trim() &&
+      isValidPhilippineMobileForTikTok(contactFields.mobile) &&
       contactFields.street.trim() &&
       contactFields.city.trim() &&
       contactFields.province.trim() &&
@@ -483,10 +491,12 @@ export default function CheckoutModal() {
 
   async function submitOrder() {
     const orderEventId = createEventId("submit-form");
+    const normalizedMobile =
+      normalizePhoneForTikTok(contactFields.mobile) || contactFields.mobile.trim();
     const payload: OrderPayload = {
       city: contactFields.city.trim(),
       email: contactFields.email.trim(),
-      mobile: contactFields.mobile.trim(),
+      mobile: normalizedMobile,
       name: contactFields.name.trim(),
       paymentMethod,
       productDetail: activeProtocol.detail,
@@ -555,7 +565,7 @@ export default function CheckoutModal() {
 
   async function nextStep() {
     if (step === 2 && !validateContactFields()) {
-      setStatusMessage("Please complete all required delivery fields.");
+      setStatusMessage("Please enter a valid Philippine mobile number in 639XXXXXXXXX format.");
       return;
     }
 
