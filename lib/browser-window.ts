@@ -18,6 +18,7 @@ type TrackingWindow = Window & {
   ttq?: {
     disableCookie?: () => void;
     enableCookie?: () => void;
+    identify?: (payload?: Record<string, unknown>) => void;
     load?: (pixelId: string) => void;
     page?: () => void;
     track?: (event: string, payload?: Record<string, unknown>) => void;

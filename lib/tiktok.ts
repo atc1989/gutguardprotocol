@@ -53,6 +53,12 @@ export type TikTokEventPayload = {
   value?: number;
 };
 
+export type TikTokIdentifyPayload = {
+  email?: string;
+  external_id?: string;
+  phone_number?: string;
+};
+
 export function getTrackingStorageKey(key: (typeof trackingQueryKeys)[number]) {
   return `${trackingStoragePrefix}${key}`;
 }
@@ -161,6 +167,23 @@ export function normalizePhoneForTikTok(value?: string | null) {
   }
 
   return digits;
+}
+
+export function normalizeEmailForTikTok(value?: string | null) {
+  const normalized = value?.trim().toLowerCase();
+  return normalized || undefined;
+}
+
+export function buildTikTokIdentifyPayload(input: {
+  email?: string | null;
+  externalId?: string | null;
+  phoneNumber?: string | null;
+}) {
+  return {
+    email: normalizeEmailForTikTok(input.email),
+    external_id: input.externalId?.trim() || undefined,
+    phone_number: normalizePhoneForTikTok(input.phoneNumber),
+  } satisfies TikTokIdentifyPayload;
 }
 
 export function buildTikTokEventPayload(input: {

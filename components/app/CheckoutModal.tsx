@@ -8,6 +8,7 @@ import type { ProtocolKey } from "@/lib/checkout";
 import type { OrderPayload, PaymentMethod } from "@/lib/orders";
 import {
   buildTikTokEventPayload,
+  buildTikTokIdentifyPayload,
   buildTikTokRegistrationPayload,
   createEventId,
   readStoredTrackingContext,
@@ -462,6 +463,24 @@ export default function CheckoutModal() {
     );
   }
 
+  function identifyTikTokUser(externalId?: string) {
+    const identifyPayload = buildTikTokIdentifyPayload({
+      email: contactFields.email,
+      externalId,
+      phoneNumber: contactFields.mobile,
+    });
+
+    if (
+      !identifyPayload.email &&
+      !identifyPayload.phone_number &&
+      !identifyPayload.external_id
+    ) {
+      return;
+    }
+
+    getTrackingWindow().ttq?.identify?.(identifyPayload);
+  }
+
   async function submitOrder() {
     const orderEventId = createEventId("submit-form");
     const payload: OrderPayload = {
@@ -512,6 +531,7 @@ export default function CheckoutModal() {
       if (result.duplicate) {
         setStatusMessage("You already have a pending order for this protocol.");
       } else {
+        identifyTikTokUser(result.orderNumber);
         getTrackingWindow().gutguardTikTokTrack?.(
           "Lead",
           buildTikTokRegistrationPayload({
@@ -546,6 +566,7 @@ export default function CheckoutModal() {
 
     if (step < 5) {
       if (step === 2) {
+        identifyTikTokUser();
         getTrackingWindow().gutguardTikTokTrack?.(
           "Contact",
           buildTikTokEventPayload({
