@@ -47,6 +47,7 @@ function buildTikTokFlags(order: OrderRecord) {
 
 export default function OrdersAdmin() {
   const [adminToken, setAdminToken] = useState("");
+  const [expandedOrderNumber, setExpandedOrderNumber] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState<OrderRecord[]>([]);
@@ -225,6 +226,7 @@ export default function OrdersAdmin() {
               {orders.length ? (
                 orders.map((order) => {
                   const tiktokFlags = buildTikTokFlags(order);
+                  const isExpanded = expandedOrderNumber === order.order_number;
 
                   return (
                     <tr className="align-top text-sm text-[#111113]" key={order.id}>
@@ -253,42 +255,72 @@ export default function OrdersAdmin() {
                         </span>
                       </td>
                       <td className="border-b border-black/5 px-3 py-4">
-                        <div className="max-w-[280px] space-y-2">
-                          <div className="flex flex-wrap gap-2">
-                            {tiktokFlags.length ? (
-                              tiktokFlags.map((flag) => (
-                                <span
-                                  className="rounded-full bg-[#f4f4f5] px-3 py-1 text-[11px] font-medium text-[#44444A]"
-                                  key={flag}
-                                >
-                                  {flag}
-                                </span>
-                              ))
-                            ) : (
-                              <span className="text-xs text-[#6B6B71]">No TikTok context stored</span>
-                            )}
-                          </div>
-                          <div className="rounded-[16px] border border-black/10 bg-[#fbfaf7] p-3 text-xs text-[#6B6B71]">
-                            <div className="font-semibold text-[#111113]">Debug</div>
-                            <div className="mt-1 break-all">
-                              Log search: <span className="font-mono">{order.order_number}</span>
+                        <div className="min-w-[260px] max-w-[340px] space-y-2">
+                          {tiktokFlags.length ? (
+                            <>
+                              <div className="flex flex-wrap gap-2">
+                                {tiktokFlags.map((flag) => (
+                                  <span
+                                    className="rounded-full bg-[#f4f4f5] px-3 py-1 text-[11px] font-medium text-[#44444A]"
+                                    key={flag}
+                                  >
+                                    {flag}
+                                  </span>
+                                ))}
+                              </div>
+                              <button
+                                className="text-xs font-medium text-[#2948ff] underline underline-offset-2"
+                                onClick={() =>
+                                  setExpandedOrderNumber((current) =>
+                                    current === order.order_number ? null : order.order_number,
+                                  )
+                                }
+                                type="button"
+                              >
+                                {isExpanded ? "Hide debug details" : "Show debug details"}
+                              </button>
+                            </>
+                          ) : (
+                            <span className="text-xs text-[#6B6B71]">No TikTok context stored</span>
+                          )}
+
+                          {isExpanded ? (
+                            <div className="rounded-[16px] border border-black/10 bg-[#fbfaf7] p-3 text-xs text-[#6B6B71]">
+                              <div className="font-semibold text-[#111113]">Debug</div>
+                              <div className="mt-2 space-y-2">
+                                <div>
+                                  <div className="font-medium text-[#44444A]">Log search</div>
+                                  <div className="font-mono text-[11px] text-[#111113]">
+                                    {order.order_number}
+                                  </div>
+                                </div>
+                                {order.tt_test_event_code ? (
+                                  <div>
+                                    <div className="font-medium text-[#44444A]">Test code</div>
+                                    <div className="font-mono text-[11px] text-[#111113]">
+                                      {order.tt_test_event_code}
+                                    </div>
+                                  </div>
+                                ) : null}
+                                {order.tiktok_event_id ? (
+                                  <div>
+                                    <div className="font-medium text-[#44444A]">Event id</div>
+                                    <div className="break-all font-mono text-[11px] text-[#111113]">
+                                      {order.tiktok_event_id}
+                                    </div>
+                                  </div>
+                                ) : null}
+                                {order.landing_page ? (
+                                  <div>
+                                    <div className="font-medium text-[#44444A]">Landing</div>
+                                    <div className="break-all font-mono text-[11px] text-[#111113]">
+                                      {order.landing_page}
+                                    </div>
+                                  </div>
+                                ) : null}
+                              </div>
                             </div>
-                            {order.tt_test_event_code ? (
-                              <div className="mt-1 break-all">
-                                Test code: <span className="font-mono">{order.tt_test_event_code}</span>
-                              </div>
-                            ) : null}
-                            {order.tiktok_event_id ? (
-                              <div className="mt-1 break-all">
-                                Event id: <span className="font-mono">{order.tiktok_event_id}</span>
-                              </div>
-                            ) : null}
-                            {order.landing_page ? (
-                              <div className="mt-1 break-all">
-                                Landing: <span className="font-mono">{order.landing_page}</span>
-                              </div>
-                            ) : null}
-                          </div>
+                          ) : null}
                         </div>
                       </td>
                       <td className="border-b border-black/5 px-3 py-4">
