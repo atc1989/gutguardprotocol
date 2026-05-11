@@ -1,10 +1,15 @@
 export const consentStorageKey = "gg_consent";
 export const landingPageStorageKey = "gg_landing_page";
+export const ttServerTestEventCodeStoredAtStorageKey = "gg_tt_server_test_event_code_stored_at";
+export const ttServerTestEventCodeStorageKey = "gg_tt_server_test_event_code";
+export const ttTestEventCodeStoredAtStorageKey = "gg_tt_test_event_code_stored_at";
 export const ttTestEventCodeStorageKey = "gg_tt_test_event_code";
 export const ttclidStorageKey = "gg_ttclid";
 export const ttpCookieName = "_ttp";
 export const trackingStoragePrefix = "gg_";
+export const tiktokTestEventCodeTtlMs = 60 * 60 * 1000;
 export const trackingQueryKeys = [
+  "tt_server_test_event_code",
   "tt_test_event_code",
   "ttclid",
   "utm_source",
@@ -18,6 +23,7 @@ export type ConsentState = "declined" | "granted";
 
 export type TrackingContext = {
   landingPage?: string;
+  serverTestEventCode?: string;
   testEventCode?: string;
   ttclid?: string;
   ttp?: string;
@@ -51,6 +57,38 @@ export function getTrackingStorageKey(key: (typeof trackingQueryKeys)[number]) {
   return `${trackingStoragePrefix}${key}`;
 }
 
+function readFreshStoredValue(valueKey: string, timestampKey: string, ttlMs: number) {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
+  const storedValue = window.localStorage.getItem(valueKey);
+
+  if (!storedValue) {
+    return undefined;
+  }
+
+  const storedAtRaw = window.localStorage.getItem(timestampKey);
+  const storedAt = storedAtRaw ? Number(storedAtRaw) : NaN;
+
+  if (!Number.isFinite(storedAt) || Date.now() - storedAt > ttlMs) {
+    window.localStorage.removeItem(valueKey);
+    window.localStorage.removeItem(timestampKey);
+    return undefined;
+  }
+
+  return storedValue;
+}
+
+export function storeTikTokTestEventCode(valueKey: string, timestampKey: string, value: string) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.localStorage.setItem(valueKey, value);
+  window.localStorage.setItem(timestampKey, String(Date.now()));
+}
+
 export function readStoredTrackingContext() {
   if (typeof window === "undefined") {
     return {};
@@ -58,7 +96,18 @@ export function readStoredTrackingContext() {
 
   return {
     landingPage: window.localStorage.getItem(landingPageStorageKey) || undefined,
-    testEventCode: window.localStorage.getItem(ttTestEventCodeStorageKey) || undefined,
+    serverTestEventCode:
+      readFreshStoredValue(
+        ttServerTestEventCodeStorageKey,
+        ttServerTestEventCodeStoredAtStorageKey,
+        tiktokTestEventCodeTtlMs,
+      ) || undefined,
+    testEventCode:
+      readFreshStoredValue(
+        ttTestEventCodeStorageKey,
+        ttTestEventCodeStoredAtStorageKey,
+        tiktokTestEventCodeTtlMs,
+      ) || undefined,
     ttclid: window.localStorage.getItem(ttclidStorageKey) || undefined,
     ttp:
       typeof document === "undefined"

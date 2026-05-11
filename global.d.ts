@@ -4,10 +4,13 @@ declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
     gutguardTikTokDebug?: {
+      canTrack: boolean;
       hasPixelId: boolean;
+      isExplicitTestMode: boolean;
       isConsentGranted: boolean;
       isLoaded: boolean;
       pathname: string;
+      serverTestEventCode?: string;
       testEventCode?: string;
       ttqPresent: boolean;
     };
@@ -34,6 +37,7 @@ declare global {
       SUPABASE_SERVICE_ROLE_KEY?: string;
       TIKTOK_EVENTS_API_ACCESS_TOKEN?: string;
       TIKTOK_EVENTS_API_URL?: string;
+      TIKTOK_TEST_EVENT_CODE?: string;
     }
   }
 }

@@ -9,6 +9,10 @@ import {
   getTrackingStorageKey,
   landingPageStorageKey,
   readStoredTrackingContext,
+  storeTikTokTestEventCode,
+  ttServerTestEventCodeStoredAtStorageKey,
+  ttServerTestEventCodeStorageKey,
+  ttTestEventCodeStoredAtStorageKey,
   ttTestEventCodeStorageKey,
   ttclidStorageKey,
   type ConsentState,
@@ -29,20 +33,30 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
 
   useEffect(() => {
     const trackingWindow = getTrackingWindow();
-    const testEventCode =
-      typeof trackingWindow === "undefined"
-        ? undefined
-        : new URLSearchParams(trackingWindow.location.search).get("tt_test_event_code") || undefined;
+    const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
+    const testEventCode = currentSearchParams.get("tt_test_event_code") || undefined;
+    const serverTestEventCode =
+      currentSearchParams.get("tt_server_test_event_code") || undefined;
+    const isExplicitTestMode = Boolean(testEventCode || serverTestEventCode);
+    const canTrack = isConsentGranted || isExplicitTestMode;
 
     trackingWindow.gutguardTikTokDebug = {
+      canTrack,
       hasPixelId: Boolean(pixelId),
+      isExplicitTestMode,
       isConsentGranted,
       isLoaded,
       pathname,
+      serverTestEventCode,
       testEventCode,
       ttqPresent: Boolean(trackingWindow.ttq),
     };
-  }, [isConsentGranted, isLoaded, pathname, pixelId]);
+  }, [
+    isConsentGranted,
+    isLoaded,
+    pathname,
+    pixelId,
+  ]);
 
   useEffect(() => {
     const trackingWindow = getTrackingWindow();
@@ -75,14 +89,27 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
     trackingWindow.localStorage.setItem(landingPageStorageKey, landingPage);
 
     const ttclid = currentSearchParams.get("ttclid");
+    const ttServerTestEventCode = currentSearchParams.get("tt_server_test_event_code");
     const ttTestEventCode = currentSearchParams.get("tt_test_event_code");
 
     if (ttclid) {
       trackingWindow.localStorage.setItem(ttclidStorageKey, ttclid);
     }
 
+    if (ttServerTestEventCode) {
+      storeTikTokTestEventCode(
+        ttServerTestEventCodeStorageKey,
+        ttServerTestEventCodeStoredAtStorageKey,
+        ttServerTestEventCode,
+      );
+    }
+
     if (ttTestEventCode) {
-      trackingWindow.localStorage.setItem(ttTestEventCodeStorageKey, ttTestEventCode);
+      storeTikTokTestEventCode(
+        ttTestEventCodeStorageKey,
+        ttTestEventCodeStoredAtStorageKey,
+        ttTestEventCode,
+      );
     }
   }, [pathname]);
 
@@ -92,8 +119,14 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
 
   useEffect(() => {
     const trackingWindow = getTrackingWindow();
+    const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
+    const isExplicitTestMode = Boolean(
+      currentSearchParams.get("tt_test_event_code") ||
+        currentSearchParams.get("tt_server_test_event_code"),
+    );
+    const canTrack = isConsentGranted || isExplicitTestMode;
 
-    if (!pixelId || !isConsentGranted || isLoaded || trackingWindow.ttq) {
+    if (!pixelId || !canTrack || isLoaded || trackingWindow.ttq) {
       return;
     }
 
@@ -143,12 +176,18 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
 
   useEffect(() => {
     const trackingWindow = getTrackingWindow();
+    const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
+    const isExplicitTestMode = Boolean(
+      currentSearchParams.get("tt_test_event_code") ||
+        currentSearchParams.get("tt_server_test_event_code"),
+    );
+    const canTrack = isConsentGranted || isExplicitTestMode;
 
     trackingWindow.gutguardTikTokTrack = (
       event: string,
       payload?: Record<string, unknown>,
     ) => {
-      if (!isConsentGranted || !trackingWindow.ttq?.track) {
+      if (!canTrack || !trackingWindow.ttq?.track) {
         return;
       }
 
@@ -158,8 +197,14 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
 
   useEffect(() => {
     const trackingWindow = getTrackingWindow();
+    const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
+    const isExplicitTestMode = Boolean(
+      currentSearchParams.get("tt_test_event_code") ||
+        currentSearchParams.get("tt_server_test_event_code"),
+    );
+    const canTrack = isConsentGranted || isExplicitTestMode;
 
-    if (!pixelId || !isConsentGranted || !trackingWindow.ttq?.page) {
+    if (!pixelId || !canTrack || !trackingWindow.ttq?.page) {
       return;
     }
 

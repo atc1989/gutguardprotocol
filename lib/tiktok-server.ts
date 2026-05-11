@@ -60,7 +60,12 @@ function getTikTokEventsApiUrl() {
 }
 
 function getTikTokTestEventCode(context?: TrackingContext) {
-  return context?.testEventCode || process.env.TIKTOK_TEST_EVENT_CODE?.trim() || undefined;
+  return (
+    context?.serverTestEventCode ||
+    context?.testEventCode ||
+    process.env.TIKTOK_TEST_EVENT_CODE?.trim() ||
+    undefined
+  );
 }
 
 export { buildTikTokEventPayload, buildTikTokRegistrationPayload };

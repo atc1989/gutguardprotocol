@@ -3,10 +3,13 @@
 type TrackingWindow = Window & {
   gtag?: (...args: unknown[]) => void;
   gutguardTikTokDebug?: {
+    canTrack: boolean;
     hasPixelId: boolean;
+    isExplicitTestMode: boolean;
     isConsentGranted: boolean;
     isLoaded: boolean;
     pathname: string;
+    serverTestEventCode?: string;
     testEventCode?: string;
     ttqPresent: boolean;
   };

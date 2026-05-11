@@ -221,7 +221,7 @@ export async function POST(request: Request) {
     region: toNullable(payload.region?.trim()),
     status: "pending",
     street: toNullable(payload.street?.trim()),
-    tt_test_event_code: toNullable(tracking?.testEventCode),
+    tt_test_event_code: toNullable(tracking?.serverTestEventCode || tracking?.testEventCode),
     tiktok_event_id: toNullable(payload.tiktokEventId),
     ttclid: toNullable(tracking?.ttclid),
     ttp: toNullable(tracking?.ttp),
