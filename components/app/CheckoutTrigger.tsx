@@ -2,7 +2,9 @@
 
 import type { MouseEvent, ReactNode } from "react";
 
-import type { ProtocolKey } from "@/lib/checkout";
+import { getTrackingWindow } from "@/lib/browser-window";
+import { protocolCatalog, type ProtocolKey } from "@/lib/checkout";
+import { buildTikTokEventPayload, createEventId } from "@/lib/tiktok";
 
 type CheckoutTriggerProps = {
   children: ReactNode;
@@ -19,6 +21,20 @@ export default function CheckoutTrigger({
 }: CheckoutTriggerProps) {
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
+    const selectedProtocol = protocolCatalog[protocolKey];
+
+    getTrackingWindow().gutguardTikTokTrack?.(
+      "ViewContent",
+      buildTikTokEventPayload({
+        description: selectedProtocol.detail,
+        eventId: createEventId("view-content"),
+        price: selectedProtocol.price,
+        productId: protocolKey,
+        productName: selectedProtocol.displayName,
+        quantity: selectedProtocol.quantity,
+      }),
+    );
+
     window.dispatchEvent(
       new CustomEvent("gutguard:open-checkout", {
         detail: { protocolKey },
