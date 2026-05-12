@@ -301,6 +301,22 @@ export default function OrdersAdmin() {
           ))}
         </div>
 
+        <div className="mt-4 rounded-[16px] border border-[#e5e7eb] bg-[#fafafa] px-4 py-3 text-xs text-[#52525b]">
+          <p>
+            <span className="font-semibold text-[#111113]">Order status</span> shows the current
+            internal workflow state in <code>orders.status</code> such as{" "}
+            <code>pending</code>, <code>paid</code>, <code>shipped</code>,{" "}
+            <code>completed</code>, or <code>cancelled</code>.
+          </p>
+          <p className="mt-1">
+            <span className="font-semibold text-[#111113]">TikTok</span> shows only historical
+            marketing events sent to TikTok in <code>order_tiktok_events</code>, such as{" "}
+            <code>Lead</code>, <code>Purchase</code>, and <code>Refund</code>. Internal statuses
+            like <code>pending</code> or <code>shipped</code> do not appear there unless a TikTok
+            event is sent for them.
+          </p>
+        </div>
+
         {errorMessage ? (
           <p className="mt-4 rounded-[16px] border border-[#fecaca] bg-[#fff1f2] px-4 py-3 text-sm text-[#b42318]">
             {errorMessage}
