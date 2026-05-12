@@ -313,14 +313,11 @@ export async function PATCH(
   }
 
   if (payload.resendEvent === "Purchase") {
-    const purchaseStatus =
-      data.status === "paid" || data.status === "completed" || data.status === "shipped"
-        ? data.status
-        : null;
+    const purchaseStatus = data.status === "paid" ? data.status : null;
 
     if (!purchaseStatus) {
       return NextResponse.json(
-        { error: "Purchase can only be resent for paid, shipped, or completed orders." },
+        { error: "Purchase can only be resent for paid orders." },
         { status: 400 },
       );
     }
@@ -354,16 +351,12 @@ export async function PATCH(
     }
   }
 
-  if (payload.status === "paid" || payload.status === "completed") {
+  if (payload.status === "paid") {
     await sendPurchaseForOrder(request, supabase, data, payload.status);
   }
 
   const shouldSendRefundOnCancellation =
-    payload.status === "cancelled" &&
-    Boolean(
-      previousOrder.tiktok_purchase_sent_at ||
-        ["paid", "completed", "shipped"].includes(previousOrder.status || ""),
-    );
+    payload.status === "cancelled" && Boolean(previousOrder.tiktok_purchase_sent_at);
 
   if (shouldSendRefundOnCancellation) {
     await sendRefundForOrder(request, supabase, data);
@@ -372,7 +365,6 @@ export async function PATCH(
   const latestOrder =
     payload.resendEvent ||
     payload.status === "paid" ||
-    payload.status === "completed" ||
     shouldSendRefundOnCancellation
       ? (await loadOrder()).data || data
       : data;

@@ -331,7 +331,7 @@ export default function OrdersAdmin() {
                 orders.map((order) => {
                   const tiktokFlags = buildTikTokFlags(order);
                   const isExpanded = expandedOrderNumber === order.order_number;
-                  const canResendPurchase = ["completed", "paid", "shipped"].includes(order.status);
+                  const canResendPurchase = order.status === "paid";
                   const canResendRefund =
                     order.status === "cancelled" && Boolean(order.tiktok_purchase_sent_at);
                   const eventHistory = order.tiktok_events || [];
