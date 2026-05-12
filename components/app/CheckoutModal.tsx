@@ -643,12 +643,7 @@ export default function CheckoutModal() {
       className="fixed inset-0 z-[80] flex items-end justify-center bg-black/70 p-0 sm:items-center sm:p-4"
       role="dialog"
     >
-      <button
-        aria-label="Close checkout"
-        className="absolute inset-0"
-        onClick={closeModal}
-        type="button"
-      />
+      <div aria-hidden="true" className="absolute inset-0" />
 
       <div className="relative z-[1] flex max-h-[96dvh] w-full max-w-[520px] flex-col overflow-hidden rounded-t-[24px] bg-[#f5f4f2] shadow-[0_30px_100px_rgba(0,0,0,0.3)] sm:max-h-[90dvh] sm:rounded-[24px]">
         <div className="border-b border-black/10 px-5 py-4">
