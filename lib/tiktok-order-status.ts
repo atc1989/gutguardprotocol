@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 type TikTokOrderStatusUpdate = {
-  event: "Lead" | "Purchase";
+  event: "Lead" | "Purchase" | "Refund";
   error?: string | null;
   sentAt?: string;
   status: "failed" | "sent";
@@ -28,7 +28,9 @@ export async function persistTikTokOrderStatus(
     tiktok_last_status: update.status,
     ...(update.event === "Lead"
       ? { tiktok_lead_sent_at: update.status === "sent" ? sentAt : null }
-      : { tiktok_purchase_sent_at: update.status === "sent" ? sentAt : null }),
+      : update.event === "Purchase"
+        ? { tiktok_purchase_sent_at: update.status === "sent" ? sentAt : null }
+        : {}),
   };
 
   const response = await supabase

@@ -152,7 +152,10 @@ export default function OrdersAdmin() {
     }
   }
 
-  async function updateOrder(orderNumber: string, body: { resendEvent?: "Lead" | "Purchase"; status?: string }) {
+  async function updateOrder(
+    orderNumber: string,
+    body: { resendEvent?: "Lead" | "Purchase" | "Refund"; status?: string },
+  ) {
     if (!adminToken.trim()) {
       setErrorMessage("Enter your admin token to update orders.");
       return;
@@ -329,6 +332,8 @@ export default function OrdersAdmin() {
                   const tiktokFlags = buildTikTokFlags(order);
                   const isExpanded = expandedOrderNumber === order.order_number;
                   const canResendPurchase = ["completed", "paid", "shipped"].includes(order.status);
+                  const canResendRefund =
+                    order.status === "cancelled" && Boolean(order.tiktok_purchase_sent_at);
                   const eventHistory = order.tiktok_events || [];
 
                   return (
@@ -412,6 +417,19 @@ export default function OrdersAdmin() {
                                   type="button"
                                 >
                                   Resend Purchase
+                                </button>
+                                <button
+                                  className={[
+                                    "rounded-full border px-3 py-1 text-[11px] font-medium",
+                                    canResendRefund
+                                      ? "border-black/10 bg-white text-[#44444A]"
+                                      : "cursor-not-allowed border-black/5 bg-[#f4f4f5] text-[#9A9AA1]",
+                                  ].join(" ")}
+                                  disabled={!canResendRefund}
+                                  onClick={() => void updateOrder(order.order_number, { resendEvent: "Refund" })}
+                                  type="button"
+                                >
+                                  Resend Refund
                                 </button>
                               </div>
                             </>

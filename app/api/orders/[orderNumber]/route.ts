@@ -12,7 +12,7 @@ import {
 } from "@/lib/tiktok-server";
 
 type UpdateOrderStatusPayload = {
-  resendEvent?: "Lead" | "Purchase";
+  resendEvent?: "Lead" | "Purchase" | "Refund";
   status?: string;
 };
 
@@ -170,6 +170,77 @@ async function sendPurchaseForOrder(
   }
 }
 
+async function sendRefundForOrder(
+  request: Request,
+  supabase: ReturnType<typeof createServerSupabaseClient>,
+  order: Record<string, string | null>,
+) {
+  const eventId = `${order.order_number}-cancelled`;
+
+  try {
+    const trackingResult = await sendTikTokServerEvent({
+      context: buildTrackingContext(order),
+      event: "Refund",
+      eventId,
+      match: {
+        email: order.email || undefined,
+        external_id: order.order_number || undefined,
+        phone_number: order.mobile || undefined,
+      },
+      payload: {
+        ...buildTikTokEventPayload({
+          description: order.product_detail || "",
+          eventId,
+          orderId: order.order_number || undefined,
+          paymentType: order.payment_method || undefined,
+          price: order.price || "0",
+          productId: order.protocol_key || "",
+          productName: order.product_name || "",
+          quantity: order.product_quantity || "0",
+        }),
+      },
+      userAgent: request.headers.get("user-agent"),
+    });
+
+    console.info("TikTok refund event sent", {
+      event: "Refund",
+      orderNumber: order.order_number,
+      status: order.status,
+      testEventCode: order.tt_test_event_code || null,
+      trackingResult,
+    });
+    await appendTikTokOrderEvent(supabase, {
+      eventId,
+      eventName: "Refund",
+      orderNumber: order.order_number || "",
+      payload: trackingResult,
+      status: "sent",
+      testEventCode: order.tt_test_event_code || null,
+    });
+    await persistTikTokOrderStatus(supabase, order.order_number || "", {
+      event: "Refund",
+      status: "sent",
+    });
+    return { ok: true as const };
+  } catch (trackingError) {
+    console.error("TikTok refund event failed", trackingError);
+    await appendTikTokOrderEvent(supabase, {
+      error: trackingError instanceof Error ? trackingError.message : "Unknown TikTok refund failure",
+      eventId,
+      eventName: "Refund",
+      orderNumber: order.order_number || "",
+      status: "failed",
+      testEventCode: order.tt_test_event_code || null,
+    });
+    await persistTikTokOrderStatus(supabase, order.order_number || "", {
+      error: trackingError instanceof Error ? trackingError.message : "Unknown TikTok refund failure",
+      event: "Refund",
+      status: "failed",
+    });
+    return { error: "Could not send TikTok refund event.", ok: false as const };
+  }
+}
+
 export async function PATCH(
   request: Request,
   { params }: { params: { orderNumber: string } },
@@ -196,6 +267,18 @@ export async function PATCH(
   const loadOrder = () =>
     supabase.from("orders").select("*").eq("order_number", params.orderNumber).maybeSingle();
 
+  const existingOrderResult = await loadOrder();
+
+  if (existingOrderResult.error) {
+    console.error("Order load failed before update", existingOrderResult.error);
+    return NextResponse.json({ error: "Could not load order." }, { status: 500 });
+  }
+
+  if (!existingOrderResult.data) {
+    return NextResponse.json({ error: "Order not found." }, { status: 404 });
+  }
+
+  const previousOrder = existingOrderResult.data;
   let data;
   let error;
 
@@ -249,12 +332,48 @@ export async function PATCH(
     }
   }
 
+  if (payload.resendEvent === "Refund") {
+    if (data.status !== "cancelled") {
+      return NextResponse.json(
+        { error: "Refund can only be resent for cancelled orders." },
+        { status: 400 },
+      );
+    }
+
+    if (!data.tiktok_purchase_sent_at) {
+      return NextResponse.json(
+        { error: "Refund can only be resent after a purchase event was sent." },
+        { status: 400 },
+      );
+    }
+
+    const resendResult = await sendRefundForOrder(request, supabase, data);
+
+    if (!resendResult.ok) {
+      return NextResponse.json({ error: resendResult.error }, { status: 500 });
+    }
+  }
+
   if (payload.status === "paid" || payload.status === "completed") {
     await sendPurchaseForOrder(request, supabase, data, payload.status);
   }
 
+  const shouldSendRefundOnCancellation =
+    payload.status === "cancelled" &&
+    Boolean(
+      previousOrder.tiktok_purchase_sent_at ||
+        ["paid", "completed", "shipped"].includes(previousOrder.status || ""),
+    );
+
+  if (shouldSendRefundOnCancellation) {
+    await sendRefundForOrder(request, supabase, data);
+  }
+
   const latestOrder =
-    payload.resendEvent || (payload.status === "paid" || payload.status === "completed")
+    payload.resendEvent ||
+    payload.status === "paid" ||
+    payload.status === "completed" ||
+    shouldSendRefundOnCancellation
       ? (await loadOrder()).data || data
       : data;
 
