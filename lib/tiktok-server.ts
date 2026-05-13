@@ -70,6 +70,28 @@ function getTikTokTestEventCode(context?: TrackingContext) {
 
 export { buildTikTokEventPayload, buildTikTokRegistrationPayload };
 
+async function readTikTokResponse(response: Response) {
+  const rawBody = await response.text();
+
+  if (!rawBody) {
+    return { data: null, rawBody: "" };
+  }
+
+  try {
+    return {
+      data: JSON.parse(rawBody) as {
+        code?: number;
+        data?: Record<string, unknown>;
+        message?: string;
+        request_id?: string;
+      },
+      rawBody,
+    };
+  } catch {
+    return { data: null, rawBody };
+  }
+}
+
 export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
   const pixelId = getTikTokPixelId();
   const accessToken = getTikTokEventsApiToken();
@@ -130,6 +152,15 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
     "Access-Token": accessToken,
     "Content-Type": "application/json",
   };
+  const debugRequest = {
+    body,
+    endpoint: eventsApiUrl,
+    headers: {
+      "Content-Type": "application/json",
+      hasAccessTokenHeader: true,
+      hasAuthorizationHeader: true,
+    },
+  };
 
   const response = await fetch(eventsApiUrl, {
     body: requestBody,
@@ -139,8 +170,10 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
     method: "POST",
   });
 
+  const responseDetails = await readTikTokResponse(response);
+
   if (!response.ok) {
-    const errorText = await response.text();
+    const errorText = responseDetails.rawBody;
 
     if (
       /access_token is empty/i.test(errorText) &&
@@ -163,16 +196,44 @@ export async function sendTikTokServerEvent(input: TikTokServerEventInput) {
         method: "POST",
       });
 
+      const retryDetails = await readTikTokResponse(retryResponse);
+
       if (retryResponse.ok) {
-        return { ok: true as const, skipped: false as const };
+        if (retryDetails.data && retryDetails.data.code && retryDetails.data.code !== 0) {
+          throw new Error(
+            `TikTok Events API failed: ${retryDetails.data.code} ${retryDetails.data.message || retryDetails.rawBody}`,
+          );
+        }
+
+        return {
+          debugRequest,
+          httpStatus: retryResponse.status,
+          ok: true as const,
+          requestId: retryDetails.data?.request_id || null,
+          response: retryDetails.data || retryDetails.rawBody || null,
+          skipped: false as const,
+        };
       }
 
-      const retryErrorText = await retryResponse.text();
+      const retryErrorText = retryDetails.rawBody;
       throw new Error(`TikTok Events API failed: ${retryResponse.status} ${retryErrorText}`);
     }
 
     throw new Error(`TikTok Events API failed: ${response.status} ${errorText}`);
   }
 
-  return { ok: true as const, skipped: false as const };
+  if (responseDetails.data && responseDetails.data.code && responseDetails.data.code !== 0) {
+    throw new Error(
+      `TikTok Events API failed: ${responseDetails.data.code} ${responseDetails.data.message || responseDetails.rawBody}`,
+    );
+  }
+
+  return {
+    debugRequest,
+    httpStatus: response.status,
+    ok: true as const,
+    requestId: responseDetails.data?.request_id || null,
+    response: responseDetails.data || responseDetails.rawBody || null,
+    skipped: false as const,
+  };
 }

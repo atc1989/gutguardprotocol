@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { createServerSupabaseClient } from "@/lib/supabase/server";
+
 type LeadPayload = {
   email: string;
   source: string;
@@ -31,22 +33,31 @@ export async function POST(request: Request) {
     submittedAt: payload.submittedAt || new Date().toISOString(),
   };
 
-  const webhookUrl = process.env.LEAD_CAPTURE_WEBHOOK_URL;
+  const supabase = createServerSupabaseClient();
+  const { data: existingLead, error: lookupError } = await supabase
+    .from("leads")
+    .select("id")
+    .eq("email", lead.email)
+    .maybeSingle();
 
-  if (webhookUrl) {
-    const response = await fetch(webhookUrl, {
-      body: JSON.stringify(lead),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
+  if (lookupError) {
+    console.error("Lead lookup failed", lookupError);
+    return NextResponse.json({ error: "Could not save your request." }, { status: 500 });
+  }
 
-    if (!response.ok) {
-      return NextResponse.json({ error: "Lead destination rejected the request." }, { status: 502 });
-    }
-  } else {
-    console.info("Lead captured", lead);
+  if (existingLead) {
+    return NextResponse.json({ ok: true, duplicate: true });
+  }
+
+  const { error } = await supabase.from("leads").insert({
+    email: lead.email,
+    source: lead.source,
+    submitted_at: lead.submittedAt,
+  });
+
+  if (error) {
+    console.error("Lead insert failed", error);
+    return NextResponse.json({ error: "Could not save your request." }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

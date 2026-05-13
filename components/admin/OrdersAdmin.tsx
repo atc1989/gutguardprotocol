@@ -91,6 +91,18 @@ function getTikTokStatusClasses(status?: string | null) {
   return "border-black/10 bg-[#f4f4f5] text-[#44444A]";
 }
 
+function formatJson(value?: Record<string, unknown> | null) {
+  if (!value) {
+    return null;
+  }
+
+  try {
+    return JSON.stringify(value, null, 2);
+  } catch {
+    return null;
+  }
+}
+
 export default function OrdersAdmin() {
   const [adminToken, setAdminToken] = useState("");
   const [copiedValue, setCopiedValue] = useState<string | null>(null);
@@ -630,6 +642,30 @@ export default function OrdersAdmin() {
                                           {event.error_text ? (
                                             <div className="mt-1 break-all text-[11px] text-[#b42318]">
                                               {event.error_text}
+                                            </div>
+                                          ) : null}
+                                          {event.payload_json ? (
+                                            <div className="mt-2">
+                                              <div className="mb-1 flex items-center justify-between gap-2">
+                                                <span className="text-[11px] font-medium text-[#44444A]">
+                                                  Payload
+                                                </span>
+                                                <button
+                                                  className="text-[11px] font-medium text-[#2948ff]"
+                                                  onClick={() =>
+                                                    void copyValue(
+                                                      `${event.event_name} payload`,
+                                                      formatJson(event.payload_json) || "",
+                                                    )
+                                                  }
+                                                  type="button"
+                                                >
+                                                  Copy JSON
+                                                </button>
+                                              </div>
+                                              <pre className="max-h-48 overflow-auto rounded-[10px] bg-[#f8f8f8] p-2 text-[10px] leading-5 text-[#44444A]">
+                                                {formatJson(event.payload_json)}
+                                              </pre>
                                             </div>
                                           ) : null}
                                         </div>

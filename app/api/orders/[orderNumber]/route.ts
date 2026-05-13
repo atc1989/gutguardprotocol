@@ -111,6 +111,7 @@ async function sendPurchaseForOrder(
       context: buildTrackingContext(order),
       event: "Purchase",
       eventId,
+      eventUrl: order.landing_page || request.url,
       match: {
         email: order.email || undefined,
         external_id: order.order_number || undefined,
@@ -182,6 +183,7 @@ async function sendRefundForOrder(
       context: buildTrackingContext(order),
       event: "Refund",
       eventId,
+      eventUrl: order.landing_page || request.url,
       match: {
         email: order.email || undefined,
         external_id: order.order_number || undefined,

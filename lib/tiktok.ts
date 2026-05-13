@@ -1,5 +1,7 @@
 export const consentStorageKey = "gg_consent";
 export const landingPageStorageKey = "gg_landing_page";
+export const ttTestIdStoredAtStorageKey = "gg_tt_test_id_stored_at";
+export const ttTestIdStorageKey = "gg_tt_test_id";
 export const ttServerTestEventCodeStoredAtStorageKey = "gg_tt_server_test_event_code_stored_at";
 export const ttServerTestEventCodeStorageKey = "gg_tt_server_test_event_code";
 export const ttTestEventCodeStoredAtStorageKey = "gg_tt_test_event_code_stored_at";
@@ -9,6 +11,7 @@ export const ttpCookieName = "_ttp";
 export const trackingStoragePrefix = "gg_";
 export const tiktokTestEventCodeTtlMs = 60 * 60 * 1000;
 export const trackingQueryKeys = [
+  "tt_test_id",
   "tt_server_test_event_code",
   "tt_test_event_code",
   "ttclid",
@@ -23,6 +26,7 @@ export type ConsentState = "declined" | "granted";
 
 export type TrackingContext = {
   landingPage?: string;
+  testId?: string;
   serverTestEventCode?: string;
   testEventCode?: string;
   ttclid?: string;
@@ -102,6 +106,12 @@ export function readStoredTrackingContext() {
 
   return {
     landingPage: window.localStorage.getItem(landingPageStorageKey) || undefined,
+    testId:
+      readFreshStoredValue(
+        ttTestIdStorageKey,
+        ttTestIdStoredAtStorageKey,
+        tiktokTestEventCodeTtlMs,
+      ) || undefined,
     serverTestEventCode:
       readFreshStoredValue(
         ttServerTestEventCodeStorageKey,

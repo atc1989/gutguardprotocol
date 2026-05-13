@@ -10,6 +10,8 @@ import {
   landingPageStorageKey,
   readStoredTrackingContext,
   storeTikTokTestEventCode,
+  ttTestIdStorageKey,
+  ttTestIdStoredAtStorageKey,
   ttServerTestEventCodeStoredAtStorageKey,
   ttServerTestEventCodeStorageKey,
   ttTestEventCodeStoredAtStorageKey,
@@ -34,10 +36,11 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
   useEffect(() => {
     const trackingWindow = getTrackingWindow();
     const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
+    const testId = currentSearchParams.get("tt_test_id") || undefined;
     const testEventCode = currentSearchParams.get("tt_test_event_code") || undefined;
     const serverTestEventCode =
       currentSearchParams.get("tt_server_test_event_code") || undefined;
-    const isExplicitTestMode = Boolean(testEventCode || serverTestEventCode);
+    const isExplicitTestMode = Boolean(testId || testEventCode || serverTestEventCode);
     const canTrack = isConsentGranted || isExplicitTestMode;
 
     trackingWindow.gutguardTikTokDebug = {
@@ -48,6 +51,7 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
       isLoaded,
       pathname,
       serverTestEventCode,
+      testId,
       testEventCode,
       ttqPresent: Boolean(trackingWindow.ttq),
     };
@@ -88,9 +92,18 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
     trackingWindow.localStorage.setItem(getTrackingStorageKey("utm_term"), currentSearchParams.get("utm_term") || trackingWindow.localStorage.getItem(getTrackingStorageKey("utm_term")) || "");
     trackingWindow.localStorage.setItem(landingPageStorageKey, landingPage);
 
+    const ttTestId = currentSearchParams.get("tt_test_id");
     const ttclid = currentSearchParams.get("ttclid");
     const ttServerTestEventCode = currentSearchParams.get("tt_server_test_event_code");
     const ttTestEventCode = currentSearchParams.get("tt_test_event_code");
+
+    if (ttTestId) {
+      storeTikTokTestEventCode(
+        ttTestIdStorageKey,
+        ttTestIdStoredAtStorageKey,
+        ttTestId,
+      );
+    }
 
     if (ttclid) {
       trackingWindow.localStorage.setItem(ttclidStorageKey, ttclid);
@@ -121,6 +134,7 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
     const trackingWindow = getTrackingWindow();
     const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
     const isExplicitTestMode = Boolean(
+      currentSearchParams.get("tt_test_id") ||
       currentSearchParams.get("tt_test_event_code") ||
         currentSearchParams.get("tt_server_test_event_code"),
     );
@@ -178,6 +192,7 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
     const trackingWindow = getTrackingWindow();
     const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
     const isExplicitTestMode = Boolean(
+      currentSearchParams.get("tt_test_id") ||
       currentSearchParams.get("tt_test_event_code") ||
         currentSearchParams.get("tt_server_test_event_code"),
     );
@@ -199,6 +214,7 @@ export default function TikTokPixel({ pixelId }: TikTokPixelProps) {
     const trackingWindow = getTrackingWindow();
     const currentSearchParams = new URLSearchParams(trackingWindow.location.search);
     const isExplicitTestMode = Boolean(
+      currentSearchParams.get("tt_test_id") ||
       currentSearchParams.get("tt_test_event_code") ||
         currentSearchParams.get("tt_server_test_event_code"),
     );

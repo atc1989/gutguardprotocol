@@ -1,6 +1,5 @@
 import { Fira_Code, Inter, Plus_Jakarta_Sans } from "next/font/google";
 
-import CheckoutTrigger from "@/components/app/CheckoutTrigger";
 import Container from "../ui/Container";
 
 const firaCode = Fira_Code({
@@ -21,6 +20,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const TIKTOK_SHOP_URL =
+  "https://shop.tiktok.com/ph/pdp/sprout-gutguard-synbiotic-tri-biotic-80b-cfu-for-digestive-immune-support/1733428303279195872";
+
 type PlanVariant = {
   label: string;
   meta: string;
@@ -28,7 +30,6 @@ type PlanVariant = {
 };
 
 type Plan = {
-  checkoutKey: "trial" | "start" | "grow" | "power";
   icon: string;
   title: string;
   subtitle: string;
@@ -48,7 +49,6 @@ type Plan = {
 
 const plans: Plan[] = [
   {
-    checkoutKey: "trial",
     icon: "\uD83C\uDF31",
     title: "Trial Protocol",
     subtitle: "GLIS 0\u201330 \u00B7 First-time users",
@@ -66,7 +66,6 @@ const plans: Plan[] = [
     ],
   },
   {
-    checkoutKey: "start",
     icon: "\u26A1",
     title: "Start Protocol",
     subtitle: "GLIS 26\u201350 \u00B7 Mild inflammation",
@@ -80,7 +79,6 @@ const plans: Plan[] = [
     cta: "Enroll Now \u2192",
   },
   {
-    checkoutKey: "grow",
     icon: "\uD83D\uDD25",
     title: "Grow Protocol",
     subtitle: "GLIS 51\u201375 \u00B7 Moderate inflammation",
@@ -103,7 +101,6 @@ const plans: Plan[] = [
     notice: "\u26A1 Limited doctor slots this week",
   },
   {
-    checkoutKey: "power",
     icon: "\uD83D\uDC51",
     title: "Power Protocol",
     subtitle: "GLIS 76\u2013100 \u00B7 High inflammation",
@@ -317,7 +314,7 @@ export default function ProtocolPlans() {
                     </ul>
                   </div>
 
-                  <CheckoutTrigger
+                  <a
                     className={[
                       inter.className,
                       "mt-6 inline-flex h-[35px] items-center justify-center self-center rounded-full border text-[14px] font-semibold leading-none transition-colors",
@@ -325,11 +322,12 @@ export default function ProtocolPlans() {
                         ? "w-[145px] border-[#1D23D8] bg-[#1D23D8] text-white"
                         : "w-[146px] border-[#2A35FF] bg-white text-[#1D23D8]",
                     ].join(" ")}
-                    href="#plans"
-                    protocolKey={plan.checkoutKey}
+                    href={TIKTOK_SHOP_URL}
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     {plan.cta}
-                  </CheckoutTrigger>
+                  </a>
                 </div>
               </article>
             ))}

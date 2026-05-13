@@ -18,6 +18,7 @@ const inter = Inter({
 
 export default function LeadCapture() {
   const [statusMessage, setStatusMessage] = useState("");
+  const [statusTone, setStatusTone] = useState<"error" | "success" | "">("");
   const inputId = useId();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -29,9 +30,11 @@ export default function LeadCapture() {
     const email = typeof emailValue === "string" ? emailValue.trim() : "";
 
     setStatusMessage("");
+    setStatusTone("");
 
     if (!email) {
       setStatusMessage("Please enter your email address.");
+      setStatusTone("error");
       return;
     }
 
@@ -51,16 +54,23 @@ export default function LeadCapture() {
       });
     } catch {
       setStatusMessage("We could not submit your request right now.");
+      setStatusTone("error");
       return;
     }
 
     if (!response.ok) {
       setStatusMessage("We could not submit your request right now.");
+      setStatusTone("error");
       return;
     }
 
+    const result = (await response.json()) as { duplicate?: boolean; ok?: boolean };
+
     form.reset();
-    setStatusMessage("Request received.");
+    setStatusMessage(
+      result.duplicate ? "This email is already on the list." : "Request received.",
+    );
+    setStatusTone("success");
   }
 
   return (
@@ -115,7 +125,19 @@ export default function LeadCapture() {
                   Send Free Guide
                 </button>
               </form>
-              <p aria-live="polite" className="sr-only" role="status">
+              <p
+                aria-live="polite"
+                className={[
+                  inter.className,
+                  "mt-3 rounded-[14px] px-4 py-3 text-[13px] leading-5",
+                  statusMessage
+                    ? statusTone === "error"
+                      ? "border border-[#7f1d1d] bg-[rgba(127,29,29,0.20)] text-[#fecaca]"
+                      : "border border-[#14532d] bg-[rgba(20,83,45,0.20)] text-[#bbf7d0]"
+                    : "hidden",
+                ].join(" ")}
+                role="status"
+              >
                 {statusMessage}
               </p>
 
