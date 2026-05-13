@@ -1,5 +1,7 @@
 import { Fira_Code, Inter, Plus_Jakarta_Sans } from "next/font/google";
 
+import CheckoutTrigger from "@/components/app/CheckoutTrigger";
+import type { ProtocolKey } from "@/lib/checkout";
 import Container from "../ui/Container";
 
 const firaCode = Fira_Code({
@@ -20,9 +22,6 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const TIKTOK_SHOP_URL =
-  "https://shop.tiktok.com/ph/pdp/sprout-gutguard-synbiotic-tri-biotic-80b-cfu-for-digestive-immune-support/1733428303279195872";
-
 type PlanVariant = {
   label: string;
   meta: string;
@@ -41,6 +40,7 @@ type Plan = {
   subtitleSizeClassName: string;
   bullets: string[];
   cta: string;
+  protocolKey: ProtocolKey;
   variants?: PlanVariant[];
   featured?: boolean;
   badge?: string;
@@ -60,6 +60,7 @@ const plans: Plan[] = [
     subtitleSizeClassName: "w-[184.5px] min-h-[21px]",
     bullets: ["1 BioScan", "Doctor review", "Free shipping"],
     cta: "Enroll: Trial \u2192",
+    protocolKey: "trial",
     variants: [
       { label: "Sachet", meta: "10 caps \u00B7 \u20B11,290", active: true },
       { label: "Bottle", meta: "30 caps \u00B7 \u20B13,800", active: false },
@@ -77,6 +78,7 @@ const plans: Plan[] = [
     subtitleSizeClassName: "w-[116.51px] min-h-[38px]",
     bullets: ["1 BioScan", "Doctor review & assignment", "Patient portal access", "Free shipping"],
     cta: "Enroll Now \u2192",
+    protocolKey: "start",
   },
   {
     icon: "\uD83D\uDD25",
@@ -96,6 +98,7 @@ const plans: Plan[] = [
       "Free shipping",
     ],
     cta: "Enroll Now \u2192",
+    protocolKey: "grow",
     featured: true,
     badge: "MOST POPULAR",
     notice: "\u26A1 Limited doctor slots this week",
@@ -112,6 +115,7 @@ const plans: Plan[] = [
     subtitleSizeClassName: "w-[124.75px] min-h-[38px]",
     bullets: ["3 BioScans", "Priority doctor response", "Full 90-day intervention", "Free shipping"],
     cta: "Enroll Now \u2192",
+    protocolKey: "power",
   },
 ];
 
@@ -314,7 +318,7 @@ export default function ProtocolPlans() {
                     </ul>
                   </div>
 
-                  <a
+                  <CheckoutTrigger
                     className={[
                       inter.className,
                       "mt-6 inline-flex h-[35px] items-center justify-center self-center rounded-full border text-[14px] font-semibold leading-none transition-colors",
@@ -322,12 +326,11 @@ export default function ProtocolPlans() {
                         ? "w-[145px] border-[#1D23D8] bg-[#1D23D8] text-white"
                         : "w-[146px] border-[#2A35FF] bg-white text-[#1D23D8]",
                     ].join(" ")}
-                    href={TIKTOK_SHOP_URL}
-                    rel="noreferrer"
-                    target="_blank"
+                    href="#plans"
+                    protocolKey={plan.protocolKey}
                   >
                     {plan.cta}
-                  </a>
+                  </CheckoutTrigger>
                 </div>
               </article>
             ))}
