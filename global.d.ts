@@ -11,6 +11,7 @@ declare global {
       isLoaded: boolean;
       pathname: string;
       serverTestEventCode?: string;
+      testId?: string;
       testEventCode?: string;
       ttqPresent: boolean;
     };
