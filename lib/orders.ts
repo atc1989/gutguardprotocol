@@ -1,5 +1,5 @@
 import { protocolCatalog } from "@/lib/checkout";
-import type { ProtocolKey } from "@/lib/checkout";
+import type { ProtocolKey, TrialVariantKey } from "@/lib/checkout";
 import type { TrackingContext } from "@/lib/tiktok";
 
 export type PaymentMethod = "bank" | "card" | "cod" | "gcash" | "maya";
@@ -18,6 +18,7 @@ export type OrderPayload = {
   productScanLine: string;
   productDuration: string;
   protocolKey: ProtocolKey;
+  variantKey?: TrialVariantKey;
   province: string;
   region: string;
   street: string;

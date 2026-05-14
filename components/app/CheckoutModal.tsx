@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { getTrackingWindow } from "@/lib/browser-window";
-import { protocolCatalog } from "@/lib/checkout";
-import type { ProtocolKey } from "@/lib/checkout";
+import { getProtocolSelection, getTrackingProductId } from "@/lib/checkout";
+import type { ProtocolKey, TrialVariantKey } from "@/lib/checkout";
 import type { OrderPayload, PaymentMethod } from "@/lib/orders";
 import {
   buildTikTokEventPayload,
@@ -362,6 +362,7 @@ function capitalizeWords(value: string) {
 
 export default function CheckoutModal() {
   const [activeProtocolKey, setActiveProtocolKey] = useState<ProtocolKey>("grow");
+  const [activeVariantKey, setActiveVariantKey] = useState<TrialVariantKey | undefined>();
   const [contactFields, setContactFields] = useState<ContactFields>(defaultContactFields);
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -370,7 +371,7 @@ export default function CheckoutModal() {
   const [statusMessage, setStatusMessage] = useState("");
   const [step, setStep] = useState<CheckoutStep>(1);
 
-  const activeProtocol = protocolCatalog[activeProtocolKey];
+  const activeProtocol = getProtocolSelection(activeProtocolKey, activeVariantKey);
   const provinceOptions = provincesByRegion[contactFields.region as keyof typeof provincesByRegion] || [];
   const cityOptions = citiesByProvince[contactFields.province] || [];
 
@@ -382,11 +383,17 @@ export default function CheckoutModal() {
   useEffect(() => {
     function handleOpen(event: Event) {
       const trackingWindow = getTrackingWindow();
-      const customEvent = event as CustomEvent<{ protocolKey?: ProtocolKey }>;
+      const customEvent = event as CustomEvent<{
+        protocolKey?: ProtocolKey;
+        variantKey?: TrialVariantKey;
+      }>;
       const nextProtocol = customEvent.detail?.protocolKey ?? "grow";
-      const nextProtocolDetails = protocolCatalog[nextProtocol];
+      const nextVariant =
+        nextProtocol === "trial" ? customEvent.detail?.variantKey ?? "sachet" : undefined;
+      const nextProtocolDetails = getProtocolSelection(nextProtocol, nextVariant);
 
       setActiveProtocolKey(nextProtocol);
+      setActiveVariantKey(nextVariant);
       setContactFields(defaultContactFields);
       setIsSubmitting(false);
       setOrderNumber("");
@@ -402,7 +409,7 @@ export default function CheckoutModal() {
           eventId: createEventId("checkout"),
           paymentType: "gcash",
           price: nextProtocolDetails.price,
-          productId: nextProtocol,
+          productId: getTrackingProductId(nextProtocol, nextVariant),
           productName: nextProtocolDetails.displayName,
           quantity: nextProtocolDetails.quantity,
         }),
@@ -510,6 +517,7 @@ export default function CheckoutModal() {
       productQuantity: activeProtocol.quantity,
       productScanLine: activeProtocol.scanLine,
       protocolKey: activeProtocolKey,
+      variantKey: activeVariantKey,
       province: contactFields.province.trim(),
       region: contactFields.region.trim(),
       street: contactFields.street.trim(),
@@ -553,7 +561,7 @@ export default function CheckoutModal() {
             eventId: orderEventId,
             orderId: result.orderNumber,
             price: activeProtocol.price,
-            productId: activeProtocolKey,
+            productId: getTrackingProductId(activeProtocolKey, activeVariantKey),
             productName: activeProtocol.displayName,
             quantity: activeProtocol.quantity,
           }),
@@ -588,7 +596,7 @@ export default function CheckoutModal() {
             eventId: createEventId("contact"),
             paymentType: paymentMethod,
             price: activeProtocol.price,
-            productId: activeProtocolKey,
+            productId: getTrackingProductId(activeProtocolKey, activeVariantKey),
             productName: activeProtocol.displayName,
             quantity: activeProtocol.quantity,
           }),
@@ -603,7 +611,7 @@ export default function CheckoutModal() {
             eventId: createEventId("payment"),
             paymentType: paymentMethod,
             price: activeProtocol.price,
-            productId: activeProtocolKey,
+            productId: getTrackingProductId(activeProtocolKey, activeVariantKey),
             productName: activeProtocol.displayName,
             quantity: activeProtocol.quantity,
           }),

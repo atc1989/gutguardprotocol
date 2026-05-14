@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-import { protocolCatalog } from "@/lib/checkout";
+import { getProtocolSelection, getTrackingProductId, protocolCatalog } from "@/lib/checkout";
 import { isOrderAdminAuthorized } from "@/lib/order-admin";
 import { buildOrderNumber, isOrderStatus, isPaymentMethod, isProtocolKey } from "@/lib/orders";
 import type { OrderPayload } from "@/lib/orders";
@@ -278,7 +278,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing required order details." }, { status: 400 });
   }
 
-  const protocol = protocolCatalog[payload.protocolKey];
+  const protocol = getProtocolSelection(payload.protocolKey, payload.variantKey);
   const supabase = createServerSupabaseClient();
   const { data: existingOrder, error: lookupError } = await supabase
     .from("orders")
@@ -358,7 +358,7 @@ export async function POST(request: Request) {
         eventId: payload.tiktokEventId || undefined,
         orderId: orderNumber,
         price: protocol.price,
-        productId: payload.protocolKey,
+        productId: getTrackingProductId(payload.protocolKey, payload.variantKey),
         productName: protocol.displayName,
         quantity: protocol.quantity,
       }),
